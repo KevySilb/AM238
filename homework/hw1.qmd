@@ -1,0 +1,164 @@
+---
+title: "Homework 1"
+author: "Kevin Silberberg"
+date: "Oct 02, 2024"
+format:
+  html:
+    code-fold: true
+    number-sections: true
+jupyter: julia-1.10
+---
+
+# Problem definition
+
+Let $X$ be a random variable with Probability density function:
+\begin{equation}\tag{1}\label{eq-pdf}
+p(x) = 
+	\begin{cases}
+		\frac{2x\cos{(x^2)} + 5}{10 + \sin{(4)}} & x \in [0, 2] \\
+		0 & \text{otherwise}
+	\end{cases}
+\end{equation}
+
+## Part A
+
+### Solve for the mean and standard deviation Numerically
+Using the Gauss-Kronrod quadrature we can numerically solve for the mean and the variance by calculating the first moment and second momements of the PDF of X.
+
+```{julia}
+using QuadGK
+
+function p(x::Real)
+    (0 ≤ x ≤ 2.0) ? (2.0 * x * cos(x^2.0) + 5.0) / (10.0 + sin(4.0)) : 0.0
+end
+
+function E1(x::Real)
+    return x * p(x)
+end
+
+function E2(x::Real)
+    return x^2 * p(x)
+end
+
+μ_numerical = quadgk(E1, 0.0, 2.0, rtol=1e-3)[1]
+σ²_numerical = quadgk(E2, 0.0, 2.0, rtol=1e-3)[1]
+σ_numerical = sqrt(σ²_numerical)
+println("The mean of the PDF of X is $μ_numerical")
+println("The variance of the PDF of X is $σ²_numerical")
+println("The standard deviation is $σ_numerical")
+```
+
+Let us solve for the first and second moments of (\ref{eq-pdf}) analytically and compare with the numerical findings.
+
+### First moment (mean)
+
+\begin{align}
+	E[X] &= \int_0^2 x\bigg(\frac{2x\cos{(x^2)} + 5}{10 + \sin{(4)}}\bigg)dx \\
+	&= x\bigg(\frac{\sin{(x^2)} + 5x}{10 + \sin{(4)}}\bigg)\bigg{\vert}_0^2 - \frac{1}{10 + \sin{(4)}}\int_0^2\bigg(\sin{(x^2)} + 5x\bigg)dx \\
+	&= \frac{-\sqrt{\frac{\pi}{2}}S\big(\sqrt{\frac{2}{\pi}}x\big) + \frac{5x^2}{2} + x\sin{(x^2)}}{10 + \sin{(4)}}\bigg{\vert}_0^2 \\
+\end{align}
+
+Where $S(x)$ is the fresnel integral defined as $$S(x) = \int_0^x \sin{(t^2)} dt$$
+
+```{julia}
+using FresnelIntegrals
+E(x) = (-sqrt(π/2.0)*fresnels(sqrt(2.0/π)*x) + (5.0/2.0)*x^2 + x*sin(x^2.0)) / (10.0 + sin(4.0))
+μ_exact = E(2.0) - E(0.0)
+println("The first moment of the PDF of X = $μ_exact")
+```
+
+### Second moment (variance) 
+
+\begin{align}
+	E^2[X] &= \int_0^2x^2\bigg(\frac{2x\cos{(x^2)}+5}{10 + \sin{(4)}}\bigg)dx \\
+	&= \frac{1}{10 + \sin{(4)}}\bigg[2\int_0^2x^3\cos{(x^2)}dx + 5\int_0^2x^2dx\bigg] \\
+	&= \frac{x^2\sin{(x^2)}+\cos{(x^2)}+\frac{5x^3}{3}}{10 + \sin{(4)}}\bigg{\vert}_0^2
+\end{align}
+
+```{julia}
+E2(x) = (x^2.0*sin(x^2.0) + cos(x^2.0) + (5.0x^3/3.0)) / (10.0 + sin(4.0))
+σ²_exact = E2(2.0) - E2(0.0)
+σ_exact = sqrt(σ²_exact)
+println("The second moment of the PDF of X = $σ²_exact")
+println("The standard deviation is $σ_exact")
+```
+
+We can clearly see that the exact solution seems to differ from the numerically integrated solutions.
+
+```{julia}
+err_μ = (abs(μ_numerical - μ_exact) / μ_exact) * 100
+err_σ = (abs(σ_numerical - σ_exact) / σ_exact) * 100
+
+println("Percent error in the calculated mean = $err_μ")
+println("Percent error in the calculated standard deviation = $err_σ")
+```
+
+## Part B
+
+In order to find the CDF numerically, we will need to write a modified version of the trapezoidal rule such that we are populating an array with the cumulative sum of every dx of the PDF of $X$. 
+
+```{julia}
+#| warning: false
+using CairoMakie
+function cumsumtrap(f::Function, x)
+    y = f.(x)
+    N = length(x)
+    dx = x[2:N] .- x[1:N-1]
+    meanY = (y[2:N] .+ y[1:N-1]) ./ 2
+    integral = cumsum(dx .* meanY)
+
+    return [0; integral]
+end
+
+function plotCDF()
+    fig = Figure();
+    ax1 = Axis(fig[1,1],
+               title = "CDF",
+               xlabel = "x",
+               ylabel = "F(x)"
+               )
+    r = -0.1:0.01:2.1
+    lines!(ax1, r, cumsumtrap(p, r), label = "numerical", color = :blue)
+    xlims!(ax1, -0.1, 2.1)
+    ylims!(ax1, -0.1, 1.1)
+
+    ax2 = Axis(fig[2, 1],
+               title = "Inverse CDF",
+               xlabel = "x",
+               ylabel = "F⁻¹(x)"
+               )
+    lines!(ax2, cumsumtrap(p, r), r)
+    xlims!(ax2, -0.1, 1.1)
+    ylims!(ax2, -0.1, 2.1)
+    display(fig)
+    return fig, ax1, r
+end
+fig, ax1, r = plotCDF();
+```
+
+Let us calculate the CDF by direct integration. The CDF of a continuous random variable $X$ can be expressed as the integral of its probability density function $p(x)$ as:
+
+\begin{equation}\tag{2}\label{eq-cdf}
+	F_X(x) = \int_{-\inf}^x p_X(t)dt
+\end{equation}
+
+Plugging (\ref{eq-pdf}) on the interval [0, 2] into (\ref{eq-cdf}) we get:
+
+\begin{align}
+	F_X(x) &= \int_0^x\bigg(\frac{2t\cos{(t^2)} + 5}{10 + \sin{(4)}}\bigg)dt \\
+	&= \frac{1}{10 + \sin{(4)}}\bigg(2\int_0^xt\cos{(t^2)}dt + 5\int_0^xdt\bigg) \\
+	&= \frac{\sin{(x^2)} + 5x}{10 + \sin{(4)}}
+\end{align}
+
+Let us plot the exact solution of the CDF over the numerical solution.
+
+```{julia}
+Fₓ(x) = (sin(x^2) + 5x) / (10 + sin(4))
+lines!(ax1, r, Fₓ.(r), label = "exact", color = :red, linestyle = :dash);
+fig[1,2] = Legend(fig, ax1, "Legend", framevisible = false);
+display(fig);
+```
+
+## Part c
+
+

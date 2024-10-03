@@ -1,0 +1,6 @@
+[deps]
+CairoMakie = "13f3f980-e62b-5c42-98c6-ff1f3baf88f0"
+FresnelIntegrals = "88497964-e39a-11e9-0fb5-b1bf0ffe80fe"
+GLMakie = "e9467ef8-e4e7-5192-8a1a-b1aee30e663a"
+Integrals = "de52edbc-65ea-441a-8357-d3a637375a31"
+QuadGK = "1fd47b50-473d-5c70-9696-f719f8f3bcdc"
