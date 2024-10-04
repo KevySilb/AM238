@@ -95,7 +95,7 @@ end
 ```
 ### Second moment 
 \begin{align}
-	E^2[X] &= \int_0^2x^2\bigg(\frac{2x\cos{(x^2)}+5}{10 + \sin{(4)}}\bigg)dx \\
+	E[X^2] &= \int_0^2x^2\bigg(\frac{2x\cos{(x^2)}+5}{10 + \sin{(4)}}\bigg)dx \\
 	&= \frac{1}{10 + \sin{(4)}}\bigg[2\int_0^2x^3\cos{(x^2)}dx + 5\int_0^2x^2dx\bigg] \\
 	&= \frac{x^2\sin{(x^2)}+\cos{(x^2)}+\frac{5x^3}{3}}{10 + \sin{(4)}}\bigg{\vert}_0^2
 \end{align}

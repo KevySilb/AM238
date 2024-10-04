@@ -148,7 +148,7 @@ p(x) =
         0 &amp; \text{otherwise}
     \end{cases}
 \end{equation}\]</span></p>
-<div id="d02630cf" class="cell" data-execution_count="1">
+<div id="f62600e1" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">CairoMakie</span></span>
@@ -185,7 +185,7 @@ p(x) =
 <section id="solve-for-the-mean-and-standard-deviation-numerically" class="level3" data-number="1.1.1">
 <h3 data-number="1.1.1" class="anchored" data-anchor-id="solve-for-the-mean-and-standard-deviation-numerically"><span class="header-section-number">1.1.1</span> Solve for the mean and standard deviation Numerically</h3>
 <p>Using the Gauss-Kronrod quadrature we can numerically solve for the mean and the variance by calculating the first moment and second momements of the PDF of X.</p>
-<div id="54b52c69" class="cell" data-execution_count="2">
+<div id="ad7d9e38" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">QuadGK</span></span>
@@ -227,7 +227,7 @@ p(x) =
     &amp;= \frac{-\sqrt{\frac{\pi}{2}}S\big(\sqrt{\frac{2}{\pi}}x\big) + \frac{5x^2}{2} + x\sin{(x^2)}}{10 + \sin{(4)}}\bigg{\vert}_0^2 \\
 \end{align}\]</span></p>
 <p>Where <span class="math inline">\(S(x)\)</span> is the fresnel integral defined as <span class="math display">\[S(x) = \int_0^x \sin{(t^2)} dt\]</span></p>
-<div id="1ca76e99" class="cell" data-execution_count="3">
+<div id="b3b7a12d" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">FresnelIntegrals</span></span>
@@ -242,11 +242,11 @@ p(x) =
 <section id="second-moment" class="level3" data-number="1.1.3">
 <h3 data-number="1.1.3" class="anchored" data-anchor-id="second-moment"><span class="header-section-number">1.1.3</span> Second moment</h3>
 <p><span class="math display">\[\begin{align}
-    E^2[X] &amp;= \int_0^2x^2\bigg(\frac{2x\cos{(x^2)}+5}{10 + \sin{(4)}}\bigg)dx \\
+    E[X^2] &amp;= \int_0^2x^2\bigg(\frac{2x\cos{(x^2)}+5}{10 + \sin{(4)}}\bigg)dx \\
     &amp;= \frac{1}{10 + \sin{(4)}}\bigg[2\int_0^2x^3\cos{(x^2)}dx + 5\int_0^2x^2dx\bigg] \\
     &amp;= \frac{x^2\sin{(x^2)}+\cos{(x^2)}+\frac{5x^3}{3}}{10 + \sin{(4)}}\bigg{\vert}_0^2
 \end{align}\]</span></p>
-<div id="f646a114" class="cell" data-execution_count="4">
+<div id="89b2958e" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">stdev</span>()</span>
@@ -268,7 +268,7 @@ p(x) =
 </div>
 </div>
 <p>The numeric and analytic solutions agree.</p>
-<div id="d22de33d" class="cell" data-execution_count="5">
+<div id="5aa162b6" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>err_μ <span class="op">=</span> (<span class="fu">abs</span>(μ_numeric <span class="op">-</span> μ_exact) <span class="op">/</span> μ_exact) <span class="op">*</span> <span class="fl">100</span></span>
@@ -287,7 +287,7 @@ Percent error in the calculated standard deviation = 9.972414966246794e-13</code
 <section id="part-b" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="part-b"><span class="header-section-number">1.2</span> Part B</h2>
 <p>In order to find the CDF numerically, we will need to write a modified version of the trapezoidal rule such that we are populating an array with the cumulative sum of every dx of the PDF of <span class="math inline">\(X\)</span>.</p>
-<div id="a1fc0e9f" class="cell" data-execution_count="6">
+<div id="47df080d" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">cumsumtrap</span>(f<span class="op">::</span><span class="dt">Function</span>, x)</span>
@@ -336,7 +336,7 @@ Percent error in the calculated standard deviation = 9.972414966246794e-13</code
     &amp;= \frac{\sin{(x^2)} + 5x}{10 + \sin{(4)}}
 \end{align}\]</span></p>
 <p>Let us plot the exact solution of the CDF over the numerical solution.</p>
-<div id="9a75b966" class="cell" data-execution_count="7">
+<div id="85657d81" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Fₓ</span>(x) <span class="op">=</span> (<span class="fu">sin</span>(x<span class="op">^</span><span class="fl">2</span>) <span class="op">+</span> <span class="fl">5</span>x) <span class="op">/</span> (<span class="fl">10</span> <span class="op">+</span> <span class="fu">sin</span>(<span class="fl">4</span>))</span>
@@ -354,7 +354,7 @@ Percent error in the calculated standard deviation = 9.972414966246794e-13</code
 </div>
 </div>
 <p>The we can plot the inverse CDF by flipping the axis.</p>
-<div id="9371b661" class="cell" data-execution_count="8">
+<div id="a42fc843" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">plotCDFInverse</span>()</span>
@@ -388,7 +388,7 @@ Percent error in the calculated standard deviation = 9.972414966246794e-13</code
     y = y_1 + \frac{(x - x_1)(y_2 - y_1)}{x_2 - x_1}
 \end{equation}\]</span></p>
 <p>The first column of <span class="math inline">\(\Sigma\)</span> comes from the cumulative trapazoidal integration of the pdf function in the range [0, 2], while the second column are equally spaced points from the range [0, 2].</p>
-<div id="93d64073" class="cell" data-execution_count="9">
+<div id="97fe8b0b" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">liy</span>(x<span class="op">::</span><span class="dt">Float64</span>, p1<span class="op">::</span><span class="dt">Vector{Float64}</span>, p2<span class="op">::</span><span class="dt">Vector{Float64}</span>)</span>
