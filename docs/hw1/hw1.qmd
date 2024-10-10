@@ -1,9 +1,29 @@
 ---
 title: "Homework 1"
-author: "Kevin Silberberg"
-date: "Oct 02, 2024"
-format: pptx
+date: 2024-10-2
+author:
+  - name: Kevin Silberberg
+    id: ks
+    orcid: 0009-0009-4825-1865
+    email: ksilberb@ucsc.edu
+    affiliation:
+      - name: University of California Santa Cruz
+        city: Santa Cruz
+        state: CA
+        href: www.ucsc.edu
+format:
+  html:
+    theme: cosmo
+    toc: true
+    code-fold: true
+    code-links:
+    - icon: github
+      href: https://github.com/KevySilb/AM238
 jupyter: julia-1.10
+execute:
+  eval: true
+  freeze: auto
+  warning: false
 ---
 
 # Problem definition
@@ -18,7 +38,6 @@ p(x) =
 \end{equation}
 
 ```{julia}
-#| warning: false
 using CairoMakie
 
 function p(x::Real)
@@ -126,7 +145,6 @@ println("Percent error in the calculated standard deviation = $err_σ")
 In order to find the CDF numerically, we will need to write a modified version of the trapezoidal rule such that we are populating an array with the cumulative sum of every dx of the PDF of $X$. 
 
 ```{julia}
-#| warning: false
 function cumsumtrap(f::Function, x)
     y = f.(x)
     N = length(x)
@@ -181,7 +199,6 @@ display(fig1);
 The we can plot the inverse CDF by flipping the axis.
 
 ```{julia}
-#| warning: false
 function plotCDFInverse()
     fig = Figure();
     ax = Axis(fig[1, 1],
@@ -196,7 +213,7 @@ function plotCDFInverse()
 end
 plotCDFInverse();
 ```
-## Part c
+## Part C
 
 Let us develop a sampler for the random variable $X$.
 
@@ -210,7 +227,6 @@ By using linear interpolation from the formula:
 The first column of $\Sigma$ comes from the cumulative trapazoidal integration of the pdf function in the range [0, 2], while the second column are equally spaced points from the range [0, 2].
 
 ```{julia}
-#| warning: false
 function liy(x::Float64, p1::Vector{Float64}, p2::Vector{Float64})
     x1, y1 = p1
     x2, y2 = p2

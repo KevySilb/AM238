@@ -102,10 +102,28 @@ window.Quarto = {
 
 </head>
 
-<body class="fullcontent">
+<body>
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#problem-definition" id="toc-problem-definition" class="nav-link active" data-scroll-target="#problem-definition">Problem definition</a>
+  <ul class="collapse">
+  <li><a href="#part-a" id="toc-part-a" class="nav-link" data-scroll-target="#part-a">Part A</a>
+  <ul class="collapse">
+  <li><a href="#solve-for-the-mean-and-standard-deviation-numerically" id="toc-solve-for-the-mean-and-standard-deviation-numerically" class="nav-link" data-scroll-target="#solve-for-the-mean-and-standard-deviation-numerically">Solve for the mean and standard deviation Numerically</a></li>
+  <li><a href="#first-moment" id="toc-first-moment" class="nav-link" data-scroll-target="#first-moment">First moment</a></li>
+  <li><a href="#second-moment" id="toc-second-moment" class="nav-link" data-scroll-target="#second-moment">Second moment</a></li>
+  </ul></li>
+  <li><a href="#part-b" id="toc-part-b" class="nav-link" data-scroll-target="#part-b">Part B</a></li>
+  <li><a href="#part-c" id="toc-part-c" class="nav-link" data-scroll-target="#part-c">Part C</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-code-links"><h2>Code Links</h2><ul><li><a href="https://github.com/KevySilb/AM238"><i class="bi bi-github"></i></a></li></ul></div></nav>
+</div>
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -114,16 +132,23 @@ window.Quarto = {
 </div>
 
 
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Kevin Silberberg <a href="mailto:ksilberb@ucsc.edu" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0009-0009-4825-1865" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            University of California Santa Cruz
+          </p>
+      </div>
+  </div>
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Kevin Silberberg </p>
-          </div>
-  </div>
-    
+      
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
@@ -139,8 +164,8 @@ window.Quarto = {
 </header>
 
 
-<section id="problem-definition" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Problem definition</h1>
+<section id="problem-definition" class="level1">
+<h1>Problem definition</h1>
 <p>Let <span class="math inline">\(X\)</span> be a random variable with Probability density function: <span class="math display">\[\begin{equation}\tag{1}\label{eq-pdf}
 p(x) =
     \begin{cases}
@@ -148,7 +173,7 @@ p(x) =
         0 &amp; \text{otherwise}
     \end{cases}
 \end{equation}\]</span></p>
-<div id="f62600e1" class="cell" data-execution_count="1">
+<div id="ab0b61f4" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">CairoMakie</span></span>
@@ -180,12 +205,12 @@ p(x) =
 </div>
 </div>
 </div>
-<section id="part-a" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="part-a"><span class="header-section-number">1.1</span> Part A</h2>
-<section id="solve-for-the-mean-and-standard-deviation-numerically" class="level3" data-number="1.1.1">
-<h3 data-number="1.1.1" class="anchored" data-anchor-id="solve-for-the-mean-and-standard-deviation-numerically"><span class="header-section-number">1.1.1</span> Solve for the mean and standard deviation Numerically</h3>
+<section id="part-a" class="level2">
+<h2 class="anchored" data-anchor-id="part-a">Part A</h2>
+<section id="solve-for-the-mean-and-standard-deviation-numerically" class="level3">
+<h3 class="anchored" data-anchor-id="solve-for-the-mean-and-standard-deviation-numerically">Solve for the mean and standard deviation Numerically</h3>
 <p>Using the Gauss-Kronrod quadrature we can numerically solve for the mean and the variance by calculating the first moment and second momements of the PDF of X.</p>
-<div id="ad7d9e38" class="cell" data-execution_count="2">
+<div id="a02ac4ee" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">QuadGK</span></span>
@@ -219,15 +244,15 @@ p(x) =
 </div>
 <p>Let us solve for the first and second moments of (<span class="math inline">\(\ref{eq-pdf}\)</span>) analytically and compare with the numerical findings.</p>
 </section>
-<section id="first-moment" class="level3" data-number="1.1.2">
-<h3 data-number="1.1.2" class="anchored" data-anchor-id="first-moment"><span class="header-section-number">1.1.2</span> First moment</h3>
+<section id="first-moment" class="level3">
+<h3 class="anchored" data-anchor-id="first-moment">First moment</h3>
 <p><span class="math display">\[\begin{align}
     E[X] &amp;= \int_0^2 x\bigg(\frac{2x\cos{(x^2)} + 5}{10 + \sin{(4)}}\bigg)dx \\
     &amp;= x\bigg(\frac{\sin{(x^2)} + 5x}{10 + \sin{(4)}}\bigg)\bigg{\vert}_0^2 - \frac{1}{10 + \sin{(4)}}\int_0^2\bigg(\sin{(x^2)} + 5x\bigg)dx \\
     &amp;= \frac{-\sqrt{\frac{\pi}{2}}S\big(\sqrt{\frac{2}{\pi}}x\big) + \frac{5x^2}{2} + x\sin{(x^2)}}{10 + \sin{(4)}}\bigg{\vert}_0^2 \\
 \end{align}\]</span></p>
 <p>Where <span class="math inline">\(S(x)\)</span> is the fresnel integral defined as <span class="math display">\[S(x) = \int_0^x \sin{(t^2)} dt\]</span></p>
-<div id="b3b7a12d" class="cell" data-execution_count="3">
+<div id="ea7f69ff" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">FresnelIntegrals</span></span>
@@ -239,14 +264,14 @@ p(x) =
 </details>
 </div>
 </section>
-<section id="second-moment" class="level3" data-number="1.1.3">
-<h3 data-number="1.1.3" class="anchored" data-anchor-id="second-moment"><span class="header-section-number">1.1.3</span> Second moment</h3>
+<section id="second-moment" class="level3">
+<h3 class="anchored" data-anchor-id="second-moment">Second moment</h3>
 <p><span class="math display">\[\begin{align}
     E[X^2] &amp;= \int_0^2x^2\bigg(\frac{2x\cos{(x^2)}+5}{10 + \sin{(4)}}\bigg)dx \\
     &amp;= \frac{1}{10 + \sin{(4)}}\bigg[2\int_0^2x^3\cos{(x^2)}dx + 5\int_0^2x^2dx\bigg] \\
     &amp;= \frac{x^2\sin{(x^2)}+\cos{(x^2)}+\frac{5x^3}{3}}{10 + \sin{(4)}}\bigg{\vert}_0^2
 \end{align}\]</span></p>
-<div id="89b2958e" class="cell" data-execution_count="4">
+<div id="77037cd9" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">stdev</span>()</span>
@@ -268,7 +293,7 @@ p(x) =
 </div>
 </div>
 <p>The numeric and analytic solutions agree.</p>
-<div id="5aa162b6" class="cell" data-execution_count="5">
+<div id="e34dc646" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>err_μ <span class="op">=</span> (<span class="fu">abs</span>(μ_numeric <span class="op">-</span> μ_exact) <span class="op">/</span> μ_exact) <span class="op">*</span> <span class="fl">100</span></span>
@@ -284,10 +309,10 @@ Percent error in the calculated standard deviation = 9.972414966246794e-13</code
 </div>
 </section>
 </section>
-<section id="part-b" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="part-b"><span class="header-section-number">1.2</span> Part B</h2>
+<section id="part-b" class="level2">
+<h2 class="anchored" data-anchor-id="part-b">Part B</h2>
 <p>In order to find the CDF numerically, we will need to write a modified version of the trapezoidal rule such that we are populating an array with the cumulative sum of every dx of the PDF of <span class="math inline">\(X\)</span>.</p>
-<div id="47df080d" class="cell" data-execution_count="6">
+<div id="c29076a4" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">cumsumtrap</span>(f<span class="op">::</span><span class="dt">Function</span>, x)</span>
@@ -336,7 +361,7 @@ Percent error in the calculated standard deviation = 9.972414966246794e-13</code
     &amp;= \frac{\sin{(x^2)} + 5x}{10 + \sin{(4)}}
 \end{align}\]</span></p>
 <p>Let us plot the exact solution of the CDF over the numerical solution.</p>
-<div id="85657d81" class="cell" data-execution_count="7">
+<div id="7cb59f61" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Fₓ</span>(x) <span class="op">=</span> (<span class="fu">sin</span>(x<span class="op">^</span><span class="fl">2</span>) <span class="op">+</span> <span class="fl">5</span>x) <span class="op">/</span> (<span class="fl">10</span> <span class="op">+</span> <span class="fu">sin</span>(<span class="fl">4</span>))</span>
@@ -354,7 +379,7 @@ Percent error in the calculated standard deviation = 9.972414966246794e-13</code
 </div>
 </div>
 <p>The we can plot the inverse CDF by flipping the axis.</p>
-<div id="a42fc843" class="cell" data-execution_count="8">
+<div id="01f8ffd0" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">plotCDFInverse</span>()</span>
@@ -380,15 +405,15 @@ Percent error in the calculated standard deviation = 9.972414966246794e-13</code
 </div>
 </div>
 </section>
-<section id="part-c" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="part-c"><span class="header-section-number">1.3</span> Part c</h2>
+<section id="part-c" class="level2">
+<h2 class="anchored" data-anchor-id="part-c">Part C</h2>
 <p>Let us develop a sampler for the random variable <span class="math inline">\(X\)</span>.</p>
 <p>Let the Matrix <span class="math inline">\(\Sigma\)</span> be a (N,2) matrix such that the rows are (x, y) coordinates, and the vector <span class="math inline">\(\textbf{x}\)</span> also be of size N, where each element is a sample from the Uniform normal distribution.</p>
 <p>By using linear interpolation from the formula: <span class="math display">\[\begin{equation}\tag{3}\label{eq-li}
     y = y_1 + \frac{(x - x_1)(y_2 - y_1)}{x_2 - x_1}
 \end{equation}\]</span></p>
 <p>The first column of <span class="math inline">\(\Sigma\)</span> comes from the cumulative trapazoidal integration of the pdf function in the range [0, 2], while the second column are equally spaced points from the range [0, 2].</p>
-<div id="97fe8b0b" class="cell" data-execution_count="9">
+<div id="a1d3fa06" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">liy</span>(x<span class="op">::</span><span class="dt">Float64</span>, p1<span class="op">::</span><span class="dt">Vector{Float64}</span>, p2<span class="op">::</span><span class="dt">Vector{Float64}</span>)</span>
