@@ -2,10 +2,7 @@
 title: "Homework 1"
 author: "Kevin Silberberg"
 date: "Oct 02, 2024"
-format:
-  html:
-    code-fold: true
-    number-sections: true
+format: pptx
 jupyter: julia-1.10
 ---
 
