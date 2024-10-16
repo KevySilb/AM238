@@ -1,0 +1,13 @@
+---
+format:
+  pdf:
+    documentclass: scrartcl
+    papersize: letter
+    pdf-engine: xelatex
+title: Research Proposal AM238
+subtitle: Sensing Wind from Quadrotor Motion
+date: 2024-10-10
+author: Kevin Silberberg
+---
+
+Using the rigid-body model described in [Sensing Wind from Quadrotor Motion](https://arc.aiaa.org/doi/10.2514/1.G003542), we aim to produce an estimate of the wind velocity and direction at each point in time while the drone is in flight. When the quadcopter drone is hovering, it operates under control software that stabilizes its flight to remain completely orthogonal to the force of gravity (thus preventing spatial translation) while maintaining a constant altitude and GPS position in the absence of pilot input commands. The rigid-body model contains parameters that must be estimated through system identification. Once these parameters are estimated, we need to identify a gain matrix that minimizes the error between the estimated state and the true state of the system by ensuring the eigenvalues of the matrix $A−LC$ are negative, so that the error converges to zero. The goal of this project is to determine the confidence in the parameter values estimated through system identification and to explore various filtering schemes (kalman filter, partical filter) to produce accurate wind estimates using the rigid-body model with an augmented state vector that includes the flow velocity of the disturbance. 

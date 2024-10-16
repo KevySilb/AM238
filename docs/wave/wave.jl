@@ -28,18 +28,16 @@ function main()
     string = Observable(Point2f.(x, f.(x)))
     fig, ax = makeplot(L)
     lines!(ax, string)
-    display(fig)
 
-    for t ∈ range(0, 20, length = 1000)
+    record(fig, "wave_dirichlet.mp4", range(0, 5, length = 700); framerate = 60) do t
         y = zeros(length(x))
         for j ∈ eachindex(x)
             sum = 0.0
             for n ∈ eachindex(a)
-                sum += a[n]*sin((n * π * x[j]) / L)*cos(ω[n]*t)
+                sum += a[n] * sin((n * π * x[j]) / L) * cos(ω[n] * t)
             end
             y[j] = sum
         end
         string[] = Point2f.(x, y)
-        sleep(0.01)
     end
 end
