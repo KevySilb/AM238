@@ -21,6 +21,7 @@ format:
       href: https://github.com/KevySilb/AM238
 jupyter: julia-1.10
 execute:
+  cache: true
   eval: true
   freeze: auto
   warning: false
@@ -254,29 +255,29 @@ function partc()
     N = Int64(5e4)
     M = Int64(500)
     r = LinRange(0.0, 1.0, M)
-    X1, X2 = gibbsSample(2)[:, 1]
-    fig = Figure(size = (650,750))
+    fig = Figure()
     grid = fig[1, 1] = GridLayout()
-    ax1 = Axis(grid[1, 1],
-        title = "f(y;X1=$(round(X1, digits=3)), X2=$(round(X2, digits = 3)))")
-    ax2 = Axis(grid[2, 1], title = "y by sample mean")
-    ax3 = Axis(grid[3, 1], title = "y by standard deviation")
+    ax = Axis(grid[1, 1],
+              title = "y by sample mean and standard deviation",
+              xlabel = "y")
     samples = Matrix{Float64}(undef, N, M)
-    cdf = hcat(cumsumtrap(y -> f(y, X1, X2), r), r)
-    for idx in eachindex(samples)
-        samples[idx] = sampleInverseCDF(rand(), cdf)
+    for i=1:N
+        X1, X2 = gibbsSample(2)[:, 1]
+        for j=1:M
+            samples[i, j] = f(r[j], X1, X2)
+        end
     end
     μᵢ = vec(sum(j -> j, samples, dims=1) ./ N)
     μₜ = sum(μᵢ) / M
     σᵢ = vec(sqrt.(sum((samples .- μᵢ') .^ 2, dims = 1) ./ (N - 1)))
-    lines!(ax1, r, f.(r, X1, X2), color = :purple)
-    lines!(ax2, r, μᵢ, color = :blue)
-    lines!(ax3, r, σᵢ, color = :red)
+    means = lines!(ax, r, μᵢ, color = :red)
+    stdv = lines!(ax, r, σᵢ, color = :blue)
+    Legend(fig[1, 2], [means, stdv], ["mean", "std dev"])
     save("q2partc.png", fig)
 end
 partc();
 ```
-![Plot of 50000 samples on a 500 spatial grid of evenly distributed values of y from 0 to 1](q2partc.png){fig-align="center"
+![Plot of the mean and standard deviation for 50000 samples on a 500 spatial grid of evenly distributed values of y from 0 to 1](q2partc.png){fig-align="center"
 width="100%"}
 
 # Question 3
@@ -304,7 +305,7 @@ Plot your results for $N = 10^3$ and $N = 10^5$.
 Let us find the inverse cdf of the cauchy distribution:
 
 \begin{align}
-	F(x) = \frac{1}{\pi} \int_{-infty}{x}\frac{1}{(1 + y^2)}dy &= \frac{1}{\pi}\left[\arctan{(y)}\bigg{|}_{-infty}^x\right] \\
+	F(x) = \frac{1}{\pi} \int_{-\infty}{x}\frac{1}{(1 + y^2)}dy &= \frac{1}{\pi}\left[\arctan{(y)}\bigg{|}_{-\infty}^x\right] \\
 	&= \frac{1}{\pi}\left[\arctan{(x)} - \arctan{(-\infty)}\right] \\
 \end{align}
 
@@ -313,36 +314,40 @@ Let us find the inverse cdf of the cauchy distribution:
 \end{align}
 
 ```{julia}
-function pX(x::Float64)
+using KernelDensity
+function PDF(x::Float64)
     return 1.0 / (π*(1+x^2))
 end
 
-function F⁻¹(x::Float64)
+function inverseCDF(x::Float64)
     return tan(π*(x - 0.5))
 end
 
-function partc(N::Integer)
-    r = LinRange(-10.0, 10.0, 1000)
-    samples = Vector{Float64}(undef, N)
-    for i in eachindex(samples)
-        samples[i] = F⁻¹(rand())
+function question3(N::Integer)
+    samples = Vector{Float64}(undef, 1000)
+    for j in eachindex(samples)
+        s = Vector{Float64}(undef, N)
+        for i in eachindex(s)
+            s[i] = inverseCDF(rand())
+        end
+        samples[j] = sum(s) / Float64(lastindex(s))
     end
-    Xbar = sum(samples) / N
+    
     fig = Figure()
-    grid = fig[1, 1] = GridLayout()
-    ax1 = Axis(grid[1, 1], title = "sample mean = $Xbar")
-    linePlot = lines!(ax1, r, pX.(r), color = :red)
-    histPlot = hist!(ax1, samples, normalization = :pdf, bins = 80)
-    leg = Legend(fig, [linePlot, histPlot], ["p(x)", "$N samples"])
-    grid[1, 2] = leg
-    xlims!(ax1, -10.0, 10.0)
-    save("q3$N.png", fig)
+    ax = Axis(fig[1, 1])
+    k = kde(samples)
+    r = LinRange(-10.0, 10.0, 1000)
+    lines!(ax, r, PDF.(r), color = :orange, label = "PDF")
+    lines!(ax, k.x, k.density, color = :red, label = "KDE N=$N", linestyle = :dash)
+    xlims!(ax, -10, 10)
+    fig[1, 2] = Legend(fig, ax, "Legend", framevisible = false)
+    save("question3_$(N).png", fig)
 end
-partc(1000);
-partc(100000);
+question3(1000);
+question3(100000);
 ```
-
-![Plot of 1000 samples from the cauchy distribution](q31000.png){fig-align="center"
+![Kernel Density estimate of the PDF of the random variable $\bar{X}_N$ from 1000 samples with N = 1000](question3_1000.png){fig-align="center"
 width="100%"}
-![Plot of 100000 samples from the cauchy distribution](q3100000.png){fig-align="center"
+
+![Kernel Density estimate of the PDF of the random variable $\bar{X}_N$ from 1000 samples with N = 100000](question3_100000.png){fig-align="center"
 width="100%"}
