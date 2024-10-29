@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.56">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Kevin Silberberg">
+<meta name="dcterms.date" content="2024-10-23">
+
+<title>Homework 3</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="hw3_files/libs/clipboard/clipboard.min.js"></script>
+<script src="hw3_files/libs/quarto-html/quarto.js"></script>
+<script src="hw3_files/libs/quarto-html/popper.min.js"></script>
+<script src="hw3_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="hw3_files/libs/quarto-html/anchor.min.js"></script>
+<link href="hw3_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="hw3_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="hw3_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="hw3_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="hw3_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#question-1" id="toc-question-1" class="nav-link active" data-scroll-target="#question-1">Question 1</a>
+  <ul class="collapse">
+  <li><a href="#part-a" id="toc-part-a" class="nav-link" data-scroll-target="#part-a">Part A</a>
+  <ul class="collapse">
+  <li><a href="#solution" id="toc-solution" class="nav-link" data-scroll-target="#solution">Solution</a></li>
+  </ul></li>
+  <li><a href="#part-b" id="toc-part-b" class="nav-link" data-scroll-target="#part-b">Part B</a>
+  <ul class="collapse">
+  <li><a href="#solution-1" id="toc-solution-1" class="nav-link" data-scroll-target="#solution-1">Solution</a></li>
+  </ul></li>
+  <li><a href="#part-c" id="toc-part-c" class="nav-link" data-scroll-target="#part-c">Part C</a>
+  <ul class="collapse">
+  <li><a href="#solution-2" id="toc-solution-2" class="nav-link" data-scroll-target="#solution-2">Solution</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#question-2" id="toc-question-2" class="nav-link" data-scroll-target="#question-2">Question 2</a>
+  <ul class="collapse">
+  <li><a href="#solution-3" id="toc-solution-3" class="nav-link" data-scroll-target="#solution-3">Solution</a></li>
+  </ul></li>
+  <li><a href="#question-3" id="toc-question-3" class="nav-link" data-scroll-target="#question-3">Question 3</a>
+  <ul class="collapse">
+  <li><a href="#part-a-1" id="toc-part-a-1" class="nav-link" data-scroll-target="#part-a-1">Part A</a>
+  <ul class="collapse">
+  <li><a href="#solution-4" id="toc-solution-4" class="nav-link" data-scroll-target="#solution-4">Solution</a></li>
+  </ul></li>
+  <li><a href="#part-b-1" id="toc-part-b-1" class="nav-link" data-scroll-target="#part-b-1">Part B</a>
+  <ul class="collapse">
+  <li><a href="#solution-5" id="toc-solution-5" class="nav-link" data-scroll-target="#solution-5">Solution</a></li>
+  </ul></li>
+  <li><a href="#part-c-1" id="toc-part-c-1" class="nav-link" data-scroll-target="#part-c-1">Part C</a>
+  <ul class="collapse">
+  <li><a href="#solution-6" id="toc-solution-6" class="nav-link" data-scroll-target="#solution-6">Solution</a></li>
+  </ul></li>
+  <li><a href="#part-d" id="toc-part-d" class="nav-link" data-scroll-target="#part-d">Part D</a>
+  <ul class="collapse">
+  <li><a href="#solution-7" id="toc-solution-7" class="nav-link" data-scroll-target="#solution-7">Solution</a></li>
+  </ul></li>
+  <li><a href="#part-e" id="toc-part-e" class="nav-link" data-scroll-target="#part-e">Part E</a>
+  <ul class="collapse">
+  <li><a href="#solution-8" id="toc-solution-8" class="nav-link" data-scroll-target="#solution-8">Solution</a></li>
+  </ul></li>
+  <li><a href="#part-f" id="toc-part-f" class="nav-link" data-scroll-target="#part-f">Part F</a>
+  <ul class="collapse">
+  <li><a href="#solution-9" id="toc-solution-9" class="nav-link" data-scroll-target="#solution-9">Solution</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="hw3.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div><div class="quarto-code-links"><h2>Code Links</h2><ul><li><a href="https://github.com/KevySilb/AM238"><i class="bi bi-github"></i></a></li></ul></div></nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Homework 3</h1>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Kevin Silberberg <a href="mailto:ksilberb@ucsc.edu" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0009-0009-4825-1865" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            University of California Santa Cruz
+          </p>
+      </div>
+  </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 23, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="question-1" class="level1">
+<h1>Question 1</h1>
+<p>Consider a Gaussian random process <span class="math inline">\(X(t;\omega)\)</span> defined on the time interval [0, 5]. The process has mean <span class="math display">\[\mu(t) = t e^{\sin{(3t)}}\]</span> and covariance function <span class="math display">\[cov(t, s) = e^{\frac{-|t-s|}{\tau}}\]</span> where <span class="math inline">\(\tau &gt; 0\)</span> represents the temporal “correlation length” of the Gaussian process.</p>
+<section id="part-a" class="level2">
+<h2 class="anchored" data-anchor-id="part-a">Part A</h2>
+<p>Compute the standard deviation of <span class="math inline">\(X(t;\omega)\)</span> at time <span class="math inline">\(t\)</span>.</p>
+<section id="solution" class="level3">
+<h3 class="anchored" data-anchor-id="solution">Solution</h3>
+<p>Notice that when <span class="math inline">\(t = s\)</span>, the covariance is 1 because we have <span class="math inline">\(e^0\)</span>. The variance of the random variable <span class="math inline">\(X(t;\omega)\)</span> at any particular time <span class="math inline">\(t\)</span> is equal to the Covariance of <span class="math inline">\(t\)</span> with itself. Since the standard deviation is just the square root of the variance we can easily show that:</p>
+<p><span class="math display">\[\begin{align}
+    \sigma(t) = \sqrt{Var(X(t;\omega))} = \sqrt{Cov(t, t)} = \sqrt{e^{\frac{-|t - t|}{\tau}}} = \sqrt{e^0} = 1
+\end{align}\]</span></p>
+</section>
+</section>
+<section id="part-b" class="level2">
+<h2 class="anchored" data-anchor-id="part-b">Part B</h2>
+<p>Compute the covariance matrix of the random variables <span class="math inline">\(X(1;\omega)\)</span> and <span class="math inline">\(X(2;\omega)\)</span> as a function of <span class="math inline">\(\tau\)</span>. What happens when <span class="math inline">\(\tau \rightarrow 0\)</span>?</p>
+<section id="solution-1" class="level3">
+<h3 class="anchored" data-anchor-id="solution-1">Solution</h3>
+<p>Therefore, the covariance is always 1 along the diagonal elements of the covariance matrix <span class="math inline">\(\Sigma\)</span>. Additionally, the off-diagonal elements are equal because we are taking the difference between the absolute values of <span class="math inline">\(t\)</span> and <span class="math inline">\(s\)</span>. Thus, the matrix is symmetric.</p>
+<p><span class="math display">\[\begin{align}
+    \Sigma_X(\tau) = \left[
+    \begin{matrix}
+        1.0 &amp; e^{\frac{-|1-2|}{\tau}} \\
+        e^{\frac{-|2-1|}{\tau}} &amp; 1.0
+    \end{matrix}\right]
+\end{align}\]</span></p>
+<p>For <span class="math inline">\(\Sigma(\tau \rightarrow 0) \rightarrow \mathbf{I}\)</span> where <span class="math inline">\(\mathbf{I}\)</span> is the identity matrix.</p>
+<p><span class="math display">\[\begin{align}
+    \lim_{\tau \rightarrow \infty} \Sigma_X(\tau) = \left[\begin{matrix} 1 &amp; 0 \\ 0 &amp; 1 \end{matrix}\right] = \mathbf{I}
+\end{align}\]</span></p>
+</section>
+</section>
+<section id="part-c" class="level2">
+<h2 class="anchored" data-anchor-id="part-c">Part C</h2>
+<p>Plot a few samples of <span class="math inline">\(X(t;\omega)\)</span> for <span class="math inline">\(\tau = 0.02\)</span> and <span class="math inline">\(\tau = 1\)</span> on a temporal with <span class="math inline">\(5000\)</span> points in [0, 5] (two different figures). Show that such sample paths are approximately within <span class="math inline">\(\mu(t) \pm 2\sigma(t)\)</span>, where <span class="math inline">\(\sigma(t)\)</span> is the standard deviation of the process.</p>
+<section id="solution-2" class="level3">
+<h3 class="anchored" data-anchor-id="solution-2">Solution</h3>
+<p>First, we define a 1D grid for time from 0 to 5, equally spaced with 5000 points. We then define the functions for the mean and covariance and construct a vector of means corresponding to each point in time. Next, we construct a covariance matrix, perform the lower triangular Cholesky factorization of that matrix, and generate a random vector. <span class="math display">\[\bar{X_i} = \bar{\mu}_i + \bar{A}\bar{\xi}\]</span> where <span class="math inline">\(\xi \sim \mathcal{N}(0, 1)\)</span></p>
+<div id="67adb579" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">GLMakie</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Distributions</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">LinearAlgebra</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">KernelDensity</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">SpecialFunctions</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">makefig1</span>(τ<span class="op">::</span><span class="dt">Float64</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    t <span class="op">=</span> <span class="fu">LinRange</span>(<span class="fl">0.0</span>, <span class="fl">5.0</span>, <span class="fl">5000</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">μ</span>(t) <span class="op">=</span> <span class="fu">t*exp</span>(<span class="fu">sin</span>(<span class="fl">3</span><span class="op">*</span>t))</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cov</span>(t, s) <span class="op">=</span> <span class="fu">exp</span>((<span class="fu">-abs</span>(t<span class="op">-</span>s)) <span class="op">/</span> (τ))</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    μs <span class="op">=</span> <span class="fu">μ</span>.(t)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    Σ <span class="op">=</span> <span class="fu">Matrix</span><span class="dt">{Float64}</span>(<span class="cn">undef</span>, <span class="fu">length</span>(t), <span class="fu">length</span>(t))</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> idx <span class="kw">in</span> <span class="fu">CartesianIndices</span>(Σ)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        Σ[idx] <span class="op">=</span> <span class="fu">cov</span>(t[idx.I[<span class="fl">1</span>]], t[idx.I[<span class="fl">2</span>]])</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    A <span class="op">=</span> <span class="fu">cholesky</span>(Σ).L</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>()</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>])</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>        Xi <span class="op">=</span> μs <span class="op">.+</span> <span class="fu">A*randn</span>(<span class="fu">length</span>(t))</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>        <span class="fu">lines!</span>(t, Xi)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines!</span>(ax, t, μs, color <span class="op">=</span> <span class="op">:</span>red, label <span class="op">=</span> <span class="st">"μ"</span>)</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines!</span>(ax, t, (μs <span class="op">.+</span> <span class="fl">2</span>),</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>           color <span class="op">=</span> <span class="op">:</span>black,</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>           linestyle <span class="op">=</span> <span class="op">:</span>dash)</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines!</span>(ax, t, (μs <span class="op">.+</span> <span class="op">-</span><span class="fl">2</span>),</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>           color <span class="op">=</span> <span class="op">:</span>black,</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>           linestyle <span class="op">=</span> <span class="op">:</span>dash,</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>           label <span class="op">=</span> <span class="st">"μ ± 2"</span>)</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">Legend</span>(fig[<span class="fl">1</span>, <span class="fl">2</span>], ax)</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">save</span>(<span class="st">"question1c_</span><span class="sc">$</span><span class="st">τ.</span>png<span class="st">"</span>, fig)</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="fu">makefig1</span>(<span class="fl">0.02</span>);</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="fu">makefig1</span>(<span class="fl">1.0</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div>
+
+</div>
+<div class="quarto-layout-panel" data-fig-pos="H" data-layout="[1, 1]" data-fig-cap="">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-image1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-image1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="hw3_files/media/question1c_0.02.png" class="img-fluid figure-img" style="width:105.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-image1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: <span class="math inline">\(\tau = 0.02\)</span>
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-image2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-image2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="hw3_files/media/question1c_1.0.png" class="img-fluid figure-img" style="width:105.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-image2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: <span class="math inline">\(\tau = 1.0\)</span>
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="question-2" class="level1">
+<h1>Question 2</h1>
+<p>Show that the sequence of numbers <span class="math inline">\(\{U_k\}\)</span> defined as</p>
+<p><span class="math display">\[U_k = \frac{(\hat{X}_k - \hat{Y}_k) \quad \mod m_1}{m_1 + 1}\]</span> where <span class="math display">\[\begin{align}\hat{X}_k =
+    \begin{cases}
+        X_k &amp; \text{if} \quad X_k \geq 0 \\
+        X_k - m_1 X_k &amp; \text{if} \quad X_k &lt; 0
+    \end{cases} &amp; \quad \hat{Y}_k =
+    \begin{cases}
+        Y_k &amp; \text{if} \quad Y_k \geq 0 \\
+        Y_k - m_2 Y_k &amp; \text{if} \quad Y_k &lt; 0
+    \end{cases}
+\end{align}\]</span></p>
+<p><span class="math display">\[\begin{align}
+    X_k = (1403580X_{k-2} - 810728X_{k-3}) \quad \mod m_1 \\
+    Y_k = (527612Y_{k-1} - 1370589Y_{k-3}) \quad \mod m_2
+\end{align}\]</span></p>
+<p>Let <span class="math inline">\(m_1 = 2^{32} - 209\)</span>, <span class="math inline">\(m_2 = 2^{32} - 22853\)</span>, and <span class="math display">\[X_{-3} = X_{-2} = X_{-1} = Y_{-3} = Y_{-2} = Y_{-1} = 111\]</span> is approximately uniformly distributed in [0, 1]. To this end, generate <span class="math inline">\(N = 10^6\)</span> numbers <span class="math inline">\(U_j\)</span> where <span class="math inline">\(j = 1, 2, ..., N\)</span> and plot the histogram of relative frquencies approximateing the PDF in [0, 1].</p>
+<section id="solution-3" class="level3">
+<h3 class="anchored" data-anchor-id="solution-3">Solution</h3>
+<p>Code that produces a vector of Float64 values of length <span class="math inline">\(N\)</span> from the seed <span class="math inline">\(111\)</span>. We use the modulo function included in Julia Base.</p>
+<div id="d67de8f4" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">MRG32k3a</span>(seed<span class="op">::</span><span class="dt">Integer</span>, N<span class="op">::</span><span class="dt">Integer</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    m₁ <span class="op">=</span> <span class="fl">2.0</span><span class="op">^</span><span class="fl">32</span> <span class="op">-</span> <span class="fl">209</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    m₂ <span class="op">=</span> <span class="fl">2.0</span><span class="op">^</span><span class="fl">32</span> <span class="op">-</span> <span class="fl">22853</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    X <span class="op">=</span> <span class="fu">Vector</span><span class="dt">{Float64}</span>(<span class="cn">undef</span>, N<span class="op">+</span><span class="fl">3</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    Y <span class="op">=</span> <span class="fu">Vector</span><span class="dt">{Float64}</span>(<span class="cn">undef</span>, N<span class="op">+</span><span class="fl">3</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        X[i] <span class="op">=</span> <span class="fu">Float64</span>(seed)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        Y[i] <span class="op">=</span> <span class="fu">Float64</span>(seed)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu">length</span>(X) <span class="op">-</span> <span class="fl">3</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        X[j<span class="op">+</span><span class="fl">3</span>] <span class="op">=</span> <span class="fu">mod</span>(<span class="fl">1403580</span><span class="op">*</span>X[j<span class="op">+</span><span class="fl">1</span>] <span class="op">-</span> <span class="fl">810728</span><span class="op">*</span>X[j], m₁)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>        Y[j<span class="op">+</span><span class="fl">3</span>] <span class="op">=</span> <span class="fu">mod</span>(<span class="fl">527642</span><span class="op">*</span>Y[j<span class="op">+</span><span class="fl">2</span>] <span class="op">-</span> <span class="fl">1370589</span><span class="op">*</span>Y[j], m₂)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">transformX</span>(Xk<span class="op">::</span><span class="dt">Float64</span>) <span class="op">=</span> Xk <span class="op">≥</span> <span class="fl">0</span> ? Xk <span class="op">:</span> Xk <span class="op">-</span> m₁<span class="op">*</span>Xk</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">transformY</span>(Yk<span class="op">::</span><span class="dt">Float64</span>) <span class="op">=</span> Yk <span class="op">≥</span> <span class="fl">0</span> ? Yk <span class="op">:</span> Yk <span class="op">-</span> m₂<span class="op">*</span>Yk</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    Xhat <span class="op">=</span> <span class="fu">transformX</span>.(X)</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    Yhat <span class="op">=</span> <span class="fu">transformY</span>.(Y)</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    Uk <span class="op">=</span> <span class="fu">Vector</span><span class="dt">{Float64}</span>(<span class="cn">undef</span>, N)</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="fu">eachindex</span>(Xhat)</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> i <span class="op">&gt;</span> <span class="fu">length</span>(Xhat) <span class="op">-</span> <span class="fl">3</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>        <span class="cf">end</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>        Uk[i] <span class="op">=</span> <span class="fu">mod</span>(Xhat[i<span class="op">+</span><span class="fl">3</span>] <span class="op">-</span> Yhat[i<span class="op">+</span><span class="fl">3</span>], m₁) <span class="op">/</span> (m₁ <span class="op">+</span> <span class="fl">1</span>)</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>    Uk</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">question2</span>()</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>()</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>],</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>        title <span class="op">=</span> <span class="st">"Relative frequencies of Uⱼ for N = 10⁶"</span>,</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>        xlabel <span class="op">=</span> <span class="st">"Uⱼ"</span>,</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>        ylabel <span class="op">=</span> <span class="st">"frequency"</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>    <span class="fu">hist!</span>(ax, <span class="fu">MRG32k3a</span>(<span class="fl">111</span>, <span class="fl">1000000</span>), bins <span class="op">=</span> <span class="fl">80</span>)</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>    <span class="fu">save</span>(<span class="st">"question2.png"</span>, fig)</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a><span class="fu">question2</span>();</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div>
+
+</div>
+<div class="quarto-layout-panel" data-fig-pos="H" data-layout="[1]" data-fig-cap="">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: flex-start;">
+<div id="fig-image3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-image3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="hw3_files/media/question2.png" class="img-fluid figure-img" style="width:75.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-image3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Histogram of relative frequencies of <span class="math inline">\(10^6\)</span> samples using the MRG32k3a algorithm
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="question-3" class="level1">
+<h1>Question 3</h1>
+<p>Consider the stochastic differential equation (SDE)</p>
+<p><span class="math display">\[\begin{equation}\tag{1}\label{SDE}
+    dX(t;\omega) = -X(t;\omega)^3 dt + \frac{1}{2} dW(t;\omega) \quad X(0;\omega) = X_0(\omega)
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(W(t;\omega)\)</span> is a Wiener process, and <span class="math inline">\(X_0(\omega)\)</span> is a uniformly distributed random variable in [1, 2]. Let us discretize (<span class="math inline">\(\ref{SDE}\)</span>) with the Euler-Maruyama scheme,</p>
+<p><span class="math display">\[\begin{equation}\tag{2}\label{Euler-M}
+    X_{k+1} = X_k - X_k^3 \Delta t + \frac{1}{2} \Delta W_k
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(X_k = X(t_k;\omega)\)</span>, <span class="math inline">\(\Delta t = t_{k+1} - t_k\)</span> and <span class="math inline">\(\{\Delta W_k\}\)</span> are i.i.d. Gaussian random variables with zero mean and variance <span class="math inline">\(\Delta t\)</span>.</p>
+<section id="part-a-1" class="level2">
+<h2 class="anchored" data-anchor-id="part-a-1">Part A</h2>
+<p>Write the Fokker-Planck (FKP) equation corresponding to the SDE (<span class="math inline">\(\ref{SDE}\)</span>).</p>
+<section id="solution-4" class="level3">
+<h3 class="anchored" data-anchor-id="solution-4">Solution</h3>
+<p>From course notes 3, we know that the Fokker-Planck equation to the general SDE</p>
+<p><span class="math display">\[\begin{align}
+    dX_t = m(X_t, t)dt + s(X_t, t)dW_t \quad X(0) = X_0
+\end{align}\]</span></p>
+<p>is</p>
+<p><span class="math display">\[\begin{align}
+    \frac{\partial p(x, t)}{\partial t} + \frac{\partial}{\partial x} \left[m(x, t)p(x, t)\right] = \frac{1}{2} \frac{\partial^2}{\partial x^2} \left[s(x, t)^2p(x, t)\right]
+\end{align}\]</span></p>
+<p>for equation (<span class="math inline">\(\ref{SDE}\)</span>) we can see the <span class="math inline">\(m(x, t) = -X_t^3\)</span> and <span class="math inline">\(s(x, t) = \frac{1}{2}\)</span>, thus the Fokker-Plank equation for (<span class="math inline">\(\ref{SDE}\)</span>) is</p>
+<p><span class="math display">\[\begin{align}
+    \frac{\partial p}{\partial t} + \frac{\partial}{\partial x} \left[-x^3 p(x, t)\right] = \frac{1}{8} \frac{\partial^2p}{\partial x^2}
+\end{align}\]</span></p>
+</section>
+</section>
+<section id="part-b-1" class="level2">
+<h2 class="anchored" data-anchor-id="part-b-1">Part B</h2>
+<p>Using the FKP equation show that there exists a statistically stationary solution and compute the PDF <span class="math inline">\(p^*(x)\)</span> of such a stationary solution analytically. Is the equilibrium distribution <span class="math inline">\(p^*(x)\)</span> Gaussian?</p>
+<p>Hint: To compute a stationary solution to the Fokker-Planck equation, set the time derivative <span class="math inline">\(\frac{\partial p}{\partial t} = 0\)</span>.</p>
+<section id="solution-5" class="level3">
+<h3 class="anchored" data-anchor-id="solution-5">Solution</h3>
+<p>We are left to solve the following DE:</p>
+<p><span class="math display">\[\begin{align}
+    \frac{\partial}{\partial x} \left( x^3 p + \frac{1}{8} \frac{\partial p}{\partial x}\right) &amp;= 0 \\
+    x^3 p + \frac{1}{8} \frac{\partial p}{\partial x} &amp;= 0 \\
+    8 \int x^3 dx &amp;= - \int \frac{1}{p} dp\\
+    2x^4 &amp;= -\ln{p} + k\\
+    p(x) &amp;= ke^{-2x^4}
+\end{align}\]</span></p>
+<p>We need to find a scaling constant <span class="math inline">\(k\)</span> for the pdf <span class="math inline">\(p(x, t)\)</span> such that when you integrate from <span class="math inline">\([-\infty, \infty]\)</span> you get <span class="math inline">\(1\)</span>.</p>
+<p><span class="math display">\[\begin{align}
+    k\int_{-\infty}^{\infty} e^{-2x^4}dx &amp;= 1
+\end{align}\]</span></p>
+<p>Notice the function is even and thus we can write the integral as such:</p>
+<p><span class="math display">\[\begin{align}
+    2k\int_{0}^{\infty} e^{-2x^4}dx &amp;= 1 \quad \begin{cases} u &amp;= x^4 \rightarrow u^{-\frac{3}{4}} = x^{-3}\\ \frac{du}{dx} &amp;= 4x^3 \\ \frac{1}{4}u^{-\frac{3}{4}}du &amp;= dx\end{cases} \\
+    \frac{K}{2} \int_0^{\infty} e^{-2u}u^{\frac{1}{4} -1} du &amp;= 1 \quad \begin{cases}\xi &amp;= 2u \\ \frac{d\xi}{2} &amp;= du\end{cases} \\
+    \frac{K}{4} \int_0^{\infty} e^{-\xi} \left(\frac{\xi}{2}\right)^{-\frac{3}{4}} d\xi &amp;= 1\\
+    \frac{2^{\frac{3}{4}}K}{4} \int_0^{\infty} e^{-\xi} \xi^{\frac{1}{4} - 1} d\xi
+\end{align}\]</span></p>
+<p>The Gamma function is <span class="math display">\[\Gamma(z) = \int_0^{\infty} e^{-\xi}\xi^{z-1}d\xi\]</span></p>
+<p>Solving for <span class="math inline">\(K\)</span> we have <span class="math display">\[\begin{align}
+    K\frac{\Gamma\left(\frac{1}{4}\right)}{2\sqrt[4]{2}} &amp;= 1\\
+    K &amp;= \frac{2\sqrt[4]{2}}{\Gamma\left(\frac{1}{4}\right)}
+\end{align}\]</span></p>
+<p>The PDF <span class="math inline">\(p^*(x)\)</span> is thus,</p>
+<p><span class="math display">\[p^*(x) = \frac{2\sqrt[4]{2}}{\Gamma\left(\frac{1}{4}\right)}e^{-2x^4}\]</span></p>
+<div id="05aeb521" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">p</span>(x) <span class="op">=</span> (<span class="fl">2</span><span class="op">^</span>(<span class="fl">7</span><span class="op">/</span><span class="fl">8</span>) <span class="op">/</span> <span class="fu">gamma</span>(<span class="fl">1</span><span class="op">/</span><span class="fl">4</span>)) <span class="op">*</span> <span class="fu">exp</span>(<span class="op">-</span><span class="fl">2</span><span class="op">*</span>x<span class="op">^</span><span class="fl">4</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">question3c</span>()</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> <span class="fu">LinRange</span>(<span class="op">-</span><span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">1000</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>()</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>],</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>              title <span class="op">=</span> L<span class="st">"</span><span class="sc">$</span>p<span class="st">^*(x)=</span><span class="sc">\f</span><span class="st">rac{2^{</span><span class="sc">\f</span><span class="st">rac{7}{8}}}{\Gamma\left(</span><span class="sc">\f</span><span class="st">rac{1}{4}</span><span class="sc">\r</span><span class="st">ight)}e^{-2x^4}</span><span class="sc">$</span><span class="st">", </span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="st">              </span>xlabel<span class="st"> = L"</span><span class="op">$</span>x<span class="op">$</span><span class="st">",</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>              ylabel <span class="op">=</span> L<span class="st">"</span><span class="sc">$</span>p<span class="st">^*(x)</span><span class="sc">$</span><span class="st">")</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="st">    </span>lines<span class="st">!(ax, x, p.(x))</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">save</span>(<span class="st">"question3c.png"</span>, fig)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="fu">question3c</span>();</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div>
+
+</div>
+<div class="quarto-layout-panel" data-fig-pos="H" data-layout="[1]" data-fig-cap="">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: flex-start;">
+<div id="fig-image4" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-image4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="hw3_files/media/question3c.png" class="img-fluid figure-img" style="width:75.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-image4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: The pdf
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p>We can see that the pdf is non-gaussian. A gaussian distribution is of the form <span class="math inline">\(f(x) = e^{-x^2}\)</span>.</p>
+</section>
+</section>
+<section id="part-c-1" class="level2">
+<h2 class="anchored" data-anchor-id="part-c-1">Part C</h2>
+<p>Write the conditional transition density <span class="math inline">\(p(x_{k+1}|x_k)\)</span> defined by discrete Markov process (<span class="math inline">\(\ref{Euler-M}\)</span>). Does the functional form of the transition density depend on the particular time <span class="math inline">\(t_k\)</span>? Or is it the same for all times?</p>
+<section id="solution-6" class="level3">
+<h3 class="anchored" data-anchor-id="solution-6">Solution</h3>
+<p>We know that the Wiener process is a gaussian random variable with zero mean and variance <span class="math inline">\(\Delta t\)</span>. For equation (<span class="math inline">\(\ref{Euler-M}\)</span>) we have <span class="math inline">\(Var(\frac{1}{2} \Delta W_k) = \frac{1}{4}\Delta t\)</span>.</p>
+<p>By the property that the sum of a constant and a gaussian random variable is still a gaussian with a shifted mean, we can see that if the current state <span class="math inline">\(X_k = x\)</span>, the next state <span class="math inline">\(X_{k+1}\)</span> is</p>
+<p><span class="math display">\[\begin{align}
+    X_{k+1} = x - x^3 \Delta t + \frac{1}{2} \Delta W_k
+\end{align}\]</span></p>
+<p>Thus</p>
+<p><span class="math display">\[\begin{align}
+    X_{k+1} | X_k = x \sim \mathcal{N}(x-x^3 \Delta t, \frac{1}{4} \Delta t)
+\end{align}\]</span></p>
+<p>From this we can explicitly write out the conditional transition density <span class="math inline">\(p(x_{k+1} | x_k)\)</span>. Let <span class="math inline">\(X_{k+1} = y\)</span> and <span class="math inline">\(X_k = x\)</span></p>
+<p><span class="math display">\[\begin{align}
+    p(y | x) = \frac{2}{\sqrt{2 \pi \Delta t}}e^{-\frac{2(y - x + x^3 \Delta t)^2}{\Delta t}}
+\end{align}\]</span></p>
+<p>The functional form of the transition density only depends on <span class="math inline">\(\Delta t\)</span>, which is constant for all time.</p>
+</section>
+</section>
+<section id="part-d" class="level2">
+<h2 class="anchored" data-anchor-id="part-d">Part D</h2>
+<p>By using numerical integration show that the PDF <span class="math inline">\(p^*(x)\)</span> of the statistical steady state you computed in part b is a solution to the fixed point problem</p>
+<p><span class="math display">\[\begin{equation}\tag{3}\label{Volterra}
+    p^*(x) = \int_{-\infty}^{\infty} p(x|y)p^*(y)dy
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(p(x|y)\)</span> is the transition density you computed in part c.&nbsp;Given that <span class="math inline">\(p^*(y)\)</span> decays quite fast, for numerical purposes it is sufficient to approximate the infinite domain of the integral (<span class="math inline">\(\ref{Volterra}\)</span>) to [-5, 5].</p>
+<section id="solution-7" class="level3">
+<h3 class="anchored" data-anchor-id="solution-7">Solution</h3>
+</section>
+</section>
+<section id="part-e" class="level2">
+<h2 class="anchored" data-anchor-id="part-e">Part E</h2>
+<p>Plot a few sample paths of the SDE for <span class="math inline">\(\Delta = 10^{-4}\)</span> for <span class="math inline">\(t \in [0, 5]\)</span>.</p>
+<section id="solution-8" class="level3">
+<h3 class="anchored" data-anchor-id="solution-8">Solution</h3>
+<div id="162a902f" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">question3partE</span>()</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    Δt <span class="op">=</span> <span class="fl">1e-4</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    ts <span class="op">=</span> <span class="fl">0.0</span><span class="op">:</span>Δt<span class="op">:</span><span class="fl">5.0</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    N <span class="op">=</span> <span class="fl">5</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    W <span class="op">=</span> <span class="fu">Normal</span>(<span class="fl">0</span>, <span class="fu">sqrt</span>(Δt))</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    procs <span class="op">=</span> <span class="fu">Matrix</span><span class="dt">{Float64}</span>(<span class="cn">undef</span>, <span class="fu">length</span>(ts), N)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>N</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        procs[<span class="fl">1</span>, i] <span class="op">=</span> <span class="fu">rand</span>() <span class="op">+</span> <span class="fl">1.0</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>N</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="fl">2</span><span class="op">:</span><span class="fu">length</span>(ts)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>            procs[j, i] <span class="op">=</span> procs[j<span class="op">-</span><span class="fl">1</span>, i] <span class="op">-</span> (procs[j<span class="op">-</span><span class="fl">1</span>, i]<span class="op">^</span><span class="fl">3</span>)<span class="op">*</span>Δt <span class="op">+</span> <span class="fl">0.5</span><span class="fu">*rand</span>(W)</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">end</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>()</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>],</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>        title <span class="op">=</span> L<span class="st">"</span><span class="sc">$</span>X_<span class="st">{k+1} = X_k - X_k^3 \Delta t + </span><span class="sc">\f</span><span class="st">rac{1}{2} \Delta W_k</span><span class="sc">$</span><span class="st">",</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="st">        </span>xlabel<span class="st"> = "</span>x<span class="st">")</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>N</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>        <span class="fu">lines!</span>(ax, ts, procs[<span class="op">:</span>, i])</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">save</span>(<span class="st">"question3e.png"</span>, fig)</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="fu">question3partE</span>();</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div>
+
+</div>
+<div class="quarto-layout-panel" data-fig-pos="H" data-layout="[1]" data-fig-cap="">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: flex-start;">
+<div id="fig-image4" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-image4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="hw3_files/media/question3e.png" class="img-fluid figure-img" style="width:75.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-image4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: 5 sample paths of the SDE for <span class="math inline">\(\Delta = 10^{-4}\)</span> for <span class="math inline">\(t \in [0, 5]\)</span>
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="part-f" class="level2">
+<h2 class="anchored" data-anchor-id="part-f">Part F</h2>
+<p>By computing a sufficiently large number of sample paths, Estimate the PDF of <span class="math inline">\(X(t;\omega)\)</span> numerically (e.g.&nbsp;by using a kernel density PDF estimator or method of relative frequencies) at different times and show that it converges to the steady state PDF you computed in part b.</p>
+<section id="solution-9" class="level3">
+<h3 class="anchored" data-anchor-id="solution-9">Solution</h3>
+<div id="7462b9e5" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">question3partF</span>()</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    Δt <span class="op">=</span> <span class="fl">1e-4</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    ts <span class="op">=</span> <span class="fl">0.0</span><span class="op">:</span>Δt<span class="op">:</span><span class="fl">5.0</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    N <span class="op">=</span> <span class="fl">1000</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    W <span class="op">=</span> <span class="fu">Normal</span>(<span class="fl">0</span>, <span class="fu">sqrt</span>(Δt))</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    procs <span class="op">=</span> <span class="fu">Matrix</span><span class="dt">{Float64}</span>(<span class="cn">undef</span>, <span class="fu">length</span>(ts), N)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">println</span>(<span class="st">"initializing matrix with uniform random numbers in [1, 2]"</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>N</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>        procs[<span class="fl">1</span>, i] <span class="op">=</span> <span class="fu">rand</span>() <span class="op">+</span> <span class="fl">1.0</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">println</span>(<span class="st">"simulating random process"</span>)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>N</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>        <span class="fu">println</span>(<span class="st">"</span><span class="sc">$</span>N<span class="st"> complete"</span>)</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="fl">2</span><span class="op">:</span><span class="fu">length</span>(ts)</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>            procs[j, i] <span class="op">=</span> procs[j<span class="op">-</span><span class="fl">1</span>, i] <span class="op">-</span> (procs[j<span class="op">-</span><span class="fl">1</span>, i]<span class="op">^</span><span class="fl">3</span>)<span class="op">*</span>Δt <span class="op">+</span> <span class="fl">0.5</span><span class="fu">*rand</span>(W)</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">end</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>();<span class="fu">display</span>(fig)</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    ax1 <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>],</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    title <span class="op">=</span> <span class="st">"</span><span class="sc">$</span>N<span class="st"> SDE paths"</span>)</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    ax2 <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">2</span>],</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>        title <span class="op">=</span> <span class="st">"KDE Density"</span>)</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> <span class="fu">LinRange</span>(<span class="op">-</span><span class="fl">5</span>, <span class="fl">5</span>, <span class="fl">1000</span>)</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlims!</span>(ax2, <span class="op">-</span><span class="fl">5</span>, <span class="fl">5</span>)    </span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>N</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>        <span class="fu">lines!</span>(ax1, ts, procs[<span class="op">:</span>, i], linewidth <span class="op">=</span> <span class="fl">1</span>)</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>    d <span class="op">=</span> <span class="fu">kde</span>(procs[<span class="fl">1</span>, <span class="op">:</span>])</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>    vlinet <span class="op">=</span> <span class="fu">Observable</span>(ts[<span class="fl">1</span>])</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>    kde_data <span class="op">=</span> <span class="fu">Observable</span>((d.x, d.density))</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>    kde_line <span class="op">=</span> <span class="fu">lines!</span>(ax2, [<span class="fl">0.0</span>], [<span class="fl">0.0</span>], color <span class="op">=</span> <span class="op">:</span>blue, label <span class="op">=</span> <span class="st">"KDE"</span>)</span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>    kde_plot <span class="op">=</span> <span class="fu">lift</span>(kde_data) <span class="cf">do</span> (x, density)</span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>        kde_line[<span class="fl">1</span>] <span class="op">=</span> x</span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>        kde_line[<span class="fl">2</span>] <span class="op">=</span> density</span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>    <span class="fu">vlines!</span>(ax1, vlinet, color <span class="op">=</span> <span class="op">:</span>red, label <span class="op">=</span> <span class="st">"time"</span>)</span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines!</span>(ax2, x, <span class="fu">p</span>.(x), color <span class="op">=</span> <span class="op">:</span>red, linestyle <span class="op">=</span> <span class="op">:</span>dash, label <span class="op">=</span> L<span class="st">"</span><span class="sc">$</span>p<span class="st">^*(x)</span><span class="sc">$</span><span class="st">")</span></span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a><span class="st">    </span>Legend<span class="st">(fig[2, 1], ax1, orientation = :horizontal)</span></span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>    <span class="fu">Legend</span>(fig[<span class="fl">2</span>, <span class="fl">2</span>], ax2, orientation <span class="op">=</span> <span class="op">:</span>horizontal)</span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>    <span class="fu">println</span>(<span class="st">"starting video rendering..."</span>)</span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>    <span class="fu">record</span>(fig, <span class="st">"question3partF.mp4"</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">100</span><span class="op">:</span><span class="fu">length</span>(ts); framerate <span class="op">=</span> <span class="fl">30</span>) <span class="cf">do</span> k</span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>        <span class="fu">println</span>(<span class="st">"frame </span><span class="sc">$</span>k<span class="st">"</span>)</span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a>        vlinet[] <span class="op">=</span> ts[k]</span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>        d <span class="op">=</span> <span class="fu">kde</span>(procs[k, <span class="op">:</span>])</span>
+<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>        kde_data[] <span class="op">=</span> (d.x, d.density)</span>
+<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a>    <span class="fu">println</span>(<span class="st">"video rendered"</span>)</span>
+<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a><span class="fu">question3partF</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<video width="700" autoplay="" loop="" muted="">
+<source src="hw3_files/media/question3partF.mp4" type="video/mp4">
+<p>Your browser does not support the video tag. </p>
+<p>:::</p>
+</video></section>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -426,16 +426,15 @@ question3partF()
 ```
 
 ::: {.content-visible when-format="pdf"}
-\begin{figure}[H]
-	\centering
+\begin{center}
 	\includegraphics[width=0.6\linewidth]{hw3_files/media/question3partF1.png}
 	\vspace{5mm}
 	\includegraphics[width=0.6\linewidth]{hw3_files/media/question3partF1.png}
 	\vspace{5mm}
 	\includegraphics[width=0.6\linewidth]{hw3_files/media/question3partF1.png}
-	\vspace{5mm}
-	\caption*{Watch the full video \href{}{here}.}
-\end{figure}
+	\vspace{5mm} \\
+	\textbf{Watch the full video:} \href{https://kevysilb.github.io/AM238/hw3.html#solution-9}{here}.
+\end{center}
 :::
 
 ::: {.content-visible when-format="html"}
