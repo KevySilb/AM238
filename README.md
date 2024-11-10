@@ -6,3 +6,5 @@
 [homework 2](https://kevysilb.github.io/AM238/hw2.html)
 
 [homework_3](https://kevysilb.github.io/AM238/hw3.html)
+
+[homework 4](https://kevysilb.github.io/AM238/hw4.html)
