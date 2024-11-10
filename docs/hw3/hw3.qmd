@@ -429,9 +429,9 @@ question3partF()
 \begin{center}
 	\includegraphics[width=0.6\linewidth]{hw3_files/media/question3partF1.png}
 	\vspace{5mm}
-	\includegraphics[width=0.6\linewidth]{hw3_files/media/question3partF1.png}
+	\includegraphics[width=0.6\linewidth]{hw3_files/media/question3partF2.png}
 	\vspace{5mm}
-	\includegraphics[width=0.6\linewidth]{hw3_files/media/question3partF1.png}
+	\includegraphics[width=0.6\linewidth]{hw3_files/media/question3partF3.png}
 	\vspace{5mm} \\
 	\textbf{Watch the full video:} \href{https://kevysilb.github.io/AM238/hw3.html#solution-9}{here}.
 \end{center}

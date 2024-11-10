@@ -1,0 +1,59 @@
+---
+title: Two dimensional drone simulation
+date: 2024-10-31
+author:
+  - name: Kevin Silberberg
+    id: ks
+    orcid: 0009-0009-4825-1865
+    email: ksilberb@ucsc.edu
+    affiliation:
+      - name: University of California Santa Cruz
+        city: Santa Cruz
+        state: CA
+        href: https://www.ucsc.edu
+format:
+  html:
+    theme: cosmo
+    toc: true
+    code-fold: true
+    code-links:
+    - icon: github
+      href: https://github.com/KevySilb/AM238
+  pdf:
+    pdf-engine: lualatex
+    monofont: "DejaVu Sans Mono"
+    toc: true
+    number-sections: true
+    documentclass: article
+---
+
+Accurate wind-velocity measurements are essential for various research applications, including climate modeling, dispersion modeling, quantifying emission sources, and measuring atmospheric boundary layers at very high altitudes. Traditionally, drones can be equipped with compact sonic anemometers, which serve as wind sensors for these purposes. However, this approach introduces specific challenges: each sensor comes at a high financial cost, requires mounting on a drone, and adds significant payload weight, reducing the drone’s flight time and compactness. Furthermore, the close proximity of the sensor to the drone’s propulsion system can introduce biases in the measurements, making them less accurate. Despite the potential benefits, these drawbacks limit the efficiency and reliability of using drones for wind measurements.
+
+
+To address the limitations of mounted wind sensors, we explore sensor-free methods utilizing the drone’s Inertial Measurement Unit (IMU). IMUs provide flight data at a much higher sampling rate (50 Hz) compared to the 1 Hz data rate typical of onboard sensors. By relying solely on IMU data, we eliminate the need to purchase additional sensors and avoid additional payload, allowing micro-drones—otherwise too lightweight to carry extra equipment—to function as self-contained wind sensors. Additionally, deploying multiple drones without incurring extra costs becomes feasible. IMU-based methods also reduce the bias inherent in mounted sensors, as measurements rely on internal flight dynamics rather than an external sensor’s exposure to wind flow.
+
+
+One crucial consideration in sensor-free wind estimation is the influence of the mass moment of inertia on accuracy, as variations can affect sensitivity to wind-induced perturbations. This variability can impact the consistency of wind estimates, particularly in drones with limited payload capacities that may only support lower-quality IMUs. Understanding and addressing these potential sources of error is critical in optimizing sensor-free wind measurement methods.
+
+
+The dynamics of the 2D drone model are captured through fundamental equations of motion, which represent the forces and torques acting on the drone. These equations express how thrust and angular displacement affect vertical and horizontal motion. The primary equations include the force acting on the drone and its resultant acceleration in both the \( y \)- and \( z \)-directions, as well as the torque-induced angular motion. By understanding these relationships, we can simulate the drone's movement and response to wind perturbations in a controlled, simplified model.
+
+
+To further analyze the drone’s dynamics, we define a state-space model. The model's states include the drone’s position and orientation variables $y(t), z(t), \phi(t)$ and their corresponding rates of change $\dot{y}(t), \dot{z}(t), \dot{\phi}(t)$. Inputs to the model are thrust $F(t)$ and torque $\tau(t)$, while the outputs match the state variables for direct monitoring of position and orientation. This representation provides a comprehensive framework for predicting the drone's response to control inputs and wind effects.
+
+
+In the non-linear model, the system’s behavior is represented by a set of differential equations that describe how state variables change over time under the influence of control inputs and wind forces. This model encapsulates the complexities of drone dynamics without linear approximations, offering a more realistic depiction of its flight behavior. The outputs align with the state variables, allowing for direct observation of the drone's response to different control inputs.
+
+To simplify the analysis, we linearize the model around small angles of $\phi(t)$, representing a near-horizontal steady-state flight. This involves approximating non-linear terms, such as $\sin(\phi)$ and $\cos(\phi)$, using Taylor expansion, yielding constant values at equilibrium. For instance, 
+\begin{align}
+	F_{eq}(t) &= mg\\
+	\tau_{eq}(t) &= 0
+\end{align}
+
+, corresponding to the drone hovering at constant altitude. Linearization around these small deviations allows for the application of control techniques and easier analysis of the system's stability.
+
+The PD (Proportional-Derivative) controller manages the drone's motion by controlling three primary outputs: vertical position \( z \), horizontal position \( y \), and angular orientation \( \phi \). For each output, the controller applies corrective accelerations based on desired target values, current values, and their derivatives. Additionally, two control inputs—thrust \( F \) and torque \( \tau \)—are adjusted in response to the error terms, maintaining desired altitude, position, and orientation.
+
+To incorporate the effects of wind, we simulate its influence as a stochastic process using an Ornstein-Uhlenbeck differential equation, which models random fluctuations around a mean wind speed. This model enables realistic wind perturbations, helping to analyze how the drone’s control system responds to varying wind forces. By examining the controller’s output, we can estimate the wind’s impact on drone dynamics.
+
+This project aims to benchmark wind estimates generated by a Linear Quadratic Regulator (LQR) controller compared to a PID controller. Additionally, we will investigate different filtering techniques, such as the Kalman and particle filters, to refine wind estimates. Another goal is to assess how changes in the drone’s mass moment of inertia affect measurement precision. Finally, the project will scale the model to a quadcopter configuration for experimental validation, establishing a basis for broader applications in wind measurement using drones.

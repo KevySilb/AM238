@@ -1,0 +1,25 @@
+---
+title: Research update OCT21-25
+date: 2024-10-28
+author:
+  - name: Kevin Silberberg
+    id: ks
+    orcid: 0009-0009-4825-1865
+    email: ksilberb@ucsc.edu
+    affiliation:
+      - name: University of California Santa Cruz
+        city: Santa Cruz
+        state: CA
+        href: https://www.ucsc.edu
+format:
+  pdf:
+    pdf-engine: lualatex
+    monofont: "DejaVu Sans Mono"
+    toc: true
+    number-sections: true
+    documentclass: article
+---
+
+I began developing a rigid body model for a two-dimensional drone that operates in the z-y plane. I have defined the system's states, along with its inputs and outputs. The next step is to linearize the system and design either a PID or a linear quadratic regulator (LQR) controller to determine a gain matrix that keeps the drone at the origin. When subjected to a constant external force, the drone should respond by increasing thrust and adjusting its tilt to maintain its position in the plane.
+
+For the week of October 28 to November 1, my goal is to write code that implements this system, begin drafting the project outline, and start assembling a presentation.

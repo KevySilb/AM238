@@ -1,0 +1,245 @@
+---
+title: Sensor-free Wind Velocity Estimate from Rotocopter Motion
+date: 2024-10-23
+author:
+  - name: Kevin Silberberg
+    id: ks
+    orcid: 0009-0009-4825-1865
+    email: ksilberb@ucsc.edu
+    affiliation:
+      - name: University of California Santa Cruz
+        city: Santa Cruz
+        state: CA
+        href: https://www.ucsc.edu
+format:
+  revealjs:
+    theme: dark
+    footer: "Sensor-free Wind Velocity Estimate from Rotocopter Motion"
+    smaller: true
+---
+
+# Introduction 
+
+- Accurate wind-velocity measurements are critical for research applications
+  - Climate modeling
+  - Dispersion modeling
+  - Quantifying emission sources
+  - Measuring Atmospheric Boundary Layer (very high altitudes)
+
+- Drones can be outfitted with compact sonic anemometers (wind sensors)
+  - High financial cost (one sensor per drone)
+  - Susceptibility to measurement bias 
+  - Additional payload reduces flight time and aircraft compactness 
+
+::: {.notes}
+calculating the rate of gas emissions from sources (Carbon dioxide, methane, ...)
+
+lower data acquisition frequency compared to stationary, full scale anemometers
+
+A wind velocity sensor so close to the aircraft propulsion system introduces bias 
+:::
+
+# Sensor-free methods
+- Inertial Measurement Unit (IMU)
+  - Provides flight data at high sampling rate (50 Hz)
+  - This is in contrast to 1 Hz for sensor aboard drones
+  
+- Eliminates the need to purchase additional sensors or additional weight
+  - Allows micro drones that otherwise could not carry sensors become sensors themselves
+  - Deploy multiple drones at the same time without compounding cost 
+  
+- Mitigates bias inherent to a mounted sensor 
+
+
+::: {.notes} 
+
+:::
+
+# Considerations
+
+- Variations in the mass moment of inertia effects the accuracy of the wind estimate
+  - Increased sensitivity to perturbations by the wind
+  
+Limitations:
+
+- Drones with smaller payload capacity may have reduced quality IMUs
+
+::: {.notes}
+
+:::
+
+# 2D drone toy model
+
+:::: {.columns}
+
+::: {.column width="50%"}
+![](File_000.png)
+:::
+
+::: {.column width="50%"}
+Equations of motion:
+\begin{align}
+	-F(t)\sin{\phi(t)} &= m \frac{d^2y}{dt^2} \\
+	F(t)\cos{\phi(t)} &= mg + m \frac{d^2z}{dt^2}\\
+	\tau(t) &= I_{xx} \frac{d^2\phi}{dt^2}
+\end{align}
+:::
+
+::::
+
+
+::: {.notes}
+
+:::
+
+# State space model
+
+:::: {.columns}
+
+:::{.column width="33%"}
+States:
+\begin{align}
+	x_1 &= y(t) \\
+	x_2 &= z(t) \\
+	x_3 &= \phi(t) \\
+	x_4 &= \dot{y}(t) \\
+	x_5 &= \dot{z}(t) \\
+	x_6 &= \dot{\phi}(t)
+\end{align}
+:::
+
+:::{.column width="33%"}
+Inputs:
+\begin{align}
+u_1 &= F(t) \\
+u_2 &= \tau(t)
+\end{align}
+:::
+
+:::{.column width="33%"}
+Outputs:
+\begin{align}
+y_1 &= y(t) \\
+y_2 &= z(t) \\
+y_3 &= \phi(t)
+\end{align}
+:::
+::::
+
+# Non-linear model
+
+:::: {.columns}
+
+::: {.column width="50%"}
+\begin{align}
+	\left[
+	\begin{matrix}
+		\dot{x_1}\\
+		\dot{x_2}\\
+		\dot{x_3}\\
+		\dot{x_4}\\
+		\dot{x_5}\\
+		\dot{x_6}
+	\end{matrix}\right] =
+	\left[
+	\begin{matrix}
+		x_4 \\
+		x_5 \\
+		x_6 \\
+		-\frac{u_1}{m}\sin(x_3) \\
+		\frac{u_1}{m}\cos(x_3) - g \\
+		\frac{u_2}{I_{xx}}
+	\end{matrix}\right]
+\end{align}
+:::
+
+::: {.column width="50%"}
+\begin{align}
+	\left[
+	\begin{matrix}
+		y_1 \\
+		y_2 \\
+		y_3
+	\end{matrix}\right] =
+	\left[
+	\begin{matrix}
+		1 & 0 & 0 \\
+		0 & 1 & 0 \\
+		0 & 0 & 1
+	\end{matrix}\right]
+	\left[
+	\begin{matrix}
+		x_1 \\
+		x_2 \\
+		x_3
+	\end{matrix}\right]
+\end{align}
+:::
+::::
+
+# Linearizing 
+
+Linearizing about small $\phi(t)$
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+Steady state dynamics
+
+\begin{align}
+	F_{eq}(t) &= mg \\
+	\tau_{eq}(t) &= 0 \\
+	\phi_{eq}(t) &= 0 \\
+	y_{eq}(t) &= y_0 \\
+	z_{eq}(t) &= z_0
+\end{align}
+
+:::
+
+::: {.column width="50%"}
+
+First order Taylor expansion of non-linear terms for small angles of $\phi$
+
+\begin{align}
+	\sin{(\phi)} &= \sin{(0)} + \cos(0)(\phi - 0) \\
+	&= \phi \\
+	\cos(\phi) &= \cos(0) -\sin(0)(\phi - 0) \\
+	&= 1
+\end{align}
+:::
+
+::::
+
+# PD Controller 
+Three outputs ($y, z, \phi$):
+\begin{align}
+	\ddot{z}_{ctrl} &= \ddot{z}_{d} + K_{pz}(z_d - z) + K_{dz}(\dot{z}_d - \dot{z}) \\
+	\ddot{y}_{ctrl} &= \ddot{y}_{d} + K_{py}(y_d - y) + K_{dy}(\dot{y}_d - \dot{y}) \\
+	\ddot{\phi}_{ctrl} &= \ddot{\phi}_{d} + K_{p\phi}(\phi_d - \phi) + K_{d\phi}(\dot{\phi}_d - \dot{\phi})
+\end{align}
+
+Two inputs ($F, \tau$):
+\begin{align}
+	u_1 &= mg + m\ddot{z}_{ctrl} \\
+	u_2 &= I_{xx}\ddot{\phi}_{ctrl}
+\end{align}
+	
+# Simulating wind
+
+We model the wind acting on the drone by propagating the following Stochastic DE in the integral solver:
+
+Ornstein-Uhlenbeck process:
+
+\begin{align}
+	dx_t = \theta(\mu - x_t)dt + \sigma dW_t
+\end{align}
+
+Then produce a wind estimate by calculating component force produced in the direction of the wind by only looking at the outputs of the controller.
+
+# Project goals
+
+- Benchmark wind estimates produced from Linear Quadratic Regulator vs PID controller
+- Use different filtering (Kalman filter, partical filter) to produce a wind estimate 
+- Explore how changing the mass moment of inertia changes the certainty of the measurement
+- Scale up the model to quad-copter and experimentally validate findings 

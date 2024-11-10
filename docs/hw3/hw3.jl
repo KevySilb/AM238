@@ -155,4 +155,3 @@ function question3partF()
         kde_data[] = (d.x, d.density)
     end
 end
-question3partF();
