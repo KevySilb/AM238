@@ -233,7 +233,7 @@ partB();
 	\vspace{5mm}
 	\includegraphics[width=0.6\linewidth]{hw4_files/media/partb1c.png}
 	\vspace{5mm} \\
-	\textbf{Watch the full video:} \href{}{here}.
+	\textbf{Watch the full video:} \href{https://kevysilb.github.io/AM238/hw4.html#solution-1}{here}.
 \end{center}
 :::
 
@@ -250,11 +250,11 @@ Write the Fokker-Planck equation for the joint PDF of $X(t;\omega)$ and $Y(t;\om
 
 ### Solution
 
-Let us rewrite \eqref{eq:SDE} in state-space form
+Let us write \eqref{eq:SDE} in state-space form
 
 \begin{align}
-	dX_1 &= -X_1^3 dt - \tau X_2 dt + \sigma dW_1 \\
-	dX_2 &= -\tau X_2 dt + \sigma dW_2
+	dX &= -X^3 dt - \tau Y dt + \sigma dW_1 \\
+	dY &= -\tau Y dt + \sigma dW_2
 \end{align}
 
 The vector $\mathbf{G}(\mathbf{X}, t)$ can be written as 
@@ -262,8 +262,8 @@ The vector $\mathbf{G}(\mathbf{X}, t)$ can be written as
 \begin{align}
 	 \mathbf{G}(\mathbf{X}, t) &= \left[
 	 \begin{matrix}
-		 -X_1^3 - \tau X_2 \\
-		 -\tau X_2
+		 -X^3 - \tau Y \\
+		 -\tau Y
 	 \end{matrix}\right]
 \end{align}
 
@@ -281,15 +281,17 @@ We can thus write the Fokker-Planck equation according equation 59 in course not
 
 \begin{align}
 	\frac{\partial p(\mathbf{x}, t)}{\partial t} &= -\sum_{k=1}^{2} \frac{\partial}{\partial x_k} \left(G_k(\mathbf{x}, t) p(\mathbf{x})\right) + \frac{1}{2} \sum_{i, k = 1}^2 \frac{\partial^2}{\partial x_i \partial x_k}\left(\sum_{j=1}^2 S_{ij}(\mathbf{x}, t)S_{kj}(\mathbf{x}, t) p(\mathbf{x}, t) \right) \\
-&= \frac{\partial}{\partial x_1}\left((x_1^3 + \tau x_2)p\right) + \frac{\partial}{\partial x_2}(\tau x_2 p) + \frac{\sigma^2}{2}\left(\frac{\partial^2p}{\partial x_1^2} + \frac{\partial^2p}{\partial x_2^2}\right) \\
-&= 3px_1^2 + x_1^3 \frac{\partial p}{\partial x_1} + \tau x_2 \frac{\partial p}{\partial x_1} + \frac{\sigma^2}{2}\left(\frac{\partial^2p}{\partial x_1^2} + \frac{\partial^2p}{\partial x_2^2}\right)
+\frac{\partial p}{\partial t} &= -\left(\frac{\partial}{\partial x} \left((-x^3 -\tau y)p\right) + \frac{\partial}{\partial y}\left(-\tau yp\right)\right) + \frac{\sigma^2}{2}\left(\frac{\partial^2p}{\partial x^2} + \frac{\partial^2 p}{\partial y^2}\right) \\
+&= \frac{\partial}{\partial x}(x^3 p) + \tau p + \tau y\left(\frac{\partial p}{\partial x} + \frac{\partial p}{\partial y}\right) + \frac{\sigma^2}{2}\left(\frac{\partial^2p}{\partial x^2} + \frac{\partial^2 p}{\partial y^2}\right)
 \end{align}
 
 The Fokker-Planck equation is thus
 
 \begin{equation}\tag{2}\label{eq:fokker-planck}
-\frac{\partial p}{\partial t} = 3px_1^2 + x_1^3 \frac{\partial p}{\partial x_1} + \tau x_2 \frac{\partial p}{\partial x_1} + \frac{\sigma^2}{2}\left(\frac{\partial^2p}{\partial x_1^2} + \frac{\partial^2p}{\partial x_2^2}\right)
+\frac{\partial p(x, y, t)}{\partial t} = \frac{\partial}{\partial x}(x^3 p(x, y, t)) + \tau p(x, y, t) + \tau y\left(\frac{\partial p(x, y, t)}{\partial x} + \frac{\partial p(x, y, t)}{\partial y}\right) + \frac{\sigma^2}{2}\left(\frac{\partial^2p(x, y, t)}{\partial x^2} + \frac{\partial^2 p(x, y, t)}{\partial y^2}\right)
 \end{equation}
+
+where $p(x, y, t)$ is the joint PDF of $X$ and $Y$.
 
 
 ## Part D
@@ -300,12 +302,51 @@ HINT: Integrate the Fokker-Planck equation with respect to $y$ and use the defin
 
 ### Solution
 
+To obtain the reduced-order equation, let us integrate \eqref{eq:fokker-planck} with respect to $y$ and use the definition of conditional PDF. 
+
+\begin{align}
+\frac{\partial}{\partial t}\int_{-\infty}^{\infty}pdy &= \int_{-\infty}^{\infty}\left(\frac{\partial}{\partial x} \left((x^3 +\tau y)p\right) + \frac{\partial}{\partial y}\left(\tau yp\right) + \frac{\sigma^2}{2}\left(\frac{\partial^2p}{\partial x^2} + \frac{\partial^2 p}{\partial y^2}\right)\right) dy\\
+\frac{\partial p(x,t)}{\partial t} &= \frac{\partial}{\partial x} \int_{-\infty}^{\infty}(x^3 + \tau y)p dy + \int_{-\infty}^{\infty} \frac{\partial}{\partial y}(\tau yp)dy + \frac{\sigma^2}{2}\left(\frac{\partial^2}{\partial x^2}\int_{-\infty}^{\infty}p dy +\cancelto{0}{\int_{-\infty}^{\infty}\frac{\partial^2 p}{\partial y^2}dy}\right) \\
+&= \frac{\partial}{\partial x}\left(x^3p(x, t) + \tau p(x, t)\mathbb{E}\{Y | X\}\right) + \cancelto{0}{\tau y p_{\bigg{|}_{-\infty}^{\infty}}} + \frac{\sigma^2}{2}\frac{\partial^2 p(x, t)}{\partial x^2}\\
+\end{align}
+
+Thus, the reduced order equation for the joint PDF can be written as,
+
+\begin{equation}\tag{3}\label{eq:reduced-order}
+	\frac{\partial p(x, t)}{\partial t} = \frac{\partial}{\partial x}(x^3 p(x, t)) + \tau \frac{\partial}{\partial x}\left(p(x, t)\mathbb{E}\{y|x\}\right) + \frac{\sigma^2}{2} \frac{\partial^2 p(x, t)}{\partial x^2}
+\end{equation}
+
 ## Part E
 
 Set $\sigma = 0$. Compute the conditional expectation $\mathbb{E}\{Y(t;\omega) | X(t;\omega)\}$ explicity as a function of 
 $t$ and substitute it in the reduced order equation you obtained in part d (with $\sigma = 0$) to obtain an exact (and closed) equation for the PDF of $X(t;\omega)$.
 
 ### Solution
+
+Recall the orginal SDE \eqref{eq:SDE} where
+
+\begin{align}
+	dY = -\tau Y dt + \sigma dW
+\end{align}
+
+setting $\sigma = 0$ we have the following ODE:
+
+\begin{align}
+	\begin{cases}
+		\frac{dY}{dt} = -\tau Y \\
+		Y(0) \sim \text{Uniform}(0, 1)
+	\end{cases}
+\end{align}
+
+solving for $Y(t)$ we have:
+
+\begin{align}
+	Y(t) = Y(0)e^{-\tau t}
+\end{align}
+
+where $Y(0)$ can be expressed as the expectation of a uniform random variable in [0, 1], which we know is $\frac{1}{2}$
+
+therefore the conditional expectation $$\mathbb{E}\{Y|X\} = \frac{1}{2}e^{-\tau t}$$
 
 ## Part F
 

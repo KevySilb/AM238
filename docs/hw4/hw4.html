@@ -207,7 +207,7 @@ window.Quarto = {
 \end{align}\]</span></p>
 <p>where <span class="math inline">\(\Delta Y_n = Y_{n+1} - Y_n = -\tau Y_n \Delta t + \sigma \Delta W_n\)</span></p>
 <p>where <span class="math inline">\(\Delta W_n\)</span> are i.i.d Gaussian random variables with zero mean and variance <span class="math inline">\(\Delta t\)</span>.</p>
-<div id="bfcc47d7" class="cell" data-execution_count="1">
+<div id="5658a508" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">GLMakie</span></span>
@@ -292,7 +292,7 @@ window.Quarto = {
 <h3 class="anchored" data-anchor-id="solution-1">Solution</h3>
 <p>From part A, we can see that as we increase <span class="math inline">\(\tau\)</span>, the system rapidly converges to a statistically steady-state process. We can prove this by the Kernel Density Estimation for 1000 sample paths for varying <span class="math inline">\(\tau\)</span> and comparing the estimated PDF for later times.</p>
 <p>The solution approaches a statistically steady state as <span class="math inline">\(t\rightarrow \infty\)</span> and approaches the statisically steady state at the rate <span class="math inline">\(\tau\)</span>.</p>
-<div id="c9747190" class="cell" data-execution_count="2">
+<div id="c1c91789" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">KernelDensity</span></span>
@@ -386,17 +386,17 @@ window.Quarto = {
 <p>Write the Fokker-Planck equation for the joint PDF of <span class="math inline">\(X(t;\omega)\)</span> and <span class="math inline">\(Y(t;\omega)\)</span>.</p>
 <section id="solution-2" class="level3">
 <h3 class="anchored" data-anchor-id="solution-2">Solution</h3>
-<p>Let us rewrite <span class="math inline">\(\eqref{eq:SDE}\)</span> in state-space form</p>
+<p>Let us write <span class="math inline">\(\eqref{eq:SDE}\)</span> in state-space form</p>
 <p><span class="math display">\[\begin{align}
-    dX_1 &amp;= -X_1^3 dt - \tau X_2 dt + \sigma dW_1 \\
-    dX_2 &amp;= -\tau X_2 dt + \sigma dW_2
+    dX &amp;= -X^3 dt - \tau Y dt + \sigma dW_1 \\
+    dY &amp;= -\tau Y dt + \sigma dW_2
 \end{align}\]</span></p>
 <p>The vector <span class="math inline">\(\mathbf{G}(\mathbf{X}, t)\)</span> can be written as</p>
 <p><span class="math display">\[\begin{align}
      \mathbf{G}(\mathbf{X}, t) &amp;= \left[
      \begin{matrix}
-         -X_1^3 - \tau X_2 \\
-         -\tau X_2
+         -X^3 - \tau Y \\
+         -\tau Y
      \end{matrix}\right]
 \end{align}\]</span></p>
 <p>The matrix <span class="math inline">\(\mathbf{S}\)</span> can be written as</p>
@@ -410,13 +410,14 @@ window.Quarto = {
 <p>We can thus write the Fokker-Planck equation according equation 59 in course notes 4 as follows:</p>
 <p><span class="math display">\[\begin{align}
     \frac{\partial p(\mathbf{x}, t)}{\partial t} &amp;= -\sum_{k=1}^{2} \frac{\partial}{\partial x_k} \left(G_k(\mathbf{x}, t) p(\mathbf{x})\right) + \frac{1}{2} \sum_{i, k = 1}^2 \frac{\partial^2}{\partial x_i \partial x_k}\left(\sum_{j=1}^2 S_{ij}(\mathbf{x}, t)S_{kj}(\mathbf{x}, t) p(\mathbf{x}, t) \right) \\
-&amp;= \frac{\partial}{\partial x_1}\left((x_1^3 + \tau x_2)p\right) + \frac{\partial}{\partial x_2}(\tau x_2 p) + \frac{\sigma^2}{2}\left(\frac{\partial^2p}{\partial x_1^2} + \frac{\partial^2p}{\partial x_2^2}\right) \\
-&amp;= 3px_1^2 + x_1^3 \frac{\partial p}{\partial x_1} + \tau x_2 \frac{\partial p}{\partial x_1} + \frac{\sigma^2}{2}\left(\frac{\partial^2p}{\partial x_1^2} + \frac{\partial^2p}{\partial x_2^2}\right)
+\frac{\partial p}{\partial t} &amp;= -\left(\frac{\partial}{\partial x} \left((-x^3 -\tau y)p\right) + \frac{\partial}{\partial y}\left(-\tau yp\right)\right) + \frac{\sigma^2}{2}\left(\frac{\partial^2p}{\partial x^2} + \frac{\partial^2 p}{\partial y^2}\right) \\
+&amp;= \frac{\partial}{\partial x}(x^3 p) + \tau p + \tau y\left(\frac{\partial p}{\partial x} + \frac{\partial p}{\partial y}\right) + \frac{\sigma^2}{2}\left(\frac{\partial^2p}{\partial x^2} + \frac{\partial^2 p}{\partial y^2}\right)
 \end{align}\]</span></p>
 <p>The Fokker-Planck equation is thus</p>
 <p><span class="math display">\[\begin{equation}\tag{2}\label{eq:fokker-planck}
-\frac{\partial p}{\partial t} = 3px_1^2 + x_1^3 \frac{\partial p}{\partial x_1} + \tau x_2 \frac{\partial p}{\partial x_1} + \frac{\sigma^2}{2}\left(\frac{\partial^2p}{\partial x_1^2} + \frac{\partial^2p}{\partial x_2^2}\right)
+\frac{\partial p(x, y, t)}{\partial t} = \frac{\partial}{\partial x}(x^3 p(x, y, t)) + \tau p(x, y, t) + \tau y\left(\frac{\partial p(x, y, t)}{\partial x} + \frac{\partial p(x, y, t)}{\partial y}\right) + \frac{\sigma^2}{2}\left(\frac{\partial^2p(x, y, t)}{\partial x^2} + \frac{\partial^2 p(x, y, t)}{\partial y^2}\right)
 \end{equation}\]</span></p>
+<p>where <span class="math inline">\(p(x, y, t)\)</span> is the joint PDF of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>.</p>
 </section>
 </section>
 <section id="part-d" class="level2">
@@ -425,6 +426,16 @@ window.Quarto = {
 <p>HINT: Integrate the Fokker-Planck equation with respect to <span class="math inline">\(y\)</span> and use the definition of conditional PDF.</p>
 <section id="solution-3" class="level3">
 <h3 class="anchored" data-anchor-id="solution-3">Solution</h3>
+<p>To obtain the reduced-order equation, let us integrate <span class="math inline">\(\eqref{eq:fokker-planck}\)</span> with respect to <span class="math inline">\(y\)</span> and use the definition of conditional PDF.</p>
+<p><span class="math display">\[\begin{align}
+\frac{\partial}{\partial t}\int_{-\infty}^{\infty}pdy &amp;= \int_{-\infty}^{\infty}\left(\frac{\partial}{\partial x} \left((x^3 +\tau y)p\right) + \frac{\partial}{\partial y}\left(\tau yp\right) + \frac{\sigma^2}{2}\left(\frac{\partial^2p}{\partial x^2} + \frac{\partial^2 p}{\partial y^2}\right)\right) dy\\
+\frac{\partial p(x,t)}{\partial t} &amp;= \frac{\partial}{\partial x} \int_{-\infty}^{\infty}(x^3 + \tau y)p dy + \int_{-\infty}^{\infty} \frac{\partial}{\partial y}(\tau yp)dy + \frac{\sigma^2}{2}\left(\frac{\partial^2}{\partial x^2}\int_{-\infty}^{\infty}p dy +\cancelto{0}{\int_{-\infty}^{\infty}\frac{\partial^2 p}{\partial y^2}dy}\right) \\
+&amp;= \frac{\partial}{\partial x}\left(x^3p(x, t) + \tau p(x, t)\mathbb{E}\{Y | X\}\right) + \cancelto{0}{\tau y p_{\bigg{|}_{-\infty}^{\infty}}} + \frac{\sigma^2}{2}\frac{\partial^2 p(x, t)}{\partial x^2}\\
+\end{align}\]</span></p>
+<p>Thus, the reduced order equation for the joint PDF can be written as,</p>
+<p><span class="math display">\[\begin{equation}\tag{3}\label{eq:reduced-order}
+    \frac{\partial p(x, t)}{\partial t} = \frac{\partial}{\partial x}(x^3 p(x, t)) + \tau \frac{\partial}{\partial x}\left(p(x, t)\mathbb{E}\{y|x\}\right) + \frac{\sigma^2}{2} \frac{\partial^2 p(x, t)}{\partial x^2}
+\end{equation}\]</span></p>
 </section>
 </section>
 <section id="part-e" class="level2">
@@ -432,6 +443,23 @@ window.Quarto = {
 <p>Set <span class="math inline">\(\sigma = 0\)</span>. Compute the conditional expectation <span class="math inline">\(\mathbb{E}\{Y(t;\omega) | X(t;\omega)\}\)</span> explicity as a function of <span class="math inline">\(t\)</span> and substitute it in the reduced order equation you obtained in part d (with <span class="math inline">\(\sigma = 0\)</span>) to obtain an exact (and closed) equation for the PDF of <span class="math inline">\(X(t;\omega)\)</span>.</p>
 <section id="solution-4" class="level3">
 <h3 class="anchored" data-anchor-id="solution-4">Solution</h3>
+<p>Recall the orginal SDE <span class="math inline">\(\eqref{eq:SDE}\)</span> where</p>
+<p><span class="math display">\[\begin{align}
+    dY = -\tau Y dt + \sigma dW
+\end{align}\]</span></p>
+<p>setting <span class="math inline">\(\sigma = 0\)</span> we have the following ODE:</p>
+<p><span class="math display">\[\begin{align}
+    \begin{cases}
+        \frac{dY}{dt} = -\tau Y \\
+        Y(0) \sim \text{Uniform}(0, 1)
+    \end{cases}
+\end{align}\]</span></p>
+<p>solving for <span class="math inline">\(Y(t)\)</span> we have:</p>
+<p><span class="math display">\[\begin{align}
+    Y(t) = Y(0)e^{-\tau t}
+\end{align}\]</span></p>
+<p>where <span class="math inline">\(Y(0)\)</span> can be expressed as the expectation of a uniform random variable in [0, 1], which we know is <span class="math inline">\(\frac{1}{2}\)</span></p>
+<p>therefore the conditional expectation <span class="math display">\[\mathbb{E}\{Y|X\} = \frac{1}{2}e^{-\tau t}\]</span></p>
 </section>
 </section>
 <section id="part-f" class="level2">

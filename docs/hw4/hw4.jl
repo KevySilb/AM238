@@ -21,8 +21,9 @@ function partA(τ::Float64, σ::Float64)
     # propagate the process
     for i in 1:N
         for j in 2:length(ts)
-            X[j, i] = X[j-1, i] - (X[j-1, i]^3)*Δt -τ*Y[j-1, i]*Δt + σ*rand(W)
-            Y[j, i] = Y[j-1, i] - τ*Y[j-1, i]*Δt + σ*rand(W)
+            ΔW = rand(W)
+            X[j, i] = X[j-1, i] - (X[j-1, i]^3)*Δt -τ*Y[j-1, i]*Δt + σ*ΔW
+            Y[j, i] = Y[j-1, i] - τ*Y[j-1, i]*Δt + σ*ΔW
         end
     end
 
