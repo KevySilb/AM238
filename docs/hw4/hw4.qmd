@@ -25,6 +25,10 @@ format:
     toc: true
     number-sections: true
     documentclass: article
+    include-in-header:
+      - text: |
+          \usepackage{amsmath}
+          \usepackage{cancel}
 jupyter: julia-1.11
 execute:
   eval: false
@@ -94,8 +98,9 @@ function partA(τ::Float64, σ::Float64)
     # propagate the process
     for i in 1:N
         for j in 2:length(ts)
-            X[j, i] = X[j-1, i] - (X[j-1, i]^3)*Δt -τ*Y[j-1, i]*Δt + σ*rand(W)
-            Y[j, i] = Y[j-1, i] - τ*Y[j-1, i]*Δt + σ*rand(W)
+            ΔW = rand(W)
+            X[j, i] = X[j-1, i] - (X[j-1, i]^3)*Δt -τ*Y[j-1, i]*Δt + σ*ΔW
+            Y[j, i] = Y[j-1, i] - τ*Y[j-1, i]*Δt + σ*ΔW
         end
     end
     # make the figure
@@ -143,7 +148,7 @@ Do you expect the system \eqref{eq:SDE} to have a statistically stationary state
 
 From part A, we can see that as we increase $\tau$, the system rapidly converges to a statistically steady-state process. We can prove this by the Kernel Density Estimation for 1000 sample paths for varying $\tau$ and comparing the estimated PDF for later times.
 
-The solution approaches a statistically steady state as $t\rightarrow \infty$ and approaches the statisically steady state at the rate $\tau$.
+The solution approaches a statistically steady state as $t\rightarrow \infty$ and approaches the statisically steady state at the rate $\tau$. It seems though that the pdf for varying $\tau$ may not be the same, as $\tau = 10.0$ seems to have a bimodal distribution for later times.
 
 ```{julia}
 using KernelDensity
@@ -169,8 +174,9 @@ function simulateB(τ::Float64)
     # propagate the process
     for i in 1:N
         for j in 2:length(ts)
-            X[j, i] = X[j-1, i] - (X[j-1, i]^3)*Δt -τ*Y[j-1, i]*Δt + σ*rand(W)
-            Y[j, i] = Y[j-1, i] - τ*Y[j-1, i]*Δt + σ*rand(W)
+            ΔW = rand(W)
+            X[j, i] = X[j-1, i] - (X[j-1, i]^3)*Δt -τ*Y[j-1, i]*Δt + σ*ΔW
+            Y[j, i] = Y[j-1, i] - τ*Y[j-1, i]*Δt + σ*ΔW
         end
     end
     return X, Y, length(ts)
@@ -223,26 +229,25 @@ function partB()
     end
     return fig
 end
-partB();
+partB()
 ```
-::: {.content-visible when-format="pdf"}
-\begin{center}
-	\includegraphics[width=0.6\linewidth]{hw4_files/media/partb1a.png}
-	\vspace{5mm}
-	\includegraphics[width=0.6\linewidth]{hw4_files/media/partb1b.png}
-	\vspace{5mm}
-	\includegraphics[width=0.6\linewidth]{hw4_files/media/partb1c.png}
-	\vspace{5mm} \\
-	\textbf{Watch the full video:} \href{https://kevysilb.github.io/AM238/hw4.html#solution-1}{here}.
-\end{center}
-:::
 
-::: {.content-visible when-format="html"}
 <video width="700" autoplay loop muted>
 	<source src="hw4_files/media/partb.mp4" type="video/mp4">
-	Your browser does not support the video tag.
 </video>
+
+::: {.content-visible when-format="pdf"}
+
+![Image 1](hw4_files/media/partb1a.png){ width=60% }
+
+![Image 2](hw4_files/media/partb1b.png){ width=60% }
+
+![Image 3](hw4_files/media/partb1c.png){ width=60% }
+
+**Watch the full video:** [here](https://kevysilb.github.io/AM238/hw4.html#solution-1).
+
 :::
+
 
 ## Part C
 
@@ -253,8 +258,8 @@ Write the Fokker-Planck equation for the joint PDF of $X(t;\omega)$ and $Y(t;\om
 Let us write \eqref{eq:SDE} in state-space form
 
 \begin{align}
-	dX &= -X^3 dt - \tau Y dt + \sigma dW_1 \\
-	dY &= -\tau Y dt + \sigma dW_2
+	dX &= -X^3 dt - \tau Y dt + \sigma dW \\
+	dY &= -\tau Y dt + \sigma dW
 \end{align}
 
 The vector $\mathbf{G}(\mathbf{X}, t)$ can be written as 
@@ -272,8 +277,8 @@ The matrix $\mathbf{S}$ can be written as
 \begin{align}
 	\mathbf{S} = \left[
 	\begin{matrix}
-		\sigma & 0 \\
-		0 & \sigma
+		\sigma \\
+		\sigma
 	\end{matrix}\right]
 \end{align}
 
@@ -306,7 +311,7 @@ To obtain the reduced-order equation, let us integrate \eqref{eq:fokker-planck} 
 
 \begin{align}
 \frac{\partial}{\partial t}\int_{-\infty}^{\infty}pdy &= \int_{-\infty}^{\infty}\left(\frac{\partial}{\partial x} \left((x^3 +\tau y)p\right) + \frac{\partial}{\partial y}\left(\tau yp\right) + \frac{\sigma^2}{2}\left(\frac{\partial^2p}{\partial x^2} + \frac{\partial^2 p}{\partial y^2}\right)\right) dy\\
-\frac{\partial p(x,t)}{\partial t} &= \frac{\partial}{\partial x} \int_{-\infty}^{\infty}(x^3 + \tau y)p dy + \int_{-\infty}^{\infty} \frac{\partial}{\partial y}(\tau yp)dy + \frac{\sigma^2}{2}\left(\frac{\partial^2}{\partial x^2}\int_{-\infty}^{\infty}p dy +\cancelto{0}{\int_{-\infty}^{\infty}\frac{\partial^2 p}{\partial y^2}dy}\right) \\
+\frac{\partial p(x,t)}{\partial t} &= \frac{\partial}{\partial x} \int_{-\infty}^{\infty}(x^3 + \tau y)p dy + \int_{-\infty}^{\infty} \frac{\partial}{\partial y}(\tau yp)dy + \frac{\sigma^2}{2}\left(\frac{\partial^2}{\partial x^2}\int_{-\infty}^{\infty}p dy + \cancelto{0}{\int_{-\infty}^{\infty}\frac{\partial^2 p}{\partial y^2}dy}\right) \\
 &= \frac{\partial}{\partial x}\left(x^3p(x, t) + \tau p(x, t)\mathbb{E}\{Y | X\}\right) + \cancelto{0}{\tau y p_{\bigg{|}_{-\infty}^{\infty}}} + \frac{\sigma^2}{2}\frac{\partial^2 p(x, t)}{\partial x^2}\\
 \end{align}
 
@@ -346,10 +351,48 @@ solving for $Y(t)$ we have:
 
 where $Y(0)$ can be expressed as the expectation of a uniform random variable in [0, 1], which we know is $\frac{1}{2}$
 
-therefore the conditional expectation $$\mathbb{E}\{Y|X\} = \frac{1}{2}e^{-\tau t}$$
+therefore the conditional expectation $$\mathbb{E}\{Y|X\} = \mathbb{E}\{Y\} = \frac{1}{2}e^{-\tau t}$$
+
+we can write a closed equation for the reduced order equation as follows:
+
+\begin{equation}\tag{4}\label{closed-reduced}
+\frac{\partial p(x, t)}{\partial t} = \frac{\partial }{\partial x}(x^3p(x, t)) + \tau \frac{\partial }{\partial x}(p(x, t)\frac{1}{2}e^{-\tau t})
+\end{equation}
 
 ## Part F
 
 Write the PDF equation you obtained in part e as an evolution equation for the cumulative distribution function (CDF) of $X(t;\omega)$.
 
 ### Solution
+
+Recall the definition of the cumulative distribution function:
+
+\begin{align}
+F(x, y, t) = \int_{-\infty}^{x}p(y, t)dy
+\end{align}
+
+if we take the derivative on both sides with respect to $x$ we have
+
+\begin{align}
+p(x, t) = \frac{\partial F(x, t)}{\partial x}
+\end{align}
+
+plugging this into \eqref{closed-reduced} we have
+
+\begin{align}
+\frac{\partial }{\partial t}\left(\frac{\partial F}{\partial x}\right) = \frac{\partial }{\partial x}\left(x^3\frac{\partial F}{\partial x}\right) + \tau \frac{\partial }{\partial x}\left(\frac{\partial F}{\partial x}\frac{1}{2}e^{-\tau t}\right)
+\end{align}
+
+taking the integral of both sides:
+
+\begin{align}
+	\int_{-\infty}^{x}\frac{\partial^2 F}{\partial t\partial x'}dx' &= \int_{-\infty}^{x}\left(\frac{\partial }{\partial x'}\left(x'^3\frac{\partial F}{\partial x'}\right) + \frac{\tau}{2} \frac{\partial }{\partial x'}\left(\frac{\partial F}{\partial x'}e^{-\tau t}\right)\right)dx' \\
+\frac{\partial F(x, t)}{\partial t} &= x'^3 \frac{\partial F}{\partial x'}\bigg|_{-\infty}^{x} + \frac{\tau}{2} \frac{\partial F}{\partial x'}e^{-\tau t}\bigg|_{-\infty}^{x} \\
+\end{align}
+
+thus we are left with the evolution equation for $F(x, t)$
+
+\begin{equation}\tag{5}\label{evolutioneq}
+\frac{\partial F(x, t)}{\partial t} = x^3 \frac{\partial F(x, t)}{\partial x} + \frac{\tau}{2}e^{-\tau t}\frac{\partial F(x, t)}{\partial x}
+\end{equation}
+
