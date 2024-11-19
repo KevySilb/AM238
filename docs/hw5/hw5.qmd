@@ -1,0 +1,422 @@
+---
+title: Homework 5
+date: 2024-11-14
+author:
+  - name: Kevin Silberberg
+    id: ks
+    orcid: 0009-0009-4825-1865
+    email: ksilberb@ucsc.edu
+    affiliation:
+      - name: University of California Santa Cruz
+        city: Santa Cruz
+        state: CA
+        href: https://www.ucsc.edu
+format:
+  html:
+    theme: darkly
+    toc: true
+    code-fold: true
+    code-links:
+    - icon: github
+      href: https://github.com/KevySilb/AM238
+  pdf:
+    pdf-engine: lualatex
+    monofont: "DejaVu Sans Mono"
+    toc: true
+    number-sections: true
+    documentclass: article
+    include-in-header:
+      - text: |
+          \usepackage{amsmath}
+          \usepackage{cancel}
+jupyter: julia-1.11
+execute:
+  eval: false
+---
+
+# Question 1
+
+Consider a random variable $\xi$ with PDF
+
+\begin{equation}\tag{1}\label{pxi}
+	p_{\xi}(x) = 
+	\begin{cases}
+		\frac{e^{-x}}{e - e^{-1}} & x \in [-1, 1] \\
+		0 & \text{otherwise}
+	\end{cases}
+\end{equation}
+
+see @fig-pdfxi for the plot of the PDF of $\xi$.
+
+## Part A
+
+Use the Stieltjes algorithm to compute the sixth-order generalized polynomial choas basis $$\{P_0(x), P_1(x), ..., P_6(x)\}$$ for $\xi$, i.e. a set of polynomials up to degree 6 that are orthogonal relative to the PDF $\xi$ given in \eqref{pxi}.
+
+### Solution
+
+We know that since the distribution function \eqref{pxi} is compactly supported, that the solution to the moment problem is unique and exists. 
+
+Let $c = \frac{1}{e-e^{-1}}$ the constant in $p_{\xi}(x)$
+
+Following the Stieltjes algorithm, let us compute the first orthogonal polynomial and then we will write a code that computes the first six orthogonal polynomials where
+\begin{align}
+\mu(x) = ce^{-x}
+\end{align}
+
+is out weight function. 
+
+Let $n = 0 \quad \pi_0 = 1 \quad \pi_{-1} = 0$
+
+\begin{align}
+\alpha_0 &= \frac{\langle x , 1 \rangle}{\langle 1, 1 \rangle} \\
+&= \frac{c \int_{-1}^{1}x e^{-x}dx}{c \int_{-1}^{1}e^{-x}dx} \\
+&= \frac{\left[{-x e^{-x}}_{\bigg{\vert}_{-1}^{1}} - \int_{-1}^{1}-e^{-x}dx\right]}{\left[{-e^{-x}}_{\bigg{\vert}_{-1}^{1}}\right] } \\
+&= \frac{-e^{-1} - e - e^{-1} + e}{-e^{-1} + e} \\
+&= -\frac{2}{e^2 - 1} \approx -0.31304
+\end{align}
+
+Using $\alpha_0$ let us find the first polynomial $\pi_1$ using the following formula
+
+\begin{align}
+\pi_{n+1}(x) = (x - \alpha_n)\pi_n(x) - \beta_n \pi_{n-1}(x)
+\end{align}
+
+\begin{align}
+\pi_1(x) &= (x - \alpha_0)\pi_0 - \beta_0 \pi_{-1} \\
+&= x + \frac{2}{e^2 - 1}
+\end{align}
+
+Let us now write a code that produces any arbitray number of orthogonal polynomials with respect to the weight function.
+
+```{julia}
+using GLMakie
+using QuadGK
+using StaticArrays
+
+# weight function
+μ(x) = exp(-x) * ^((exp(1.0) - ^(exp(1.0), -1.0)), -1.0)
+
+# define an integral using gauss-kronrod quadrature rule
+integ(x::Function, sup::SVector{2}) = quadgk(x, sup[1], sup[2]; atol=1e-8, rtol=1e-8)[1]
+
+# the support of the weight function
+sup = SVector{2}(-1.0, 1.0)
+
+function stieltjes(μ::Function, N::Int64, sup::SVector{2})
+    # μ: weight function defining the inner product
+    # N: number of orthogonal polynomials to compute
+    # sup: support (integration bounds) of the weight function
+
+    M = N + 2  # Extend size to accommodate buffer
+    n = 2      # Starting index for the recursion
+
+    # Initialize orthogonal polynomials (πn) as functions
+    π = Vector{Function}(undef, M)
+    π[n-1] = x -> 0.0 * x^0.0  # π₀(x) = 0
+    π[n] = x -> 1.0 * x^0.0    # π₁(x) = 1
+
+    # Initialize coefficient vectors αn and βn
+    α = Vector{Float64}(undef, M)
+    β = Vector{Float64}(undef, M)
+    β[n-1] = 0.0  # β₀ = 0
+    β[n] = 0.0    # β₁ = 0
+
+    # Compute the first α coefficient (α₂)
+    # α₂ = ⟨xπ₁, π₁⟩ / ⟨π₁, π₁⟩
+    α[n] = integ(x -> x * π[n](x) * π[n](x) * μ(x), sup) / integ(x -> π[n](x) * π[n](x) * μ(x), sup)
+    
+    # Compute the next orthogonal polynomial π₂
+    # π₂(x) = (x - α₁)π₁(x) - β₁π₀(x)
+    π[n+1] = x -> (x - α[n]) * π[n](x) - β[n] * π[n-1](x)
+
+    for n in 3:M-1
+        α[n] = integ(x -> x * π[n](x) * π[n](x) * μ(x), sup) / integ(x -> π[n](x) * π[n](x) * μ(x), sup)
+        β[n] = integ(x -> π[n](x) * π[n](x) * μ(x), sup) / integ(x -> π[n-1](x) * π[n-1](x) * μ(x), sup)
+        π[n+1] = π[n+1] = x -> (x - α[n]) * π[n](x) - β[n] * π[n-1](x)
+    end
+    return π
+end
+π = stieltjes(μ, 6, sup)
+```
+
+Let us define a function that plots the first polynomial $\pi_1(x)$ over the numerical result as a validation.
+
+```{julia}
+function validatepione(π::Vector{Function})
+    π_1(x) = x + (2 / (exp(1)^2 - 1))
+    xs = LinRange(-1, 1, 1000)
+    fig = Figure()
+    ax = Axis(fig[1, 1], title = "first orthogonal polynomial validation")
+    lines!(ax, xs, π_1.(xs), label = "analytical")
+    lines!(ax, xs, π[3].(xs), label = "numerical", linestyle = :dash, color = :red)
+    Legend(fig[1, 2], ax)
+    save("validationpione.png", fig)
+end
+validatepione(π);
+```
+::: {#fig-q1pa style="text-align: center;"}
+![Validation of the stieltjes algorthim: Plot of numerical over analytical solution of the first orthogonal polynomial](hw5_files/media/validationpione.png){width="70%"}
+
+:::
+
+## Part B
+
+Veriy that the polynomial basis you obtained in part a is orthogonal, i.e., that the matrix
+
+\begin{equation}\tag{2}\label{polybasis}
+\mathbb{E}\{P_k(\xi)P_j(\xi)\} = \int_{-1}^{1} P_k(x)P_j(x)dx
+\end{equation}
+is diagonal.
+
+### Solution
+
+Let us write a code that computes the Matrix and then plot the matrix using a heatmap to check if it diagonal.
+
+```{julia}
+function isdiagonal(π::Vector{Function}, sup::SVector{2})
+    A = Matrix{Float64}(undef, 7, 7)
+    for idx in CartesianIndices(A)
+        (k, j) = idx.I
+        ele = integ(x-> π[k+1](x) * π[j+1](x) * μ(x), sup)
+        A[k, j] = ele < 1e-12 ? 1e-8 : ele
+    end
+    fig = Figure()
+    ax = Axis(fig[1, 1], title = "heatmap of the diagona matrix")
+    heatmap!(ax, log10.(A))
+    ax.yreversed=true
+    save("heatmapdiagonal.png", fig)
+end
+isdiagonal(π, sup)
+```
+::: {#fig-q1pb style="text-align: center;"}
+![Heatmap showing that the matrix of innerproducts with respect to the weight function of all polynomials generated is diagonal.](hw5_files/media/heatmapdiagonal.png){width="70%"}
+:::
+
+Clearly we can see that the matrix is diagonal and thus the polynomail functions are orthogonal with respect to the weight function.
+
+## Part C
+
+Plot $P_k(x)$ for $k = 0, ..., 6$
+
+### Solution
+
+Let us define a code that plots all polynomials $P_k(x)$ for $k = 0, ..., 6$
+
+```{julia}
+function plotpolynomials(π::Vector{Function})
+    M = size(π)[1]
+    fig = Figure();display(fig)
+    ax = Axis(fig[1, 1], title = "Plot of the set of orthogonal polynomials up to degree 6")
+    xs = LinRange(-1.0, 1.0, 1000)
+    for n in 1:M-1
+        lines!(ax, xs, π[n+1].(xs), label="π_$(n-1)")
+    end
+    Legend(fig[1, 2], ax)
+    save("plotpolynomials.png", fig)
+end
+plotpolynomials(π)
+```
+::: {#fig-q1pc style="text-align: center;"}
+![Plot of polynomials within the support [-1, 1]](hw5_files/media/plotpolynomials.png){width="70%"}
+:::
+# Question 2
+
+Consider the following nonlinear fuction of the random variable $\xi(\omega)$ with PDF defined in \eqref{pxi}
+
+\begin{equation}\tag{3}\label{eta}
+\eta(\omega) = \frac{\xi(\omega) -1}{2 + 1\sin{(2\xi(\omega))}}
+\end{equation}
+
+## Part A
+
+Compute the PDF of $\eta$ using the relative frequency approach. To this end, sample 50,000 realizations of $\xi$ using the inverse CDF approach applied to \eqref{pxi}, and use such samples to compute samples of $\eta(\omega)$.
+
+### Solution
+
+The following code samples from \eqref{pxi} 50,000 times using the inverse sampling method previously applied in Homework 1 and 2, then applies the transformation \eqref{eta}, and finally plots the histogram with 80 bins, normalized so that the PDF integrates to one over the support.
+
+```{julia}
+η(ξ) = (ξ - 1) / (2 + sin(2*ξ))
+function question2a()
+    r = LinRange(-1, 1, 1000)
+    fig = Figure();display(fig)
+    ax = Axis(fig[1, 1],
+        title = "PDF of η(ξ(ω))")
+    ys = cumsumtrap(μ, r)
+    samples = Vector{Float64}(undef, 50000)
+    for i in eachindex(samples)
+        samples[i] = η(sampleInverseCDF(rand(), hcat(ys, r)))
+    end
+    hist!(ax, samples, bins = 80, normalization = :pdf)
+    save("question2a.png", fig)
+    samples
+end
+samples = question2a();
+```
+::: {#fig-q2pa style="text-align: center;"}
+![PDF of $\eta(\xi(\omega))$ by sampling 50,000 times via inverse CDF approach and applying the transformation \eqref{eta}](hw5_files/media/question2a.png){width="70%"}
+:::
+
+## Part B
+
+Show numerically that the gPC expansion [^2]
+
+\begin{equation}\tag{5}\label{gpc}
+\eta_M(\omega) = \sum_{k=0}^{M}a_k P_k(\xi(\omega)), \quad a_k = \frac{\mathbb{E}\{\eta(\xi(\omega))P_k(\xi(\omega))\}}{\mathbb{E}\{P_k^2(\xi(\omega))\}}
+\end{equation}
+
+converges to $\eta(\omega)$ in distribution as $M$ increases. To this end, plot the PDF of the random variables $\eta_M(\xi(\omega))$ for $M = 1, 2, 4, 6$ using method of relative frequencies and compare such PDF's with the PDF of $\eta$ you computed in part a.
+
+### Solution
+
+```{julia}
+function question2b(πn::Vector{Function})
+    a = Vector{Float64}(undef, 7)
+    colors = Symbol[:red, :green, :blue, :yellow, :orange, :purple]
+    # calculate coefficients
+    for k in eachindex(a)
+        a[k] = integ(x -> η(x) * πn[k+1](x) * μ(x), sup) / integ(x -> πn[k+1](x) * πn[k+1](x) * μ(x), sup)
+    end
+    
+    fig = Figure();display(fig)
+    ax = Axis(fig[1, 1], title="densities of ηM(ξ(ω)) for M = {1, 2, 4, 6}")
+    r = LinRange(-1, 1, 1000)
+    ys = hcat(cumsumtrap(μ, r), r)
+    for M in SVector{4}(1, 2, 4, 6)
+        ηM_samples = Vector{Float64}(undef, 50000)
+        for l in eachindex(ηM_samples)
+            η_sum = 0.0
+            ξ = sampleInverseCDF(rand(), ys)
+            for k in 1:M+1
+                η_sum+=a[k]*πn[k+1](ξ)
+            end
+            ηM_samples[l] = η_sum
+        end
+        density!(ax, ηM_samples, color = (colors[M], 0.3), label = "M = $M", strokecolor = colors[M], strokewidth = 3, strokearound = true) 
+    end
+    Legend(fig[1, 2], ax)
+    save("question2b.png", fig)
+end
+question2b(π);
+```
+::: {#fig-q2pb style="text-align: center;"}
+![The PDF ploted using Kernel Density Estimation for values M = {1, 2, 4, 6}](hw5_files/media/question2b.png){width="70%"}
+:::
+
+As we can see, the PDF of the random variable $\eta_M(\omega)$ converges to the PDF of $\eta(\omega)$ as M increases.
+
+[^2]: Note that $\mathbb{E}\{\eta(\xi(\omega))P_k(\xi(\omega))\}$ can be computed with MC, or with quadrature as \begin{equation}\tag{4}\label{four}\mathbb{E}\{\eta(\xi(\omega))P_k(\xi(\omega))\}= \int_{-1}^{1}\frac{x - 1}{2 + 1 \sin(2x)}P_k(x)P_\xi(x)dx\end{equation}
+
+## Part C
+
+Compute the mean and variance of $\eta_6$ and compare it with the mean and variance of $\eta$. Note that such means and variances can be computed in multiple ways, e.g., by using MC, or by approximating the integral defining the moments of the random variable $\eta$ using quadrature, e.g., via the trapezoidal rule applied to the integral
+
+\begin{equation}\tag{6}\label{quadr}
+\mathbb{E}\{\eta^k\} = \int_{-1}^{1} \left(\frac{x-1}{2+\sin(2x)}\right)^k p_{\xi}(x)dx
+\end{equation}
+
+### Solution
+
+Let us find the mean and variance of $\eta$ and $\eta_6$ by generating 1000 samples of size 1000 and taking the average of the mean and variance for each sample.
+
+```{julia}
+function question2c()
+    r = LinRange(-1, 1, 1000)
+    ys = hcat(cumsumtrap(μ, r), r)
+    η_samples = Vector{Float64}(undef, 50000)
+    for i in eachindex(η_samples)
+        η_samples[i] = η(sampleInverseCDF(rand(), ys))
+    end
+    a = Vector{Float64}(undef, 7)
+    for k in eachindex(a)
+        a[k] = integ(x -> η(x) * πn[k+1](x) * μ(x), sup) / integ(x -> πn[k+1](x) * πn[k+1](x) * μ(x), sup)
+    end
+    η6_samples = Vector{Float64}(undef, 50000)
+    for l in eachindex(η6_samples)
+        η_sum = 0.0
+        ξ = sampleInverseCDF(rand(), ys)
+        for k in eachindex(a)
+            η_sum+=a[k]*πn[k+1](ξ)
+        end
+        η6_samples[l] = η_sum
+    end
+
+    means = Vector{Float64}(undef, 1000)
+    variances = Vector{Float64}(undef, 1000)
+    for i in eachindex(means)
+        sample = rand(η_samples, 1000)
+        means[i] = mean(sample)
+        variances[i] = var(sample)
+    end
+    η_mean = mean(means)
+    η_var = mean(variances)
+
+    means = Vector{Float64}(undef, 1000)
+    variances = Vector{Float64}(undef, 1000)
+    for i in eachindex(means)
+        sample = rand(η6_samples, 1000)
+        means[i] = mean(sample)
+        variances[i] = var(sample)
+    end
+    η6_mean = mean(means)
+    η6_var = mean(variances)
+    fig = Figure();display(fig)
+    ax = Axis(fig[1, 1],
+        xticks = (1:2, ["η", "η₆"]),
+    title = "mean and variance for η and η_6")
+    barplot!(ax, [1, 1, 2, 2], [η_mean, η_var, η6_mean, η6_var],
+        dodge = [1, 2, 1, 2],
+        color = [1, 2, 1, 2])
+    save("question2c.png", fig)
+end
+question2c();
+```
+
+::: {#fig-q2pc style="text-align: center;"}
+![Barplot of the bootstrap mean and variance from MC for $\eta$ and $\eta_6$](hw5_files/media/question2c.png){width="70%"}
+:::
+
+From the plot we can see the the sample meand and variance for both are almost identical.
+
+# Question 3
+
+Compute the solution of the following random initial value problem 
+
+
+\begin{equation}\tag{7}\label{randomivp}
+\begin{cases}
+	\frac{x}{t} &= -xi(\omega)x + \cos(4t) \\
+	x(0) &= 1
+\end{cases}
+\end{equation}
+
+using the stocastic Galerkin method with the gPC basis you obtained in question 1. In particular, use the following gPC expansion of degree 6 for the solution of \eqref{randomivp}.
+
+\begin{equation}\tag{8}\label{eight}
+x(t;\omega) = \sum_{k=0}^6 \hat{x}_k(t)P_k(\xi(\omega))
+\end{equation}
+
+where the gPC modes $\hat{x}_k(t)$ are to be determined from \eqref{randomivp}.
+
+## Part A
+
+Compute the mean and the variance of \eqref{eight} fot $t \in [0, 3]$.
+
+### Solution
+
+## Part B
+
+Compute the PDF of \eqref{eight} at times $\{0.5, 1, 2, 3\}$ (use relative frequencies).
+
+Note: you can debug your gPC results by either computing the analytic solution of \eqref{randomivp} and then computing moments/PDFs of such solutions as a function of $t$, or by randomly sampling many solution paths of \eqref{randomivp} and then computing ensemble averages.
+
+### Solution
+
+# Appendix
+
+## Figures
+
+::: {#fig-pdfxi style="text-align: center;"}
+![The PDF of $\xi$](hw5_files/media/PDFone.png){width="50%"}
+
+:::
