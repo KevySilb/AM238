@@ -38,7 +38,7 @@ execute:
 
 Consider a random variable $\xi$ with PDF
 
-\begin{equation}\tag{1}\label{pxi}
+\begin{equation}\label{eq-pxi}
 	p_{\xi}(x) = 
 	\begin{cases}
 		\frac{e^{-x}}{e - e^{-1}} & x \in [-1, 1] \\
@@ -46,15 +46,15 @@ Consider a random variable $\xi$ with PDF
 	\end{cases}
 \end{equation}
 
-see @fig-pdfxi for the plot of the PDF of $\xi$.
+refer to @fig-pdfxi for a plot of the PDF
 
 ## Part A
 
-Use the Stieltjes algorithm to compute the sixth-order generalized polynomial choas basis $$\{P_0(x), P_1(x), ..., P_6(x)\}$$ for $\xi$, i.e. a set of polynomials up to degree 6 that are orthogonal relative to the PDF $\xi$ given in \eqref{pxi}.
+Use the Stieltjes algorithm to compute the sixth-order generalized polynomial choas basis $$\{P_0(x), P_1(x), ..., P_6(x)\}$$ for $\xi$, i.e. a set of polynomials up to degree 6 that are orthogonal relative to the PDF $\xi$ given in \eqref{eq-pxi}.
 
 ### Solution
 
-We know that since the distribution function \eqref{pxi} is compactly supported, that the solution to the moment problem is unique and exists. 
+We know that since the distribution function \eqref{eq-pxi} is compactly supported, that the solution to the moment problem is unique and exists. 
 
 Let $c = \frac{1}{e-e^{-1}}$ the constant in $p_{\xi}(x)$
 
@@ -154,16 +154,13 @@ function validatepione(π::Vector{Function})
 end
 validatepione(π);
 ```
-::: {#fig-q1pa style="text-align: center;"}
-![Validation of the stieltjes algorthim: Plot of numerical over analytical solution of the first orthogonal polynomial](hw5_files/media/validationpione.png){width="70%"}
-
-:::
+![Validation of the stieltjes algorthim: Plot of numerical over analytical solution of the first orthogonal polynomial](hw5_files/media/validationpione.png)
 
 ## Part B
 
 Veriy that the polynomial basis you obtained in part a is orthogonal, i.e., that the matrix
 
-\begin{equation}\tag{2}\label{polybasis}
+\begin{equation}\label{polybasis}
 \mathbb{E}\{P_k(\xi)P_j(\xi)\} = \int_{-1}^{1} P_k(x)P_j(x)dx
 \end{equation}
 is diagonal.
@@ -188,11 +185,10 @@ function isdiagonal(π::Vector{Function}, sup::SVector{2})
 end
 isdiagonal(π, sup)
 ```
-::: {#fig-q1pb style="text-align: center;"}
-![Heatmap showing that the matrix of innerproducts with respect to the weight function of all polynomials generated is diagonal.](hw5_files/media/heatmapdiagonal.png){width="70%"}
-:::
 
-Clearly we can see that the matrix is diagonal and thus the polynomail functions are orthogonal with respect to the weight function.
+![Heatmap showing that the matrix of innerproducts with respect to the weight function of all polynomials generated is diagonal.](hw5_files/media/heatmapdiagonal.png)
+
+Clearly we can see that the matrix is diagonal and thus the polynomial functions are orthogonal with respect to the weight function.
 
 ## Part C
 
@@ -216,24 +212,23 @@ function plotpolynomials(π::Vector{Function})
 end
 plotpolynomials(π)
 ```
-::: {#fig-q1pc style="text-align: center;"}
-![Plot of polynomials within the support [-1, 1]](hw5_files/media/plotpolynomials.png){width="70%"}
-:::
+![Plot of polynomials within the support [-1, 1]](hw5_files/media/plotpolynomials.png)
+
 # Question 2
 
-Consider the following nonlinear fuction of the random variable $\xi(\omega)$ with PDF defined in \eqref{pxi}
+Consider the following nonlinear fuction of the random variable $\xi(\omega)$ with PDF defined in \eqref{eq-pxi}
 
-\begin{equation}\tag{3}\label{eta}
+\begin{equation}\label{eta}
 \eta(\omega) = \frac{\xi(\omega) -1}{2 + 1\sin{(2\xi(\omega))}}
 \end{equation}
 
 ## Part A
 
-Compute the PDF of $\eta$ using the relative frequency approach. To this end, sample 50,000 realizations of $\xi$ using the inverse CDF approach applied to \eqref{pxi}, and use such samples to compute samples of $\eta(\omega)$.
+Compute the PDF of $\eta$ using the relative frequency approach. To this end, sample 50,000 realizations of $\xi$ using the inverse CDF approach applied to \eqref{eq-pxi}, and use such samples to compute samples of $\eta(\omega)$.
 
 ### Solution
 
-The following code samples from \eqref{pxi} 50,000 times using the inverse sampling method previously applied in Homework 1 and 2, then applies the transformation \eqref{eta}, and finally plots the histogram with 80 bins, normalized so that the PDF integrates to one over the support.
+The following code samples from \eqref{eq-pxi} 50,000 times using the inverse sampling method previously applied in Homework 1 and 2, then applies the transformation \eqref{eta}, and finally plots the histogram with 80 bins, normalized so that the PDF integrates to one over the support.
 
 ```{julia}
 η(ξ) = (ξ - 1) / (2 + sin(2*ξ))
@@ -253,15 +248,14 @@ function question2a()
 end
 samples = question2a();
 ```
-::: {#fig-q2pa style="text-align: center;"}
-![PDF of $\eta(\xi(\omega))$ by sampling 50,000 times via inverse CDF approach and applying the transformation \eqref{eta}](hw5_files/media/question2a.png){width="70%"}
-:::
+
+![PDF of $\eta(\xi(\omega))$ by sampling 50,000 times via inverse CDF approach and applying the transformation \eqref{eta}](hw5_files/media/question2a.png)
 
 ## Part B
 
 Show numerically that the gPC expansion [^2]
 
-\begin{equation}\tag{5}\label{gpc}
+\begin{equation}\label{gpc}
 \eta_M(\omega) = \sum_{k=0}^{M}a_k P_k(\xi(\omega)), \quad a_k = \frac{\mathbb{E}\{\eta(\xi(\omega))P_k(\xi(\omega))\}}{\mathbb{E}\{P_k^2(\xi(\omega))\}}
 \end{equation}
 
@@ -299,19 +293,18 @@ function question2b(πn::Vector{Function})
 end
 question2b(π);
 ```
-::: {#fig-q2pb style="text-align: center;"}
-![The PDF ploted using Kernel Density Estimation for values M = {1, 2, 4, 6}](hw5_files/media/question2b.png){width="70%"}
-:::
+
+![The PDF ploted using Kernel Density Estimation for values M = {1, 2, 4, 6}](hw5_files/media/question2b.png)
 
 As we can see, the PDF of the random variable $\eta_M(\omega)$ converges to the PDF of $\eta(\omega)$ as M increases.
 
-[^2]: Note that $\mathbb{E}\{\eta(\xi(\omega))P_k(\xi(\omega))\}$ can be computed with MC, or with quadrature as \begin{equation}\tag{4}\label{four}\mathbb{E}\{\eta(\xi(\omega))P_k(\xi(\omega))\}= \int_{-1}^{1}\frac{x - 1}{2 + 1 \sin(2x)}P_k(x)P_\xi(x)dx\end{equation}
+[^2]: Note that $\mathbb{E}\{\eta(\xi(\omega))P_k(\xi(\omega))\}$ can be computed with MC, or with quadrature as \begin{equation}\label{four}\mathbb{E}\{\eta(\xi(\omega))P_k(\xi(\omega))\}= \int_{-1}^{1}\frac{x - 1}{2 + 1 \sin(2x)}P_k(x)P_\xi(x)dx\end{equation}
 
 ## Part C
 
 Compute the mean and variance of $\eta_6$ and compare it with the mean and variance of $\eta$. Note that such means and variances can be computed in multiple ways, e.g., by using MC, or by approximating the integral defining the moments of the random variable $\eta$ using quadrature, e.g., via the trapezoidal rule applied to the integral
 
-\begin{equation}\tag{6}\label{quadr}
+\begin{equation}\label{quadr}
 \mathbb{E}\{\eta^k\} = \int_{-1}^{1} \left(\frac{x-1}{2+\sin(2x)}\right)^k p_{\xi}(x)dx
 \end{equation}
 
@@ -372,27 +365,25 @@ end
 question2c();
 ```
 
-::: {#fig-q2pc style="text-align: center;"}
-![Barplot of the bootstrap mean and variance from MC for $\eta$ and $\eta_6$](hw5_files/media/question2c.png){width="70%"}
-:::
+![Barplot of the bootstrap mean and variance from MC for $\eta$ and $\eta_6$](hw5_files/media/question2c.png)
 
-From the plot we can see the the sample meand and variance for both are almost identical.
+From the plot we can see the the sample mean and variance for both are almost identical.
 
 # Question 3
 
 Compute the solution of the following random initial value problem 
 
 
-\begin{equation}\tag{7}\label{randomivp}
+\begin{equation}\label{randomivp}
 \begin{cases}
-	\frac{x}{t} &= -xi(\omega)x + \cos(4t) \\
+	\frac{dx}{dt} &= -\xi(\omega)x + \cos(4t) \\
 	x(0) &= 1
 \end{cases}
 \end{equation}
 
 using the stocastic Galerkin method with the gPC basis you obtained in question 1. In particular, use the following gPC expansion of degree 6 for the solution of \eqref{randomivp}.
 
-\begin{equation}\tag{8}\label{eight}
+\begin{equation}\label{eight}
 x(t;\omega) = \sum_{k=0}^6 \hat{x}_k(t)P_k(\xi(\omega))
 \end{equation}
 
@@ -400,9 +391,112 @@ where the gPC modes $\hat{x}_k(t)$ are to be determined from \eqref{randomivp}.
 
 ## Part A
 
-Compute the mean and the variance of \eqref{eight} fot $t \in [0, 3]$.
+Compute the mean and the variance of \eqref{eight} of $t \in [0, 3]$.
 
 ### Solution
+
+Let us find the solution of the random initial value problem by using the stocastic Galerkin method and finding the gPC modes by plugging in \eqref{eight} into \eqref{randomivp}.
+
+\begin{align}
+	\sum_{k=0}^{6}\frac{\partial \hat{x}_k}{\partial t}P_k &= -\xi \sum_{k=0}^{6}\hat{x}_k P_k + cos(4t) \\
+\frac{\partial \hat{x}_j}{\partial t}\mathbb{E}\{P_j^2\} &= -\sum_{k=0}^{6}\hat{x}_k \mathbb{E}\{\xi P_k P_j\} + \cos(4t) \mathbb{E}\{P_j\} \\
+\frac{\partial \hat{x}_j}{\partial t} &= -\frac{1}{\mathbb{E}\{P_j^2\}}\sum_{k=0}^{6}\hat{x}_k \mathbb{E}\{\xi P_k P_j\} + \frac{\cos(4t) \mathbb{E}\{P_j\}}{\mathbb{E}\{P_j^2\}} \\
+\end{align}
+
+Recall from Question 1, Part A where we calculated the $P_1(\xi)$
+
+\begin{align}
+P_1(\xi) &= \xi + \frac{2}{e^2 + 1} \\
+\xi &= P_1(\xi) - \frac{2}{e^2 + 1}
+\end{align}
+
+Plugging $\xi$ back into the ODE we have:
+
+\begin{align}
+\frac{\partial \hat{x}_j}{\partial t} &= -\frac{1}{\mathbb{E}\{P_j^2\}}\sum_{k=0}^{6}\hat{x}_k \mathbb{E}\{ \left(P_1(\xi) - \frac{2}{e^2 + 1}\right) P_k P_j\} + \frac{\cos(4t) \mathbb{E}\{P_j\}}{\mathbb{E}\{P_j^2\}} \\
+\frac{\partial \hat{x}_j}{\partial t} &= -\frac{1}{ \mathbb{E}\{P_j^2\}} \sum_{k=0}^{6}\hat{x}_k \mathbb{E}\{P_1 P_k P_j\} + \frac{2\hat{x}}{e^2 + 1} + \frac{\cos(4t) \mathbb{E}\{P_j\}}{ \mathbb{E}\{P_j^2\}}
+\end{align}
+
+where the initial conditions are:
+
+\begin{align}
+x(0;\omega) &= 1 \\
+x(j;\omega) &= 0 \quad \text{for } j = 1, ..., 6
+\end{align}
+
+
+In the following code we precompute the expectations required for defining the first order system of equations, solve the IVP using Tsitouras 5/4 Runge-Kutta method, calculate the variance by the following:
+
+\begin{align}
+var(x(t;\omega)) = \sum_{k=1}^{6}\hat{x}_k^2(t) \mathbb{E}\{P_k^2\}
+\end{align}
+
+and plot the mean and variance on two seperate graphs in the temporal domain [0, 3]
+
+```{julia}
+using DifferentialEquations
+function question3a()
+    # get polynomials
+    πn = stieltjes()
+
+    # simulation initial and final time
+    t0, tf = SVector{2}(0.0, 3.0)
+
+    # initial conditions
+    u0 = SVector{7}(1, 0, 0, 0, 0, 0, 0)
+
+    # highest polynomial order
+    M = size(πn)[1]
+    
+    # precompute E{Pj}
+    Epj1 = Vector{Float64}(undef, M)
+    for k in eachindex(πn)
+        Epj1[k] = integ(x -> πn[k](x) * μ(x), sup)
+    end
+    
+    # precompute E{Pj^2}
+    Epj2 = Vector{Float64}(undef, M)
+    for j in eachindex(πn)
+            Epj2[j] = integ(x -> πn[j](x) * πn[j](x) * μ(x), sup)
+    end
+
+    # precompute E{P₁PkPj}
+    Ep1pjpk = Matrix{Float64}(undef, M, M)
+    for idx in CartesianIndices(Ep1pjpk)
+        (j, k) = idx.I
+        Ep1pjpk[j, k] = integ(x -> πn[2](x) * πn[j](x) * πn[k](x) * μ(x), sup)
+    end
+
+    # precompute the constant multiplying xhatj
+    β = (2.0 / (exp(1.0)^2 + 1.0))
+
+    # define the system of odes
+    function ode(u, p, t)
+        return SVector{M}(
+            ((-sum(u[k] * Ep1pjpk[j, k] for k in 1:M))/Epj2[j]) + β*u[j] + (cos(4*t)*Epj1[j]/Epj2[j]) for j in 1:M
+        )
+    end
+
+    # solve the ode problem using Tsitouras 5/4 Runge-Kutta method
+    prob = ODEProblem(ode, u0, (t0, tf))
+    sol = solve(prob, Tsit5(), saveat=0.01, abstol=1e-8, reltol=1e-8)
+    # find the variance
+    var = sum([(sol[k, :].^2) .* Epj2[k] for k in 2:M], dims=1)[1]
+
+    # plot the mean and variance
+    fig = Figure(size = (800, 400));display(fig)
+    ax1 = Axis(fig[1, 1], title = "mean of x(t;ω)",
+        xlabel = "time")
+    ax2 = Axis(fig[1, 2], title = "variance of x(t;ω)",
+        xlabel = "time")    
+    lines!(ax1, sol.t, sol[1, :])
+    lines!(ax2, sol.t, var)
+    save("question3a.png", fig)
+end
+question3a();
+```
+
+![The mean and variance of \eqref{eight} in $t \in [0, 3]$](hw5_files/media/question3a.png)
 
 ## Part B
 
@@ -412,11 +506,141 @@ Note: you can debug your gPC results by either computing the analytic solution o
 
 ### Solution
 
+We have everything we need to compute the PDF of \eqref{eight} for various times. 
+
+Let us generate a random vector by sampling $p_{\xi}(x)$ 50,000 times, then generate samples by evaluating the following:
+
+\begin{align}
+x(t^*;\omega) = \sum_{i=0}^{6}\hat{x}_i(t^*) P_i(\xi(\omega))
+\end{align}
+
+where
+
+\begin{align}
+&\hat{x}_i(t^*) &\quad &\text{are the gPC coefficients at time } t^* \\
+&P_i(\xi) &\quad &\text{are the gPC basis functions} \\
+&\xi &\quad &\text{random variables from the distribution } P_{\xi}(x)
+\end{align}
+
+```{julia}
+function question3b()
+    # get orthogonal polynomials
+    πn = stieltjes()
+    
+    # get gPC modes
+    sol = question3a()
+    
+    # generate samples of ξ
+    r = LinRange(-1, 1, 1000)
+    ys = hcat(cumsumtrap(μ, r), r)
+    ξ_samples = Vector{Float64}(undef, 50000)
+    for i in eachindex(ξ_samples)
+        ξ_samples[i] = sampleInverseCDF(rand(), ys)
+    end
+
+    # define t*
+    times = SVector{4}(0.5, 1.0, 2.0, 3.0)
+
+    # number of solutions (gPC modes)
+    M = size(sol)[1]
+
+    # define figure
+    fig = Figure(size = (800, 800))
+    ax = SVector{4}(Axis(fig[1, 1]), Axis(fig[1, 2]), Axis(fig[2, 1]), Axis(fig[2, 2]))
+    
+    # plot histogram of samples of x(tstar;ω)
+    for (i, tstar) in enumerate(times)
+        hist!(ax[i], sum(sol(tstar)[j] .* πn[j].(ξ_samples) for j in 1:M), bins = 80, normalization = :pdf)
+        ax[i].title = "t = $tstar"
+        ax[i].ylabel = "normalized frequency"
+    end
+    Label(fig[0, :], "PDF of various times, for x(t;ω)", fontsize=20)
+    save("question3b.png", fig)
+end
+question3b();
+```
+
+![PDF for various times found by the method of relative frequencies](hw5_files/media/question3b.png)
+
 # Appendix
+
+## Validation
+
+Let us randomly sample many solution paths of \eqref{randomivp} and then compute the ensemble average to validate our gPC results. 
+
+For this we will generate 50,000 samples from the PDF of \eqref{eq-pxi}, then solve the ODE numerically 50,000 times and plot the histogram of the normalized frequency just as we did in Question 3 partb. 
+
+```{julia}
+function validation(N::Int64)
+    # generate samples of ξ
+    r = LinRange(-1, 1, 1000)
+    ys = hcat(cumsumtrap(μ, r), r)
+    ξ_samples = Vector{Float64}(undef, N)
+    for i in eachindex(ξ_samples)
+        ξ_samples[i] = sampleInverseCDF(rand(), ys)
+    end
+
+    # define t*
+    times = SVector{4}(0.5, 1.0, 2.0, 3.0)
+
+    # define the ODEProblem
+    function ode(u, p, t)
+    	return SVector{1}(-p * u[1] + cos(4*t))
+    end
+
+    # initial condition
+    u0 = SVector{1}(1)
+
+    # solve once to get size of time vector
+    prob = ODEProblem(ode, u0, (0.0, 3.0), -1.0)
+    sol = solve(prob, Tsit5(), saveat=0.01, abstol=1e-8, reltol=1e-8)
+    
+    # init matrix to store solutions
+    solTstar = [Float64[] for _ in 1:length(times)]
+    solutions = Matrix{Float64}(undef, N, size(sol.t)[1])
+
+    # solve the ode for each sample and extract sample paths
+    for (i, ξ) in enumerate(ξ_samples)
+        prob = ODEProblem(ode, u0, (0.0, 3.0), ξ)
+        sol = solve(prob, Tsit5(), saveat=0.01, abstol=1e-8, reltol=1e-8)
+        solutions[i, :] = Float64[u[1] for u in sol.u]
+        for (j, tstar) in enumerate(times)
+            push!(solTstar[j], sol(tstar)[1])
+        end
+    end
+
+    # calculate sample path mean and variance
+    meanPath = mean(solutions, dims=1)
+    variancePath = var(solutions, mean=meanPath, dims=1)
+
+    # plot results
+    fig1 = Figure(size = (800, 800))
+    ax1 = [Axis(fig1[i, j]) for i in 1:2, j in 1:2]
+    fig2 = Figure(size = (800, 400))
+    ax2 = [Axis(fig2[1, i]) for i in 1:2]
+    for (i, tstar) in enumerate(times)
+        hist!(ax1[i], solTstar[i], bins = 80, normalization = :pdf)
+        ax1[i].title = "t = $tstar"
+        ax1[i].ylabel = "Normalized Frequency"
+    end
+    Label(fig1[0, :], "PDF of Various Times Using MC Method", fontsize=20)
+    lines!(ax2[1], sol.t, vec(meanPath), label="Mean Path")
+    ax2[1].title = "Mean Path"
+    ax2[1].xlabel = "Time"
+    lines!(ax2[2], sol.t, vec(variancePath), label="Variance")
+    ax2[2].title = "Variance over Time"
+    ax2[2].xlabel = "Time"
+    save("validationPDF.png", fig1)
+    save("validationmeanvar.png", fig2)
+end
+validation(50000);
+```
+
+![The mean and variance of $x(t;\omega)$ using Monte Carlo method](hw5_files/media/validationmeanvar.png)
+
+![The PDF for specific times using Monte Carlo method](hw5_files/media/validationPDF.png)
 
 ## Figures
 
-::: {#fig-pdfxi style="text-align: center;"}
-![The PDF of $\xi$](hw5_files/media/PDFone.png){width="50%"}
 
-:::
+![The PDF of $\xi$](hw5_files/media/PDFone.png){#fig-pdfxi}

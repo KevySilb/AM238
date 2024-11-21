@@ -1,5 +1,6 @@
 [deps]
 CairoMakie = "13f3f980-e62b-5c42-98c6-ff1f3baf88f0"
+DifferentialEquations = "0c46a032-eb83-5123-abaf-570d42b7fbaa"
 Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
 DynamicalSystems = "61744808-ddfa-5f27-97ff-6e42cc95d634"
 FresnelIntegrals = "88497964-e39a-11e9-0fb5-b1bf0ffe80fe"

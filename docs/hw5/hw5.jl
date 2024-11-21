@@ -80,7 +80,6 @@ function plotpolynomials(π::Vector{Function})
     save("plotpolynomials.png", fig)
 end
 
-
 function isdiagonal(π::Vector{Function}, sup::SVector{2})
     A = Matrix{Float64}(undef, 7, 7)
     for idx in CartesianIndices(A)
@@ -170,7 +169,8 @@ function question2b(πn::Vector{Function})
             end
             ηM_samples[l] = η_sum
         end
-        density!(ax, ηM_samples, color = (colors[M], 0.3), label = "M = $M", strokecolor = colors[M], strokewidth = 3, strokearound = true) 
+        #density!(ax, ηM_samples, color = (colors[M], 0.3), label = "M = $M", strokecolor = colors[M], strokewidth = 3, strokearound = true)
+        hist!(ax, ηM_samples, bins = 80, normalization = :pdf, color = (colors[M], 0.6), label = "M = $M")
     end
     Legend(fig[1, 2], ax)
     save("question2b.png", fig)

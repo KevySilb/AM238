@@ -1,15 +1,13 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
-<head>
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.56">
 
-<meta charset="utf-8" />
-<meta name="generator" content="quarto-1.5.56" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-
-<meta name="author" content="Kevin Silberberg" />
-<meta name="dcterms.date" content="2024-11-14" />
+<meta name="author" content="Kevin Silberberg">
+<meta name="dcterms.date" content="2024-11-14">
 
 <title>Homework 5</title>
 <style>
@@ -60,7 +58,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
-<!-- htmldependencies:E3FAD763 -->
+
+<script src="hw5_files/libs/clipboard/clipboard.min.js"></script>
+<script src="hw5_files/libs/quarto-html/quarto.js"></script>
+<script src="hw5_files/libs/quarto-html/popper.min.js"></script>
+<script src="hw5_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="hw5_files/libs/quarto-html/anchor.min.js"></script>
+<link href="hw5_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="hw5_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="hw5_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="hw5_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="hw5_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -98,7 +106,58 @@ window.Quarto = {
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
 <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-  <div id="quarto-toc-target"></div>
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#question-1" id="toc-question-1" class="nav-link active" data-scroll-target="#question-1">Question 1</a>
+  <ul class="collapse">
+  <li><a href="#part-a" id="toc-part-a" class="nav-link" data-scroll-target="#part-a">Part A</a>
+  <ul class="collapse">
+  <li><a href="#solution" id="toc-solution" class="nav-link" data-scroll-target="#solution">Solution</a></li>
+  </ul></li>
+  <li><a href="#part-b" id="toc-part-b" class="nav-link" data-scroll-target="#part-b">Part B</a>
+  <ul class="collapse">
+  <li><a href="#solution-1" id="toc-solution-1" class="nav-link" data-scroll-target="#solution-1">Solution</a></li>
+  </ul></li>
+  <li><a href="#part-c" id="toc-part-c" class="nav-link" data-scroll-target="#part-c">Part C</a>
+  <ul class="collapse">
+  <li><a href="#solution-2" id="toc-solution-2" class="nav-link" data-scroll-target="#solution-2">Solution</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#question-2" id="toc-question-2" class="nav-link" data-scroll-target="#question-2">Question 2</a>
+  <ul class="collapse">
+  <li><a href="#part-a-1" id="toc-part-a-1" class="nav-link" data-scroll-target="#part-a-1">Part A</a>
+  <ul class="collapse">
+  <li><a href="#solution-3" id="toc-solution-3" class="nav-link" data-scroll-target="#solution-3">Solution</a></li>
+  </ul></li>
+  <li><a href="#part-b-1" id="toc-part-b-1" class="nav-link" data-scroll-target="#part-b-1">Part B</a>
+  <ul class="collapse">
+  <li><a href="#solution-4" id="toc-solution-4" class="nav-link" data-scroll-target="#solution-4">Solution</a></li>
+  </ul></li>
+  <li><a href="#part-c-1" id="toc-part-c-1" class="nav-link" data-scroll-target="#part-c-1">Part C</a>
+  <ul class="collapse">
+  <li><a href="#solution-5" id="toc-solution-5" class="nav-link" data-scroll-target="#solution-5">Solution</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#question-3" id="toc-question-3" class="nav-link" data-scroll-target="#question-3">Question 3</a>
+  <ul class="collapse">
+  <li><a href="#part-a-2" id="toc-part-a-2" class="nav-link" data-scroll-target="#part-a-2">Part A</a>
+  <ul class="collapse">
+  <li><a href="#solution-6" id="toc-solution-6" class="nav-link" data-scroll-target="#solution-6">Solution</a></li>
+  </ul></li>
+  <li><a href="#part-b-2" id="toc-part-b-2" class="nav-link" data-scroll-target="#part-b-2">Part B</a>
+  <ul class="collapse">
+  <li><a href="#solution-7" id="toc-solution-7" class="nav-link" data-scroll-target="#solution-7">Solution</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#appendix" id="toc-appendix" class="nav-link" data-scroll-target="#appendix">Appendix</a>
+  <ul class="collapse">
+  <li><a href="#validation" id="toc-validation" class="nav-link" data-scroll-target="#validation">Validation</a></li>
+  <li><a href="#figures" id="toc-figures" class="nav-link" data-scroll-target="#figures">Figures</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="hw5.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div><div class="quarto-code-links"><h2>Code Links</h2><ul><li><a href="https://github.com/KevySilb/AM238"><i class="bi bi-github"></i></a></li></ul></div></nav>
 </div>
 <main class="content" id="quarto-document-content">
 
@@ -139,74 +198,24 @@ window.Quarto = {
 
 </header>
 
-<nav id="TOC" role="doc-toc">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#question-1" id="toc-question-1">Question 1</a>
-  <ul>
-  <li><a href="#part-a" id="toc-part-a">Part A</a>
-  <ul>
-  <li><a href="#solution" id="toc-solution">Solution</a></li>
-  </ul></li>
-  <li><a href="#part-b" id="toc-part-b">Part B</a>
-  <ul>
-  <li><a href="#solution-1" id="toc-solution-1">Solution</a></li>
-  </ul></li>
-  <li><a href="#part-c" id="toc-part-c">Part C</a>
-  <ul>
-  <li><a href="#solution-2" id="toc-solution-2">Solution</a></li>
-  </ul></li>
-  </ul></li>
-  <li><a href="#question-2" id="toc-question-2">Question 2</a>
-  <ul>
-  <li><a href="#part-a-1" id="toc-part-a-1">Part A</a>
-  <ul>
-  <li><a href="#solution-3" id="toc-solution-3">Solution</a></li>
-  </ul></li>
-  <li><a href="#part-b-1" id="toc-part-b-1">Part B</a>
-  <ul>
-  <li><a href="#solution-4" id="toc-solution-4">Solution</a></li>
-  </ul></li>
-  <li><a href="#part-c-1" id="toc-part-c-1">Part C</a>
-  <ul>
-  <li><a href="#solution-5" id="toc-solution-5">Solution</a></li>
-  </ul></li>
-  </ul></li>
-  <li><a href="#question-3" id="toc-question-3">Question 3</a>
-  <ul>
-  <li><a href="#part-a-2" id="toc-part-a-2">Part A</a>
-  <ul>
-  <li><a href="#solution-6" id="toc-solution-6">Solution</a></li>
-  </ul></li>
-  <li><a href="#part-b-2" id="toc-part-b-2">Part B</a>
-  <ul>
-  <li><a href="#solution-7" id="toc-solution-7">Solution</a></li>
-  </ul></li>
-  </ul></li>
-  <li><a href="#appendix" id="toc-appendix">Appendix</a>
-  <ul>
-  <li><a href="#figures" id="toc-figures">Figures</a></li>
-  </ul></li>
-  </ul>
-</nav>
+
 <section id="question-1" class="level1">
 <h1>Question 1</h1>
 <p>Consider a random variable <span class="math inline">\(\xi\)</span> with PDF</p>
-<p><span class="math display">\[\begin{equation}\tag{1}\label{pxi}
+<p><span class="math display">\[\begin{equation}\label{eq-pxi}
     p_{\xi}(x) =
     \begin{cases}
         \frac{e^{-x}}{e - e^{-1}} &amp; x \in [-1, 1] \\
         0 &amp; \text{otherwise}
     \end{cases}
 \end{equation}\]</span></p>
-<p>see <a href="#fig-pdfxi" class="quarto-xref">Figure 7</a> for the plot of the PDF of <span class="math inline">\(\xi\)</span>.</p>
+<p>refer to <a href="#fig-pdfxi" class="quarto-xref">Figure&nbsp;1</a> for a plot of the PDF</p>
 <section id="part-a" class="level2">
-<h2>Part A</h2>
-<p>Use the Stieltjes algorithm to compute the sixth-order generalized polynomial choas basis <span class="math display">\[\{P_0(x), P_1(x), ..., P_6(x)\}\]</span> for <span class="math inline">\(\xi\)</span>, i.e. a set of polynomials up to degree 6 that are orthogonal relative to the PDF <span class="math inline">\(\xi\)</span> given in <span class="math inline">\(\eqref{pxi}\)</span>.</p>
+<h2 class="anchored" data-anchor-id="part-a">Part A</h2>
+<p>Use the Stieltjes algorithm to compute the sixth-order generalized polynomial choas basis <span class="math display">\[\{P_0(x), P_1(x), ..., P_6(x)\}\]</span> for <span class="math inline">\(\xi\)</span>, i.e.&nbsp;a set of polynomials up to degree 6 that are orthogonal relative to the PDF <span class="math inline">\(\xi\)</span> given in <span class="math inline">\(\eqref{eq-pxi}\)</span>.</p>
 <section id="solution" class="level3">
-<h3>Solution</h3>
-<p>We know that since the distribution function <span class="math inline">\(\eqref{pxi}\)</span> is compactly supported, that the solution to the moment problem is unique and exists.</p>
+<h3 class="anchored" data-anchor-id="solution">Solution</h3>
+<p>We know that since the distribution function <span class="math inline">\(\eqref{eq-pxi}\)</span> is compactly supported, that the solution to the moment problem is unique and exists.</p>
 <p>Let <span class="math inline">\(c = \frac{1}{e-e^{-1}}\)</span> the constant in <span class="math inline">\(p_{\xi}(x)\)</span></p>
 <p>Following the Stieltjes algorithm, let us compute the first orthogonal polynomial and then we will write a code that computes the first six orthogonal polynomials where <span class="math display">\[\begin{align}
 \mu(x) = ce^{-x}
@@ -229,10 +238,10 @@ window.Quarto = {
 &amp;= x + \frac{2}{e^2 - 1}
 \end{align}\]</span></p>
 <p>Let us now write a code that produces any arbitray number of orthogonal polynomials with respect to the weight function.</p>
-<div id="0b08ac4b" class="cell" data-execution_count="1">
+<div id="14f0726a" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode" id="cb1"><pre class="sourceCode julia cell-code"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">GLMakie</span></span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">GLMakie</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">QuadGK</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">StaticArrays</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -279,56 +288,47 @@ window.Quarto = {
 <span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
 <span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="cn">π</span></span>
 <span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="cn">π</span> <span class="op">=</span> <span class="fu">stieltjes</span>(μ, <span class="fl">6</span>, sup)</span></code></pre></div>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="cn">π</span> <span class="op">=</span> <span class="fu">stieltjes</span>(μ, <span class="fl">6</span>, sup)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Let us define a function that plots the first polynomial <span class="math inline">\(\pi_1(x)\)</span> over the numerical result as a validation.</p>
-<div id="2d7cc711" class="cell" data-execution_count="2">
+<div id="626f8572" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode" id="cb2"><pre class="sourceCode julia cell-code"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">validatepione</span>(<span class="cn">π</span><span class="op">::</span><span class="dt">Vector{Function}</span>)</span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">validatepione</span>(<span class="cn">π</span><span class="op">::</span><span class="dt">Vector{Function}</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">π_1</span>(x) <span class="op">=</span> x <span class="op">+</span> (<span class="fl">2</span> <span class="op">/</span> (<span class="fu">exp</span>(<span class="fl">1</span>)<span class="op">^</span><span class="fl">2</span> <span class="op">-</span> <span class="fl">1</span>))</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    xs <span class="op">=</span> <span class="fu">LinRange</span>(<span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1000</span>)</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>()</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>], title <span class="op">=</span> <span class="st">&quot;first orthogonal polynomial validation&quot;</span>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines!</span>(ax, xs, <span class="fu">π_1</span>.(xs), label <span class="op">=</span> <span class="st">&quot;analytical&quot;</span>)</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines!</span>(ax, xs, <span class="cn">π</span>[<span class="fl">3</span>].(xs), label <span class="op">=</span> <span class="st">&quot;numerical&quot;</span>, linestyle <span class="op">=</span> <span class="op">:</span>dash, color <span class="op">=</span> <span class="op">:</span>red)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>], title <span class="op">=</span> <span class="st">"first orthogonal polynomial validation"</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines!</span>(ax, xs, <span class="fu">π_1</span>.(xs), label <span class="op">=</span> <span class="st">"analytical"</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines!</span>(ax, xs, <span class="cn">π</span>[<span class="fl">3</span>].(xs), label <span class="op">=</span> <span class="st">"numerical"</span>, linestyle <span class="op">=</span> <span class="op">:</span>dash, color <span class="op">=</span> <span class="op">:</span>red)</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">Legend</span>(fig[<span class="fl">1</span>, <span class="fl">2</span>], ax)</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">save</span>(<span class="st">&quot;validationpione.png&quot;</span>, fig)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">save</span>(<span class="st">"validationpione.png"</span>, fig)</span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">validatepione</span>(<span class="cn">π</span>);</span></code></pre></div>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">validatepione</span>(<span class="cn">π</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="fig-q1pa" class="quarto-float quarto-figure quarto-figure-center" style="text-align: center;">
-<figure class="quarto-float quarto-float-fig">
-<div aria-describedby="fig-q1pa-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img src="hw5_files/media/validationpione.png" class="img-fluid" style="width:70.0%" /></p>
+<figure class="figure">
+<p><img src="hw5_files/media/validationpione.png" class="img-fluid figure-img"></p>
 <figcaption>Validation of the stieltjes algorthim: Plot of numerical over analytical solution of the first orthogonal polynomial</figcaption>
-</figure>
-</div>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-q1pa-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure 1
-</figcaption>
 </figure>
 </div>
 </section>
 </section>
 <section id="part-b" class="level2">
-<h2>Part B</h2>
+<h2 class="anchored" data-anchor-id="part-b">Part B</h2>
 <p>Veriy that the polynomial basis you obtained in part a is orthogonal, i.e., that the matrix</p>
-<p><span class="math display">\[\begin{equation}\tag{2}\label{polybasis}
+<p><span class="math display">\[\begin{equation}\label{polybasis}
 \mathbb{E}\{P_k(\xi)P_j(\xi)\} = \int_{-1}^{1} P_k(x)P_j(x)dx
 \end{equation}\]</span> is diagonal.</p>
 <section id="solution-1" class="level3">
-<h3>Solution</h3>
+<h3 class="anchored" data-anchor-id="solution-1">Solution</h3>
 <p>Let us write a code that computes the Matrix and then plot the matrix using a heatmap to check if it diagonal.</p>
-<div id="4d38cffa" class="cell" data-execution_count="3">
+<div id="35a9bcc3" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode" id="cb3"><pre class="sourceCode julia cell-code"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">isdiagonal</span>(<span class="cn">π</span><span class="op">::</span><span class="dt">Vector{Function}</span>, sup<span class="op">::</span><span class="dt">SVector{2}</span>)</span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">isdiagonal</span>(<span class="cn">π</span><span class="op">::</span><span class="dt">Vector{Function}</span>, sup<span class="op">::</span><span class="dt">SVector{2}</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    A <span class="op">=</span> <span class="fu">Matrix</span><span class="dt">{Float64}</span>(<span class="cn">undef</span>, <span class="fl">7</span>, <span class="fl">7</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> idx <span class="kw">in</span> <span class="fu">CartesianIndices</span>(A)</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        (k, j) <span class="op">=</span> idx.I</span>
@@ -336,68 +336,50 @@ Figure 1
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        A[k, j] <span class="op">=</span> ele <span class="op">&lt;</span> <span class="fl">1e-12</span> ? <span class="fl">1e-8</span> <span class="op">:</span> ele</span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>()</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>], title <span class="op">=</span> <span class="st">&quot;heatmap of the diagona matrix&quot;</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>], title <span class="op">=</span> <span class="st">"heatmap of the diagona matrix"</span>)</span>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">heatmap!</span>(ax, <span class="fu">log10</span>.(A))</span>
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    ax.yreversed<span class="op">=</span><span class="cn">true</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">save</span>(<span class="st">&quot;heatmapdiagonal.png&quot;</span>, fig)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">save</span>(<span class="st">"heatmapdiagonal.png"</span>, fig)</span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="fu">isdiagonal</span>(<span class="cn">π</span>, sup)</span></code></pre></div>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="fu">isdiagonal</span>(<span class="cn">π</span>, sup)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="fig-q1pb" class="quarto-float quarto-figure quarto-figure-center" style="text-align: center;">
-<figure class="quarto-float quarto-float-fig">
-<div aria-describedby="fig-q1pb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img src="hw5_files/media/heatmapdiagonal.png" class="img-fluid" style="width:70.0%" /></p>
+<figure class="figure">
+<p><img src="hw5_files/media/heatmapdiagonal.png" class="img-fluid figure-img"></p>
 <figcaption>Heatmap showing that the matrix of innerproducts with respect to the weight function of all polynomials generated is diagonal.</figcaption>
 </figure>
 </div>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-q1pb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure 2
-</figcaption>
-</figure>
-</div>
-<p>Clearly we can see that the matrix is diagonal and thus the polynomail functions are orthogonal with respect to the weight function.</p>
+<p>Clearly we can see that the matrix is diagonal and thus the polynomial functions are orthogonal with respect to the weight function.</p>
 </section>
 </section>
 <section id="part-c" class="level2">
-<h2>Part C</h2>
+<h2 class="anchored" data-anchor-id="part-c">Part C</h2>
 <p>Plot <span class="math inline">\(P_k(x)\)</span> for <span class="math inline">\(k = 0, ..., 6\)</span></p>
 <section id="solution-2" class="level3">
-<h3>Solution</h3>
+<h3 class="anchored" data-anchor-id="solution-2">Solution</h3>
 <p>Let us define a code that plots all polynomials <span class="math inline">\(P_k(x)\)</span> for <span class="math inline">\(k = 0, ..., 6\)</span></p>
-<div id="06edca10" class="cell" data-execution_count="4">
+<div id="d6d86a9b" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode" id="cb4"><pre class="sourceCode julia cell-code"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">plotpolynomials</span>(<span class="cn">π</span><span class="op">::</span><span class="dt">Vector{Function}</span>)</span>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">plotpolynomials</span>(<span class="cn">π</span><span class="op">::</span><span class="dt">Vector{Function}</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    M <span class="op">=</span> <span class="fu">size</span>(<span class="cn">π</span>)[<span class="fl">1</span>]</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>();<span class="fu">display</span>(fig)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>], title <span class="op">=</span> <span class="st">&quot;Plot of the set of orthogonal polynomials up to degree 6&quot;</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>], title <span class="op">=</span> <span class="st">"Plot of the set of orthogonal polynomials up to degree 6"</span>)</span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    xs <span class="op">=</span> <span class="fu">LinRange</span>(<span class="op">-</span><span class="fl">1.0</span>, <span class="fl">1.0</span>, <span class="fl">1000</span>)</span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> n <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>M<span class="op">-</span><span class="fl">1</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">lines!</span>(ax, xs, <span class="cn">π</span>[n<span class="op">+</span><span class="fl">1</span>].(xs), label<span class="op">=</span><span class="st">&quot;π_</span><span class="sc">$</span>(n<span class="op">-</span><span class="fl">1</span>)<span class="st">&quot;</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">lines!</span>(ax, xs, <span class="cn">π</span>[n<span class="op">+</span><span class="fl">1</span>].(xs), label<span class="op">=</span><span class="st">"π_</span><span class="sc">$</span>(n<span class="op">-</span><span class="fl">1</span>)<span class="st">"</span>)</span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">Legend</span>(fig[<span class="fl">1</span>, <span class="fl">2</span>], ax)</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">save</span>(<span class="st">&quot;plotpolynomials.png&quot;</span>, fig)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">save</span>(<span class="st">"plotpolynomials.png"</span>, fig)</span>
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plotpolynomials</span>(<span class="cn">π</span>)</span></code></pre></div>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plotpolynomials</span>(<span class="cn">π</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="fig-q1pc" class="quarto-float quarto-figure quarto-figure-center" style="text-align: center;">
-<figure class="quarto-float quarto-float-fig">
-<div aria-describedby="fig-q1pc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img src="hw5_files/media/plotpolynomials.png" class="img-fluid" style="width:70.0%" /></p>
+<figure class="figure">
+<p><img src="hw5_files/media/plotpolynomials.png" class="img-fluid figure-img"></p>
 <figcaption>Plot of polynomials within the support [-1, 1]</figcaption>
-</figure>
-</div>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-q1pc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure 3
-</figcaption>
 </figure>
 </div>
 </section>
@@ -405,67 +387,58 @@ Figure 3
 </section>
 <section id="question-2" class="level1">
 <h1>Question 2</h1>
-<p>Consider the following nonlinear fuction of the random variable <span class="math inline">\(\xi(\omega)\)</span> with PDF defined in <span class="math inline">\(\eqref{pxi}\)</span></p>
-<p><span class="math display">\[\begin{equation}\tag{3}\label{eta}
+<p>Consider the following nonlinear fuction of the random variable <span class="math inline">\(\xi(\omega)\)</span> with PDF defined in <span class="math inline">\(\eqref{eq-pxi}\)</span></p>
+<p><span class="math display">\[\begin{equation}\label{eta}
 \eta(\omega) = \frac{\xi(\omega) -1}{2 + 1\sin{(2\xi(\omega))}}
 \end{equation}\]</span></p>
 <section id="part-a-1" class="level2">
-<h2>Part A</h2>
-<p>Compute the PDF of <span class="math inline">\(\eta\)</span> using the relative frequency approach. To this end, sample 50,000 realizations of <span class="math inline">\(\xi\)</span> using the inverse CDF approach applied to <span class="math inline">\(\eqref{pxi}\)</span>, and use such samples to compute samples of <span class="math inline">\(\eta(\omega)\)</span>.</p>
+<h2 class="anchored" data-anchor-id="part-a-1">Part A</h2>
+<p>Compute the PDF of <span class="math inline">\(\eta\)</span> using the relative frequency approach. To this end, sample 50,000 realizations of <span class="math inline">\(\xi\)</span> using the inverse CDF approach applied to <span class="math inline">\(\eqref{eq-pxi}\)</span>, and use such samples to compute samples of <span class="math inline">\(\eta(\omega)\)</span>.</p>
 <section id="solution-3" class="level3">
-<h3>Solution</h3>
-<p>The following code samples from <span class="math inline">\(\eqref{pxi}\)</span> 50,000 times using the inverse sampling method previously applied in Homework 1 and 2, then applies the transformation <span class="math inline">\(\eqref{eta}\)</span>, and finally plots the histogram with 80 bins, normalized so that the PDF integrates to one over the support.</p>
-<div id="2b6066ca" class="cell" data-execution_count="5">
+<h3 class="anchored" data-anchor-id="solution-3">Solution</h3>
+<p>The following code samples from <span class="math inline">\(\eqref{eq-pxi}\)</span> 50,000 times using the inverse sampling method previously applied in Homework 1 and 2, then applies the transformation <span class="math inline">\(\eqref{eta}\)</span>, and finally plots the histogram with 80 bins, normalized so that the PDF integrates to one over the support.</p>
+<div id="0471c826" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode" id="cb5"><pre class="sourceCode julia cell-code"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">η</span>(ξ) <span class="op">=</span> (ξ <span class="op">-</span> <span class="fl">1</span>) <span class="op">/</span> (<span class="fl">2</span> <span class="op">+</span> <span class="fu">sin</span>(<span class="fl">2</span><span class="op">*</span>ξ))</span>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">η</span>(ξ) <span class="op">=</span> (ξ <span class="op">-</span> <span class="fl">1</span>) <span class="op">/</span> (<span class="fl">2</span> <span class="op">+</span> <span class="fu">sin</span>(<span class="fl">2</span><span class="op">*</span>ξ))</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">question2a</span>()</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    r <span class="op">=</span> <span class="fu">LinRange</span>(<span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1000</span>)</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>();<span class="fu">display</span>(fig)</span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>],</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        title <span class="op">=</span> <span class="st">&quot;PDF of η(ξ(ω))&quot;</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        title <span class="op">=</span> <span class="st">"PDF of η(ξ(ω))"</span>)</span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    ys <span class="op">=</span> <span class="fu">cumsumtrap</span>(μ, r)</span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    samples <span class="op">=</span> <span class="fu">Vector</span><span class="dt">{Float64}</span>(<span class="cn">undef</span>, <span class="fl">50000</span>)</span>
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="fu">eachindex</span>(samples)</span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>        samples[i] <span class="op">=</span> <span class="fu">η</span>(<span class="fu">sampleInverseCDF</span>(<span class="fu">rand</span>(), <span class="fu">hcat</span>(ys, r)))</span>
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
 <span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">hist!</span>(ax, samples, bins <span class="op">=</span> <span class="fl">80</span>, normalization <span class="op">=</span> <span class="op">:</span>pdf)</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">save</span>(<span class="st">&quot;question2a.png&quot;</span>, fig)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">save</span>(<span class="st">"question2a.png"</span>, fig)</span>
 <span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    samples</span>
 <span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>samples <span class="op">=</span> <span class="fu">question2a</span>();</span></code></pre></div>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>samples <span class="op">=</span> <span class="fu">question2a</span>();</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="fig-q2pa" class="quarto-float quarto-figure quarto-figure-center" style="text-align: center;">
-<figure class="quarto-float quarto-float-fig">
-<div aria-describedby="fig-q2pa-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img src="hw5_files/media/question2a.png" class="img-fluid" style="width:70.0%" /></p>
+<figure class="figure">
+<p><img src="hw5_files/media/question2a.png" class="img-fluid figure-img"></p>
 <figcaption>PDF of <span class="math inline">\(\eta(\xi(\omega))\)</span> by sampling 50,000 times via inverse CDF approach and applying the transformation <span class="math inline">\(\eqref{eta}\)</span></figcaption>
-</figure>
-</div>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-q2pa-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure 4
-</figcaption>
 </figure>
 </div>
 </section>
 </section>
 <section id="part-b-1" class="level2">
-<h2>Part B</h2>
+<h2 class="anchored" data-anchor-id="part-b-1">Part B</h2>
 <p>Show numerically that the gPC expansion <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
-<p><span class="math display">\[\begin{equation}\tag{5}\label{gpc}
+<p><span class="math display">\[\begin{equation}\label{gpc}
 \eta_M(\omega) = \sum_{k=0}^{M}a_k P_k(\xi(\omega)), \quad a_k = \frac{\mathbb{E}\{\eta(\xi(\omega))P_k(\xi(\omega))\}}{\mathbb{E}\{P_k^2(\xi(\omega))\}}
 \end{equation}\]</span></p>
 <p>converges to <span class="math inline">\(\eta(\omega)\)</span> in distribution as <span class="math inline">\(M\)</span> increases. To this end, plot the PDF of the random variables <span class="math inline">\(\eta_M(\xi(\omega))\)</span> for <span class="math inline">\(M = 1, 2, 4, 6\)</span> using method of relative frequencies and compare such PDF’s with the PDF of <span class="math inline">\(\eta\)</span> you computed in part a.</p>
 <section id="solution-4" class="level3">
-<h3>Solution</h3>
-<div id="c362a8b7" class="cell" data-execution_count="6">
+<h3 class="anchored" data-anchor-id="solution-4">Solution</h3>
+<div id="fd87dc23" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode" id="cb6"><pre class="sourceCode julia cell-code"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">question2b</span>(πn<span class="op">::</span><span class="dt">Vector{Function}</span>)</span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">question2b</span>(πn<span class="op">::</span><span class="dt">Vector{Function}</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    a <span class="op">=</span> <span class="fu">Vector</span><span class="dt">{Float64}</span>(<span class="cn">undef</span>, <span class="fl">7</span>)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    colors <span class="op">=</span> <span class="dt">Symbol</span>[<span class="op">:</span>red, <span class="op">:</span>green, <span class="op">:</span>blue, <span class="op">:</span>yellow, <span class="op">:</span>orange, <span class="op">:</span>purple]</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># calculate coefficients</span></span>
@@ -474,7 +447,7 @@ Figure 4
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>();<span class="fu">display</span>(fig)</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>], title<span class="op">=</span><span class="st">&quot;densities of ηM(ξ(ω)) for M = {1, 2, 4, 6}&quot;</span>)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>], title<span class="op">=</span><span class="st">"densities of ηM(ξ(ω)) for M = {1, 2, 4, 6}"</span>)</span>
 <span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    r <span class="op">=</span> <span class="fu">LinRange</span>(<span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1000</span>)</span>
 <span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    ys <span class="op">=</span> <span class="fu">hcat</span>(<span class="fu">cumsumtrap</span>(μ, r), r)</span>
 <span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> M <span class="kw">in</span> <span class="fu">SVector</span><span class="dt">{4}</span>(<span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">4</span>, <span class="fl">6</span>)</span>
@@ -487,45 +460,36 @@ Figure 4
 <span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>            <span class="cf">end</span></span>
 <span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>            ηM_samples[l] <span class="op">=</span> η_sum</span>
 <span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">end</span></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>        <span class="fu">density!</span>(ax, ηM_samples, color <span class="op">=</span> (colors[M], <span class="fl">0.3</span>), label <span class="op">=</span> <span class="st">&quot;M = </span><span class="sc">$</span>M<span class="st">&quot;</span>, strokecolor <span class="op">=</span> colors[M], strokewidth <span class="op">=</span> <span class="fl">3</span>, strokearound <span class="op">=</span> <span class="cn">true</span>) </span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>        <span class="fu">density!</span>(ax, ηM_samples, color <span class="op">=</span> (colors[M], <span class="fl">0.3</span>), label <span class="op">=</span> <span class="st">"M = </span><span class="sc">$</span>M<span class="st">"</span>, strokecolor <span class="op">=</span> colors[M], strokewidth <span class="op">=</span> <span class="fl">3</span>, strokearound <span class="op">=</span> <span class="cn">true</span>) </span>
 <span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
 <span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">Legend</span>(fig[<span class="fl">1</span>, <span class="fl">2</span>], ax)</span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">save</span>(<span class="st">&quot;question2b.png&quot;</span>, fig)</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">save</span>(<span class="st">"question2b.png"</span>, fig)</span>
 <span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="fu">question2b</span>(<span class="cn">π</span>);</span></code></pre></div>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="fu">question2b</span>(<span class="cn">π</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="fig-q2pb" class="quarto-float quarto-figure quarto-figure-center" style="text-align: center;">
-<figure class="quarto-float quarto-float-fig">
-<div aria-describedby="fig-q2pb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img src="hw5_files/media/question2b.png" class="img-fluid" style="width:70.0%" /></p>
+<figure class="figure">
+<p><img src="hw5_files/media/question2b.png" class="img-fluid figure-img"></p>
 <figcaption>The PDF ploted using Kernel Density Estimation for values M = {1, 2, 4, 6}</figcaption>
-</figure>
-</div>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-q2pb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure 5
-</figcaption>
 </figure>
 </div>
 <p>As we can see, the PDF of the random variable <span class="math inline">\(\eta_M(\omega)\)</span> converges to the PDF of <span class="math inline">\(\eta(\omega)\)</span> as M increases.</p>
 </section>
 </section>
 <section id="part-c-1" class="level2">
-<h2>Part C</h2>
+<h2 class="anchored" data-anchor-id="part-c-1">Part C</h2>
 <p>Compute the mean and variance of <span class="math inline">\(\eta_6\)</span> and compare it with the mean and variance of <span class="math inline">\(\eta\)</span>. Note that such means and variances can be computed in multiple ways, e.g., by using MC, or by approximating the integral defining the moments of the random variable <span class="math inline">\(\eta\)</span> using quadrature, e.g., via the trapezoidal rule applied to the integral</p>
-<p><span class="math display">\[\begin{equation}\tag{6}\label{quadr}
+<p><span class="math display">\[\begin{equation}\label{quadr}
 \mathbb{E}\{\eta^k\} = \int_{-1}^{1} \left(\frac{x-1}{2+\sin(2x)}\right)^k p_{\xi}(x)dx
 \end{equation}\]</span></p>
 <section id="solution-5" class="level3">
-<h3>Solution</h3>
+<h3 class="anchored" data-anchor-id="solution-5">Solution</h3>
 <p>Let us find the mean and variance of <span class="math inline">\(\eta\)</span> and <span class="math inline">\(\eta_6\)</span> by generating 1000 samples of size 1000 and taking the average of the mean and variance for each sample.</p>
-<div id="67f30cfe" class="cell" data-execution_count="7">
+<div id="1c785c28" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode" id="cb7"><pre class="sourceCode julia cell-code"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">question2c</span>()</span>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">question2c</span>()</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    r <span class="op">=</span> <span class="fu">LinRange</span>(<span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1000</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    ys <span class="op">=</span> <span class="fu">hcat</span>(<span class="fu">cumsumtrap</span>(μ, r), r)</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    η_samples <span class="op">=</span> <span class="fu">Vector</span><span class="dt">{Float64}</span>(<span class="cn">undef</span>, <span class="fl">50000</span>)</span>
@@ -567,96 +531,321 @@ Figure 5
 <span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>    η<span class="fl">6</span>_var <span class="op">=</span> <span class="fu">mean</span>(variances)</span>
 <span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>();<span class="fu">display</span>(fig)</span>
 <span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>],</span>
-<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>        xticks <span class="op">=</span> (<span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, [<span class="st">&quot;η&quot;</span>, <span class="st">&quot;η₆&quot;</span>]),</span>
-<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a>    title <span class="op">=</span> <span class="st">&quot;mean and variance for η and η_6&quot;</span>)</span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>        xticks <span class="op">=</span> (<span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, [<span class="st">"η"</span>, <span class="st">"η₆"</span>]),</span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a>    title <span class="op">=</span> <span class="st">"mean and variance for η and η_6"</span>)</span>
 <span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>    <span class="fu">barplot!</span>(ax, [<span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">2</span>], [η_mean, η_var, η<span class="fl">6</span>_mean, η<span class="fl">6</span>_var],</span>
 <span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a>        dodge <span class="op">=</span> [<span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">2</span>],</span>
 <span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>        color <span class="op">=</span> [<span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">2</span>])</span>
-<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a>    <span class="fu">save</span>(<span class="st">&quot;question2c.png&quot;</span>, fig)</span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a>    <span class="fu">save</span>(<span class="st">"question2c.png"</span>, fig)</span>
 <span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
-<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a><span class="fu">question2c</span>();</span></code></pre></div>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a><span class="fu">question2c</span>();</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="fig-q2pc" class="quarto-float quarto-figure quarto-figure-center" style="text-align: center;">
-<figure class="quarto-float quarto-float-fig">
-<div aria-describedby="fig-q2pc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img src="hw5_files/media/question2c.png" class="img-fluid" style="width:70.0%" /></p>
+<figure class="figure">
+<p><img src="hw5_files/media/question2c.png" class="img-fluid figure-img"></p>
 <figcaption>Barplot of the bootstrap mean and variance from MC for <span class="math inline">\(\eta\)</span> and <span class="math inline">\(\eta_6\)</span></figcaption>
 </figure>
 </div>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-q2pc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure 6
-</figcaption>
-</figure>
-</div>
-<p>From the plot we can see the the sample meand and variance for both are almost identical.</p>
+<p>From the plot we can see the the sample mean and variance for both are almost identical.</p>
 </section>
 </section>
 </section>
 <section id="question-3" class="level1">
 <h1>Question 3</h1>
 <p>Compute the solution of the following random initial value problem</p>
-<p><span class="math display">\[\begin{equation}\tag{7}\label{randomivp}
+<p><span class="math display">\[\begin{equation}\label{randomivp}
 \begin{cases}
-    \frac{x}{t} &amp;= -xi(\omega)x + \cos(4t) \\
+    \frac{dx}{dt} &amp;= -\xi(\omega)x + \cos(4t) \\
     x(0) &amp;= 1
 \end{cases}
 \end{equation}\]</span></p>
 <p>using the stocastic Galerkin method with the gPC basis you obtained in question 1. In particular, use the following gPC expansion of degree 6 for the solution of <span class="math inline">\(\eqref{randomivp}\)</span>.</p>
-<p><span class="math display">\[\begin{equation}\tag{8}\label{eight}
+<p><span class="math display">\[\begin{equation}\label{eight}
 x(t;\omega) = \sum_{k=0}^6 \hat{x}_k(t)P_k(\xi(\omega))
 \end{equation}\]</span></p>
 <p>where the gPC modes <span class="math inline">\(\hat{x}_k(t)\)</span> are to be determined from <span class="math inline">\(\eqref{randomivp}\)</span>.</p>
 <section id="part-a-2" class="level2">
-<h2>Part A</h2>
-<p>Compute the mean and the variance of <span class="math inline">\(\eqref{eight}\)</span> fot <span class="math inline">\(t \in [0, 3]\)</span>.</p>
+<h2 class="anchored" data-anchor-id="part-a-2">Part A</h2>
+<p>Compute the mean and the variance of <span class="math inline">\(\eqref{eight}\)</span> of <span class="math inline">\(t \in [0, 3]\)</span>.</p>
 <section id="solution-6" class="level3">
-<h3>Solution</h3>
+<h3 class="anchored" data-anchor-id="solution-6">Solution</h3>
+<p>Let us find the solution of the random initial value problem by using the stocastic Galerkin method and finding the gPC modes by plugging in <span class="math inline">\(\eqref{eight}\)</span> into <span class="math inline">\(\eqref{randomivp}\)</span>.</p>
+<p><span class="math display">\[\begin{align}
+    \sum_{k=0}^{6}\frac{\partial \hat{x}_k}{\partial t}P_k &amp;= -\xi \sum_{k=0}^{6}\hat{x}_k P_k + cos(4t) \\
+\frac{\partial \hat{x}_j}{\partial t}\mathbb{E}\{P_j^2\} &amp;= -\sum_{k=0}^{6}\hat{x}_k \mathbb{E}\{\xi P_k P_j\} + \cos(4t) \mathbb{E}\{P_j\} \\
+\frac{\partial \hat{x}_j}{\partial t} &amp;= -\frac{1}{\mathbb{E}\{P_j^2\}}\sum_{k=0}^{6}\hat{x}_k \mathbb{E}\{\xi P_k P_j\} + \frac{\cos(4t) \mathbb{E}\{P_j\}}{\mathbb{E}\{P_j^2\}} \\
+\end{align}\]</span></p>
+<p>Recall from Question 1, Part A where we calculated the <span class="math inline">\(P_1(\xi)\)</span></p>
+<p><span class="math display">\[\begin{align}
+P_1(\xi) &amp;= \xi + \frac{2}{e^2 + 1} \\
+\xi &amp;= P_1(\xi) - \frac{2}{e^2 + 1}
+\end{align}\]</span></p>
+<p>Plugging <span class="math inline">\(\xi\)</span> back into the ODE we have:</p>
+<p><span class="math display">\[\begin{align}
+\frac{\partial \hat{x}_j}{\partial t} &amp;= -\frac{1}{\mathbb{E}\{P_j^2\}}\sum_{k=0}^{6}\hat{x}_k \mathbb{E}\{ \left(P_1(\xi) - \frac{2}{e^2 + 1}\right) P_k P_j\} + \frac{\cos(4t) \mathbb{E}\{P_j\}}{\mathbb{E}\{P_j^2\}} \\
+\frac{\partial \hat{x}_j}{\partial t} &amp;= -\frac{1}{ \mathbb{E}\{P_j^2\}} \sum_{k=0}^{6}\hat{x}_k \mathbb{E}\{P_1 P_k P_j\} + \frac{2\hat{x}}{e^2 + 1} + \frac{\cos(4t) \mathbb{E}\{P_j\}}{ \mathbb{E}\{P_j^2\}}
+\end{align}\]</span></p>
+<p>where the initial conditions are:</p>
+<p><span class="math display">\[\begin{align}
+x(0;\omega) &amp;= 1 \\
+x(j;\omega) &amp;= 0 \quad \text{for } j = 1, ..., 6
+\end{align}\]</span></p>
+<p>In the following code we precompute the expectations required for defining the first order system of equations, solve the IVP using Tsitouras 5/4 Runge-Kutta method, calculate the variance by the following:</p>
+<p><span class="math display">\[\begin{align}
+var(x(t;\omega)) = \sum_{k=1}^{6}\hat{x}_k^2(t) \mathbb{E}\{P_k^2\}
+\end{align}\]</span></p>
+<p>and plot the mean and variance on two seperate graphs in the temporal domain [0, 3]</p>
+<div id="650d90d4" class="cell" data-execution_count="8">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">DifferentialEquations</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">question3a</span>()</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># get polynomials</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    πn <span class="op">=</span> <span class="fu">stieltjes</span>()</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># simulation initial and final time</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    t0, tf <span class="op">=</span> <span class="fu">SVector</span><span class="dt">{2}</span>(<span class="fl">0.0</span>, <span class="fl">3.0</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># initial conditions</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    u0 <span class="op">=</span> <span class="fu">SVector</span><span class="dt">{7}</span>(<span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># highest polynomial order</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    M <span class="op">=</span> <span class="fu">size</span>(πn)[<span class="fl">1</span>]</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># precompute E{Pj}</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    Epj1 <span class="op">=</span> <span class="fu">Vector</span><span class="dt">{Float64}</span>(<span class="cn">undef</span>, M)</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> k <span class="kw">in</span> <span class="fu">eachindex</span>(πn)</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>        Epj1[k] <span class="op">=</span> <span class="fu">integ</span>(x <span class="op">-&gt;</span> πn[k](x) <span class="op">*</span> <span class="fu">μ</span>(x), sup)</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># precompute E{Pj^2}</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>    Epj2 <span class="op">=</span> <span class="fu">Vector</span><span class="dt">{Float64}</span>(<span class="cn">undef</span>, M)</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="fu">eachindex</span>(πn)</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>            Epj2[j] <span class="op">=</span> <span class="fu">integ</span>(x <span class="op">-&gt;</span> πn[j](x) <span class="op">*</span> πn[j](x) <span class="op">*</span> <span class="fu">μ</span>(x), sup)</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># precompute E{P₁PkPj}</span></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>    Ep1pjpk <span class="op">=</span> <span class="fu">Matrix</span><span class="dt">{Float64}</span>(<span class="cn">undef</span>, M, M)</span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> idx <span class="kw">in</span> <span class="fu">CartesianIndices</span>(Ep1pjpk)</span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>        (j, k) <span class="op">=</span> idx.I</span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>        Ep1pjpk[j, k] <span class="op">=</span> <span class="fu">integ</span>(x <span class="op">-&gt;</span> πn[<span class="fl">2</span>](x) <span class="op">*</span> πn[j](x) <span class="op">*</span> πn[k](x) <span class="op">*</span> <span class="fu">μ</span>(x), sup)</span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>    <span class="co"># precompute the constant multiplying xhatj</span></span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>    β <span class="op">=</span> (<span class="fl">2.0</span> <span class="op">/</span> (<span class="fu">exp</span>(<span class="fl">1.0</span>)<span class="op">^</span><span class="fl">2</span> <span class="op">+</span> <span class="fl">1.0</span>))</span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>    <span class="co"># define the system of odes</span></span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>    <span class="kw">function</span> <span class="fu">ode</span>(u, p, t)</span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="fu">SVector</span><span class="dt">{M}</span>(</span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>            ((<span class="fu">-sum</span>(u[k] <span class="op">*</span> Ep1pjpk[j, k] <span class="cf">for</span> k <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>M))<span class="op">/</span>Epj2[j]) <span class="op">+</span> β<span class="op">*</span>u[j] <span class="op">+</span> (<span class="fu">cos</span>(<span class="fl">4</span><span class="op">*</span>t)<span class="op">*</span>Epj1[j]<span class="op">/</span>Epj2[j]) <span class="cf">for</span> j <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>M</span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>    <span class="co"># solve the ode problem using Tsitouras 5/4 Runge-Kutta method</span></span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a>    prob <span class="op">=</span> <span class="fu">ODEProblem</span>(ode, u0, (t0, tf))</span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a>    sol <span class="op">=</span> <span class="fu">solve</span>(prob, <span class="fu">Tsit5</span>(), saveat<span class="op">=</span><span class="fl">0.01</span>, abstol<span class="op">=</span><span class="fl">1e-8</span>, reltol<span class="op">=</span><span class="fl">1e-8</span>)</span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>    <span class="co"># find the variance</span></span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>    var <span class="op">=</span> <span class="fu">sum</span>([(sol[k, <span class="op">:</span>]<span class="op">.^</span><span class="fl">2</span>) <span class="op">.*</span> Epj2[k] for k <span class="kw">in</span> <span class="fl">2</span><span class="op">:</span>M], dims<span class="op">=</span><span class="fl">1</span>)[<span class="fl">1</span>]</span>
+<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a>    <span class="co"># plot the mean and variance</span></span>
+<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(size <span class="op">=</span> (<span class="fl">800</span>, <span class="fl">400</span>));<span class="fu">display</span>(fig)</span>
+<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a>    ax1 <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>], title <span class="op">=</span> <span class="st">"mean of x(t;ω)"</span>,</span>
+<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a>        xlabel <span class="op">=</span> <span class="st">"time"</span>)</span>
+<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a>    ax2 <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">2</span>], title <span class="op">=</span> <span class="st">"variance of x(t;ω)"</span>,</span>
+<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a>        xlabel <span class="op">=</span> <span class="st">"time"</span>)    </span>
+<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines!</span>(ax1, sol.t, sol[<span class="fl">1</span>, <span class="op">:</span>])</span>
+<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines!</span>(ax2, sol.t, var)</span>
+<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a>    <span class="fu">save</span>(<span class="st">"question3a.png"</span>, fig)</span>
+<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span>
+<span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a><span class="fu">question3a</span>();</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="hw5_files/media/question3a.png" class="img-fluid figure-img"></p>
+<figcaption>The mean and variance of <span class="math inline">\(\eqref{eight}\)</span> in <span class="math inline">\(t \in [0, 3]\)</span></figcaption>
+</figure>
+</div>
 </section>
 </section>
 <section id="part-b-2" class="level2">
-<h2>Part B</h2>
+<h2 class="anchored" data-anchor-id="part-b-2">Part B</h2>
 <p>Compute the PDF of <span class="math inline">\(\eqref{eight}\)</span> at times <span class="math inline">\(\{0.5, 1, 2, 3\}\)</span> (use relative frequencies).</p>
 <p>Note: you can debug your gPC results by either computing the analytic solution of <span class="math inline">\(\eqref{randomivp}\)</span> and then computing moments/PDFs of such solutions as a function of <span class="math inline">\(t\)</span>, or by randomly sampling many solution paths of <span class="math inline">\(\eqref{randomivp}\)</span> and then computing ensemble averages.</p>
 <section id="solution-7" class="level3">
-<h3>Solution</h3>
+<h3 class="anchored" data-anchor-id="solution-7">Solution</h3>
+<p>We have everything we need to compute the PDF of <span class="math inline">\(\eqref{eight}\)</span> for various times.</p>
+<p>Let us generate a random vector by sampling <span class="math inline">\(p_{\xi}(x)\)</span> 50,000 times, then generate samples by evaluating the following:</p>
+<p><span class="math display">\[\begin{align}
+x(t^*;\omega) = \sum_{i=0}^{6}\hat{x}_i(t^*) P_i(\xi(\omega))
+\end{align}\]</span></p>
+<p>where</p>
+<p><span class="math display">\[\begin{align}
+&amp;\hat{x}_i(t^*) &amp;\quad &amp;\text{are the gPC coefficients at time } t^* \\
+&amp;P_i(\xi) &amp;\quad &amp;\text{are the gPC basis functions} \\
+&amp;\xi &amp;\quad &amp;\text{random variables from the distribution } P_{\xi}(x)
+\end{align}\]</span></p>
+<div id="80f77ca5" class="cell" data-execution_count="9">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">question3b</span>()</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># get orthogonal polynomials</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    πn <span class="op">=</span> <span class="fu">stieltjes</span>()</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># get gPC modes</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    sol <span class="op">=</span> <span class="fu">question3a</span>()</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># generate samples of ξ</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    r <span class="op">=</span> <span class="fu">LinRange</span>(<span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1000</span>)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    ys <span class="op">=</span> <span class="fu">hcat</span>(<span class="fu">cumsumtrap</span>(μ, r), r)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    ξ_samples <span class="op">=</span> <span class="fu">Vector</span><span class="dt">{Float64}</span>(<span class="cn">undef</span>, <span class="fl">50000</span>)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="fu">eachindex</span>(ξ_samples)</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>        ξ_samples[i] <span class="op">=</span> <span class="fu">sampleInverseCDF</span>(<span class="fu">rand</span>(), ys)</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># define t*</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    times <span class="op">=</span> <span class="fu">SVector</span><span class="dt">{4}</span>(<span class="fl">0.5</span>, <span class="fl">1.0</span>, <span class="fl">2.0</span>, <span class="fl">3.0</span>)</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># number of solutions (gPC modes)</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>    M <span class="op">=</span> <span class="fu">size</span>(sol)[<span class="fl">1</span>]</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># define figure</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(size <span class="op">=</span> (<span class="fl">800</span>, <span class="fl">800</span>))</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> <span class="fu">SVector</span><span class="dt">{4}</span>(<span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>]), <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">2</span>]), <span class="fu">Axis</span>(fig[<span class="fl">2</span>, <span class="fl">1</span>]), <span class="fu">Axis</span>(fig[<span class="fl">2</span>, <span class="fl">2</span>]))</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>    <span class="co"># plot histogram of samples of x(tstar;ω)</span></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (i, tstar) <span class="kw">in</span> <span class="fu">enumerate</span>(times)</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>        <span class="fu">hist!</span>(ax[i], <span class="fu">sum</span>(<span class="fu">sol</span>(tstar)[j] <span class="op">.*</span> πn[j].(ξ_samples) <span class="cf">for</span> j <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>M), bins <span class="op">=</span> <span class="fl">80</span>, normalization <span class="op">=</span> <span class="op">:</span>pdf)</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>        ax[i].title <span class="op">=</span> <span class="st">"t = </span><span class="sc">$</span>tstar<span class="st">"</span></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>        ax[i].ylabel <span class="op">=</span> <span class="st">"normalized frequency"</span></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">Label</span>(fig[<span class="fl">0</span>, <span class="op">:</span>], <span class="st">"PDF of various times, for x(t;ω)"</span>, fontsize<span class="op">=</span><span class="fl">20</span>)</span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>    <span class="fu">save</span>(<span class="st">"question3b.png"</span>, fig)</span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a><span class="fu">question3b</span>();</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="hw5_files/media/question3b.png" class="img-fluid figure-img"></p>
+<figcaption>PDF for various times found by the method of relative frequencies</figcaption>
+</figure>
+</div>
 </section>
 </section>
 </section>
 <section id="appendix" class="level1">
 <h1>Appendix</h1>
-<section id="figures" class="level2">
-<h2>Figures</h2>
-<div id="fig-pdfxi" class="quarto-float quarto-figure quarto-figure-center" style="text-align: center;">
-<figure class="quarto-float quarto-float-fig">
-<div aria-describedby="fig-pdfxi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<section id="validation" class="level2">
+<h2 class="anchored" data-anchor-id="validation">Validation</h2>
+<p>Let us randomly sample many solution paths of <span class="math inline">\(\eqref{randomivp}\)</span> and then compute the ensemble average to validate our gPC results.</p>
+<p>For this we will generate 50,000 samples from the PDF of <span class="math inline">\(\eqref{eq-pxi}\)</span>, then solve the ODE numerically 50,000 times and plot the histogram of the normalized frequency just as we did in Question 3 partb.</p>
+<div id="91b83dc5" class="cell" data-execution_count="10">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">validation</span>(N<span class="op">::</span><span class="dt">Int64</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># generate samples of ξ</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    r <span class="op">=</span> <span class="fu">LinRange</span>(<span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1000</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    ys <span class="op">=</span> <span class="fu">hcat</span>(<span class="fu">cumsumtrap</span>(μ, r), r)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    ξ_samples <span class="op">=</span> <span class="fu">Vector</span><span class="dt">{Float64}</span>(<span class="cn">undef</span>, N)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="fu">eachindex</span>(ξ_samples)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>        ξ_samples[i] <span class="op">=</span> <span class="fu">sampleInverseCDF</span>(<span class="fu">rand</span>(), ys)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># define t*</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    times <span class="op">=</span> <span class="fu">SVector</span><span class="dt">{4}</span>(<span class="fl">0.5</span>, <span class="fl">1.0</span>, <span class="fl">2.0</span>, <span class="fl">3.0</span>)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># define the ODEProblem</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">function</span> <span class="fu">ode</span>(u, p, t)</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="fu">SVector</span><span class="dt">{1}</span>(<span class="op">-</span>p <span class="op">*</span> u[<span class="fl">1</span>] <span class="op">+</span> <span class="fu">cos</span>(<span class="fl">4</span><span class="op">*</span>t))</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">end</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># initial condition</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    u0 <span class="op">=</span> <span class="fu">SVector</span><span class="dt">{1}</span>(<span class="fl">1</span>)</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># solve once to get size of time vector</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>    prob <span class="op">=</span> <span class="fu">ODEProblem</span>(ode, u0, (<span class="fl">0.0</span>, <span class="fl">3.0</span>), <span class="op">-</span><span class="fl">1.0</span>)</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>    sol <span class="op">=</span> <span class="fu">solve</span>(prob, <span class="fu">Tsit5</span>(), saveat<span class="op">=</span><span class="fl">0.01</span>, abstol<span class="op">=</span><span class="fl">1e-8</span>, reltol<span class="op">=</span><span class="fl">1e-8</span>)</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># init matrix to store solutions</span></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>    solTstar <span class="op">=</span> [<span class="dt">Float64</span>[] for _ <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu">length</span>(times)]</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>    solutions <span class="op">=</span> <span class="fu">Matrix</span><span class="dt">{Float64}</span>(<span class="cn">undef</span>, N, <span class="fu">size</span>(sol.t)[<span class="fl">1</span>])</span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>    <span class="co"># solve the ode for each sample and extract sample paths</span></span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (i, ξ) <span class="kw">in</span> <span class="fu">enumerate</span>(ξ_samples)</span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>        prob <span class="op">=</span> <span class="fu">ODEProblem</span>(ode, u0, (<span class="fl">0.0</span>, <span class="fl">3.0</span>), ξ)</span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>        sol <span class="op">=</span> <span class="fu">solve</span>(prob, <span class="fu">Tsit5</span>(), saveat<span class="op">=</span><span class="fl">0.01</span>, abstol<span class="op">=</span><span class="fl">1e-8</span>, reltol<span class="op">=</span><span class="fl">1e-8</span>)</span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>        solutions[i, <span class="op">:</span>] <span class="op">=</span> <span class="dt">Float64</span>[u[<span class="fl">1</span>] for u <span class="kw">in</span> sol.u]</span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> (j, tstar) <span class="kw">in</span> <span class="fu">enumerate</span>(times)</span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>            <span class="fu">push!</span>(solTstar[j], <span class="fu">sol</span>(tstar)[<span class="fl">1</span>])</span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a>        <span class="cf">end</span></span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>    <span class="co"># calculate sample path mean and variance</span></span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a>    meanPath <span class="op">=</span> <span class="fu">mean</span>(solutions, dims<span class="op">=</span><span class="fl">1</span>)</span>
+<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a>    variancePath <span class="op">=</span> <span class="fu">var</span>(solutions, mean<span class="op">=</span>meanPath, dims<span class="op">=</span><span class="fl">1</span>)</span>
+<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a>    <span class="co"># plot results</span></span>
+<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a>    fig1 <span class="op">=</span> <span class="fu">Figure</span>(size <span class="op">=</span> (<span class="fl">800</span>, <span class="fl">800</span>))</span>
+<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a>    ax1 <span class="op">=</span> [<span class="fu">Axis</span>(fig1[i, j]) for i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, j <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>]</span>
+<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a>    fig2 <span class="op">=</span> <span class="fu">Figure</span>(size <span class="op">=</span> (<span class="fl">800</span>, <span class="fl">400</span>))</span>
+<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a>    ax2 <span class="op">=</span> [<span class="fu">Axis</span>(fig2[<span class="fl">1</span>, i]) for i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>]</span>
+<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (i, tstar) <span class="kw">in</span> <span class="fu">enumerate</span>(times)</span>
+<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a>        <span class="fu">hist!</span>(ax1[i], solTstar[i], bins <span class="op">=</span> <span class="fl">80</span>, normalization <span class="op">=</span> <span class="op">:</span>pdf)</span>
+<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a>        ax1[i].title <span class="op">=</span> <span class="st">"t = </span><span class="sc">$</span>tstar<span class="st">"</span></span>
+<span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a>        ax1[i].ylabel <span class="op">=</span> <span class="st">"Normalized Frequency"</span></span>
+<span id="cb10-52"><a href="#cb10-52" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb10-53"><a href="#cb10-53" aria-hidden="true" tabindex="-1"></a>    <span class="fu">Label</span>(fig1[<span class="fl">0</span>, <span class="op">:</span>], <span class="st">"PDF of Various Times Using MC Method"</span>, fontsize<span class="op">=</span><span class="fl">20</span>)</span>
+<span id="cb10-54"><a href="#cb10-54" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines!</span>(ax2[<span class="fl">1</span>], sol.t, <span class="fu">vec</span>(meanPath), label<span class="op">=</span><span class="st">"Mean Path"</span>)</span>
+<span id="cb10-55"><a href="#cb10-55" aria-hidden="true" tabindex="-1"></a>    ax2[<span class="fl">1</span>].title <span class="op">=</span> <span class="st">"Mean Path"</span></span>
+<span id="cb10-56"><a href="#cb10-56" aria-hidden="true" tabindex="-1"></a>    ax2[<span class="fl">1</span>].xlabel <span class="op">=</span> <span class="st">"Time"</span></span>
+<span id="cb10-57"><a href="#cb10-57" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines!</span>(ax2[<span class="fl">2</span>], sol.t, <span class="fu">vec</span>(variancePath), label<span class="op">=</span><span class="st">"Variance"</span>)</span>
+<span id="cb10-58"><a href="#cb10-58" aria-hidden="true" tabindex="-1"></a>    ax2[<span class="fl">2</span>].title <span class="op">=</span> <span class="st">"Variance over Time"</span></span>
+<span id="cb10-59"><a href="#cb10-59" aria-hidden="true" tabindex="-1"></a>    ax2[<span class="fl">2</span>].xlabel <span class="op">=</span> <span class="st">"Time"</span></span>
+<span id="cb10-60"><a href="#cb10-60" aria-hidden="true" tabindex="-1"></a>    <span class="fu">save</span>(<span class="st">"validationPDF.png"</span>, fig1)</span>
+<span id="cb10-61"><a href="#cb10-61" aria-hidden="true" tabindex="-1"></a>    <span class="fu">save</span>(<span class="st">"validationmeanvar.png"</span>, fig2)</span>
+<span id="cb10-62"><a href="#cb10-62" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb10-63"><a href="#cb10-63" aria-hidden="true" tabindex="-1"></a><span class="fu">validation</span>(<span class="fl">50000</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 <div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img src="hw5_files/media/PDFone.png" class="img-fluid" style="width:50.0%" /></p>
-<figcaption>The PDF of <span class="math inline">\(\xi\)</span></figcaption>
+<figure class="figure">
+<p><img src="hw5_files/media/validationmeanvar.png" class="img-fluid figure-img"></p>
+<figcaption>The mean and variance of <span class="math inline">\(x(t;\omega)\)</span> using Monte Carlo method</figcaption>
 </figure>
 </div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="hw5_files/media/validationPDF.png" class="img-fluid figure-img"></p>
+<figcaption>The PDF for specific times using Monte Carlo method</figcaption>
+</figure>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-pdfxi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure 7
+</section>
+<section id="figures" class="level2">
+<h2 class="anchored" data-anchor-id="figures">Figures</h2>
+<div id="fig-pdfxi" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pdfxi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="hw5_files/media/PDFone.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pdfxi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: The PDF of <span class="math inline">\(\xi\)</span>
 </figcaption>
 </figure>
 </div>
 </section>
 </section>
-<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr />
-<ol>
-<li id="fn1"><p>Note that <span class="math inline">\(\mathbb{E}\{\eta(\xi(\omega))P_k(\xi(\omega))\}\)</span> can be computed with MC, or with quadrature as <span class="math display">\[\begin{equation}\tag{4}\label{four}\mathbb{E}\{\eta(\xi(\omega))P_k(\xi(\omega))\}= \int_{-1}^{1}\frac{x - 1}{2 + 1 \sin(2x)}P_k(x)P_\xi(x)dx\end{equation}\]</span><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section>
 
-</main>
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Note that <span class="math inline">\(\mathbb{E}\{\eta(\xi(\omega))P_k(\xi(\omega))\}\)</span> can be computed with MC, or with quadrature as <span class="math display">\[\begin{equation}\label{four}\mathbb{E}\{\eta(\xi(\omega))P_k(\xi(\omega))\}= \int_{-1}^{1}\frac{x - 1}{2 + 1 \sin(2x)}P_k(x)P_\xi(x)dx\end{equation}\]</span><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main>
 <!-- /main column -->
-<script id = "quarto-html-after-body" type="application/javascript">
+<script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -1078,6 +1267,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 </div> <!-- /content -->
 
-</body>
 
-</html>
+
+
+</body></html>
