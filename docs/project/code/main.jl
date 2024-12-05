@@ -4,21 +4,6 @@ using OrdinaryDiffEq
 using DynamicalSystems
 using LinearAlgebra
 
-global forcing = Observable(0.3)
-
-function reset()
-    forcing[] = 0.3
-end
-
-function windSDE(forcing, Δt)
-    μ, θ, σ = SVector{3}(
-        0.3, # Mean forcing
-        0.5, # Mean reversion rate
-        0.2, # Standard dev
-    )
-    forcing[] = θ * (μ - forcing[]) * Δt + σ * sqrt(Δt) * randn()
-end
-
 function PDdrone(u0 = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]; params)
     diffeq = (alg = Tsit5(), abstol = 1e-6, reltol = 1e-6)
     return CoupledODEs(droneRule, u0, params; diffeq)
@@ -73,8 +58,34 @@ end
 function animstep!(integ, ϵ) 
     step!(integ)
     Δt = integ.dt
-    windSDE(forcing, Δt)
     ϵ[] = [integ[1], integ[2], integ[3]]
+end
+
+function makefig(u0, params)
+    L = params[4]
+    h = L * 0.1
+    pd = PDdrone(u0; params)
+    integ = pd.integ
+
+    # Observables
+    ϵ = Observable([integ[1], integ[2], integ[3]])
+    points = [-L -h; L -h; L h; -L h; -L -h]'
+
+    # Listeners
+    drone = lift(ϵ) do p
+        translated_points = (
+            [cos(p[3]) -sin(p[3]); sin(p[3]) cos(p[3])] * copy(points) .+ [p[1], p[2]]
+        )
+        map(col -> Point2f(col...), eachcol(translated_points))
+    end
+
+    fig = Figure(); display(fig)
+    ax = Axis(fig[1, 1])
+    lines!(ax, drone, linewidth = 1, color = :black)
+    ax.title = "2D drone PD controller"
+    xlims!(ax, -1.5, 1.5)
+    ylims!(ax, 0, 2.0)
+    return fig, integ, ϵ
 end
 
 function main()
@@ -116,31 +127,4 @@ function main()
 
     ax = content(fig[1, 1])
     Makie.deactivate_interaction!(ax, :rectanglezoom)
-end
-
-function makefig(u0, params)
-    L = params[4]
-    h = L * 0.1
-    pd = PDdrone(u0; params)
-    integ = pd.integ
-
-    # Observables
-    ϵ = Observable([integ[1], integ[2], integ[3]])
-    points = [-L -h; L -h; L h; -L h; -L -h]'
-
-    # Listeners
-    drone = lift(ϵ) do p
-        translated_points = (
-            [cos(p[3]) -sin(p[3]); sin(p[3]) cos(p[3])] * copy(points) .+ [p[1], p[2]]
-        )
-        map(col -> Point2f(col...), eachcol(translated_points))
-    end
-
-    fig = Figure(); display(fig)
-    ax = Axis(fig[1, 1])
-    lines!(ax, drone, linewidth = 1, color = :black)
-    ax.title = "2D drone PD controller"
-    xlims!(ax, -1.5, 1.5)
-    ylims!(ax, 0, 2.0)
-    return fig, integ, ϵ
 end

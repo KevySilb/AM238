@@ -1,0 +1,74 @@
+---
+title: 2D Rigid Body Model
+date: 2024-12-2
+author:
+  - name: Kevin Silberberg
+    id: ks
+    orcid: 0009-0009-4825-1865
+    email: ksilberb@ucsc.edu
+    affiliation:
+      - name: University of California Santa Cruz
+        city: Santa Cruz
+        state: CA
+        href: https://www.ucsc.edu
+format:
+  html:
+    theme: darkly
+    toc: true
+    code-fold: true
+    code-links:
+    - icon: github
+      href: https://github.com/KevySilb/AM238
+jupyter: julia-1.11
+execute:
+  eval: false
+---
+# Notes
+
+## Drag 
+
+In order to model wind velocity we need to include a drag term on the air frame that would induce a translational motion in the y and z components respectively. 
+
+for a particle in motion, the air-relative velocity of the air-frame in each directional component are:
+
+\begin{align}
+v_{r_y} &= \frac{dy}{dt} - v_y \\
+v_{r_z} &= \frac{dz}{dt} - v_z
+\end{align}
+
+where $v_{y, z}$ denotes the velocity of the air in the \{y, z\} direction.
+
+from here we can define the drag force experienced by the drone by the following:
+
+\begin{align}
+F_{d_y} &= -C_d v_{r_y}\sqrt{v_{r_y}^2 + v_{r_z}^2} \\
+F_{d_z} &= -C_d v_{r_z}\sqrt{v_{r_y}^2 + v_{r_z}^2}
+\end{align}
+
+## Equations of Motion
+
+y-axis:
+
+\begin{align}
+	-f(t) \sin(\phi(t)) + F_{d_y} = m \frac{d^2 y}{dt^2}
+\end{align}
+
+z-axis:
+
+\begin{align}
+	f(t)\cos(\phi(t)) + F_{d_z} = mg + m \frac{d^2 z}{dt^2}
+\end{align}
+
+rotation:
+
+\begin{align}
+	\tau(t) = I_{xx} \frac{d^2 \phi}{dt^2}
+\end{align}
+
+where $I_{xx}$ is the mass moment of inertia defined by:
+
+\begin{align}
+	I_{xx} = mL^2
+\end{align}
+
+where $m$ is the mass of the drone, and $L$ is the distance from the center of mass of the quadcopter to the center of rotation of each propeller arm.
